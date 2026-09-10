@@ -18,7 +18,7 @@ function esc(s){
   });
 }
 function senecaQuote(){
-  return '<p class="muted">There is nothing so absurd that some philosopher has not already said it.</p><p class="note">\u2014 Cicero</p>';
+  return '<p class="muted">There is no surer way to find out whether you like people or hate them than to travel with them.</p><p class="note">\u2014 Mark Twain</p>';
 }
 function davisQuote(){
   return '<p class="muted">An idiot admires complexity, a genius admires simplicity.</p><p class="note">\u2014 Terry A. Davis</p>';
