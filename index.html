@@ -6,11 +6,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<meta name="apple-mobile-web-app-title" content="Belvia" />
-<meta name="theme-color" content="#1e3a5f" />
+<meta name="apple-mobile-web-app-title" content="BudVia" />
+<meta name="theme-color" content="#14301f" />
 <meta name="referrer" content="no-referrer" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com; connect-src 'none'; font-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'" />
-<title>Belvia</title>
+<title>BudVia</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <style>
 :root {
@@ -29,7 +29,8 @@ button{cursor:pointer;font:inherit;color:inherit}
 #app{position:relative;z-index:1;width:100%;max-width:430px;height:100dvh;height:100svh;margin:0 auto;display:grid;grid-template-rows:auto minmax(0,1fr) auto}
 header.top{grid-row:1;background:var(--moss);color:var(--plaque);border-bottom:5px solid var(--wood);padding:calc(10px + var(--safe-t)) 12px 10px;position:relative;z-index:5;box-shadow:inset 0 -2px 0 var(--wood-lit)}
 .barrow{display:flex;align-items:center;gap:10px;min-height:36px}
-.mark{width:26px;height:26px;flex:0 0 auto;background:var(--wood);color:var(--plaque);display:grid;place-items:center;font-size:13px;font-weight:750}
+.mark{width:36px;height:36px;flex:0 0 auto;background:var(--wood);overflow:hidden;border:2px solid var(--wood-lit)}
+.mark img{width:100%;height:100%;object-fit:cover;image-rendering:auto;display:block}
 .brand{flex:1;min-width:0;color:var(--plaque)}
 .brand h1{margin:0;font-size:15px;font-weight:700;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase}
 .brand p{margin:2px 0 0;font-size:10px;font-weight:600;opacity:.75}
@@ -96,6 +97,7 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 .ticket .meta b{display:block;font-variant-numeric:tabular-nums}
 .ticket .meta span{font-size:10px;font-weight:650}
 .banner{padding:12px 14px;font-size:12px}
+.brandshot{width:100%;margin:10px 0;border:5px solid var(--wood);display:block;image-rendering:auto}
 #map{height:280px;background:#1e3a5f;touch-action:none;filter:grayscale(1) contrast(1.15) sepia(.55)}
 .mapwrap{position:relative;padding:8px}
 .mapclose{position:absolute;top:16px;left:16px;z-index:2;height:34px;padding:0 12px;border:0;background:var(--wood);color:var(--plaque);font-size:12px;font-weight:700}
@@ -110,7 +112,7 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
   <header class="top">
     <div class="barrow">
       <div class="mark" aria-hidden="true">B</div>
-      <div class="brand"><h1 id="hdrTitle">Belvia</h1><p id="hdrSub">On-device itinerary</p></div>
+      <div class="brand"><h1 id="hdrTitle">BudVia</h1><p id="hdrSub">Welcome to BudVia</p></div>
       <button class="iconbtn" data-act="export" type="button" aria-label="Export">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 13v6h14v-6"/></svg>
       </button>
@@ -137,6 +139,7 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
   </div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="./icon.js"></script>
 <script src="./app.js"></script>
 <script src="./ui.js"></script>
 <script src="./pages.js"></script>
