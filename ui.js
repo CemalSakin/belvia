@@ -1,7 +1,7 @@
 const $ = (id) => document.getElementById(id);
 const EX = {
   trip: "./IMG_0554.jpeg",
-  schedule: "./IMG_0555.jpeg",
+  schedule: "./schedule-ex.jpeg",
   tickets: "./IMG_0556.jpeg",
   routes: "./IMG_0557.jpeg",
   bag: "./IMG_0559.jpeg",
