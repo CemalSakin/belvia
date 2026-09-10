@@ -1,51 +1,45 @@
 # Belvia
 
-A private, on-device travel companion for iPhone.
+Cheap tickets live in five different apps. Belvia puts the whole trip on one phone, on this device.
 
-No account. No server. No analytics. Trip data stays in the browser that opened the page.
+You book the flight on Wizz, the coach on FlixBus, the room on Airbnb or Booking, then a bike pass, a dinner table, a dating app pin. Each confirmation sits in a different inbox. Belvia is the single timeline that holds them together: times, maps, packing, and a tap that opens the app you already used to buy the ticket.
 
-Belvia is a single-file Progressive Web App: itinerary, reminders, Apple Maps directions, packing list, calendar / Reminders export, and deep links into apps already installed on the phone.
+No account. No server. No analytics. The itinerary never leaves the phone that opened the page.
+
+## The problem it solves
+
+Hunting for the cheapest seat means splitting a trip across airlines, coaches, hosts and side apps. Reconstructing that trip the night before departure is slow and easy to get wrong. Belvia does not sell tickets. It collects what you already bought and turns it into one private plan you can swipe through.
+
+- Flight and coach times on one card
+- Reminders with full dates, not just a clock
+- Apple Maps directions for each leg
+- Packing list that stays on the device
+- Deep links into Wizz Air, FlixBus, Airbnb, Booking, MOL Bubi, Bumble, Timeleft, Nomadtable — only if they are already installed
+- Calendar and Reminders export as `.ics`
+
+## Dates
+
+| | |
+|---|---|
+| Listing prepared | 10 September 2026 |
+| Intended App Store release | 12 September 2026 |
+| Sample itinerary | 14–21 September 2026, Ankara → Budapest → Vienna |
+
+The sample is optional and censored: booking codes are masked, street numbers are omitted, pins sit on public landmarks. Start empty and type your own trip if you prefer.
 
 ## Open on iPhone
 
-1. Open `index.html` in Safari, or use GitHub Pages after it is enabled.
+1. Open `index.html` in Safari, or GitHub Pages once it is on.
 2. Share → **Add to Home Screen**.
-3. Start empty, or tap **Load sample itinerary**.
-4. Replace sample pins and booking codes with your own.
+3. Create a trip with dates, or tap **Load sample itinerary**.
 
-Sample data is censored on purpose: booking codes are masked, street numbers are omitted, and pins sit on public landmarks only.
+Data lives in `localStorage` key `belvia-v2`. Clear trip removes it.
 
-## What it does
+## App Store
 
-- **Today** — trip title, next reminder, flight ticket card
-- **Plan** — dated checklist with Apple Maps links
-- **Map** — Leaflet pins plus native Maps directions (easy Close)
-- **Pack** — packing list stored on this device
-- **Apps** — opens Wizz Air, FlixBus, Airbnb, Booking, MOL Bubi, Bumble, Timeleft, Nomadtable if they are installed
-- **Export** — `.ics` for Calendar and Reminders
+Native review still needs an Apple Developer account and an Xcode wrapper. The store text, keywords and privacy answers are in [`APP_STORE.md`](APP_STORE.md). Belvia itself is a PWA you can ship today as a Home Screen app.
 
-Swipe left / right between tabs. Header and dock stay put.
-
-## Privacy
-
-- Default state is empty.
-- Persistence is `localStorage` key `belvia-v2` only.
-- Content-Security-Policy, HTML escaping, `rel="noopener noreferrer"`, `Referrer-Policy: no-referrer`.
-- No login, no backend, no cookies from Belvia itself.
-
-Clear trip removes the copy from that browser.
-
-## Run locally
-
-Open `index.html` in Safari or any modern browser. Leaflet tiles load from CARTO via unpkg. Everything else is local.
-
-To serve from this repo with GitHub Pages:
-
-1. Settings → Pages
-2. Source: Deploy from a branch
-3. Branch: `main` / root
-
-Then the live app is:
+GitHub Pages target:
 
 `https://cemalsakin.github.io/belvia/`
 
