@@ -12,8 +12,9 @@ function exampleCard(how, result, who, pic){
   return '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">Example</p><h3>'+how+'</h3><p class="note">'+result+'</p>'+(pic?'<p class="note" style="letter-spacing:.08em">'+pic+'</p>':'')+'<p class="note">\u2014 '+who+'</p></div></div>';
 }
 function tripExample(){
-  const src = window.EXAMPLE_TRIP || "./example-trip.jpg";
-  return '<div class="card" style="margin-top:16px"><div class="pad"><p class="kicker">Example</p><img class="brandshot" alt="Example trip" src="./example-trip.jpg" onerror="this.onerror=null;this.src=(window.EXAMPLE_TRIP||\'\')"/><p class="note">Not all who wander are lost, especially with the right companion. \u2014 Tolkien</p></div></div>';
+  const src = window.EXAMPLE_TRIP || "";
+  if(!src) return "";
+  return '<div class="card shotcard" style="margin-top:16px"><p class="kicker" style="margin:10px 12px 8px">Example</p><img class="shot" alt="" src="'+src+'"/></div>';
 }
 function load(){ try { const raw = localStorage.getItem(KEY); return raw ? Object.assign(emptyState(), JSON.parse(raw)) : emptyState(); } catch(e){ return emptyState(); } }
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
