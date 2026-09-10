@@ -3,10 +3,10 @@
 </p>
 
 <p align="center">
-  <a href="https://cemalsakin.github.io/belvia/"><img src="https://img.shields.io/badge/live-cemalsakin.github.io%2Fbelvia-f0e68c?style=for-the-badge&labelColor=1e3a5f" alt="live" /></a>
+  <a href="https://tahsinsakin.github.io/belvia/"><img src="https://img.shields.io/badge/live-tahsinsakin.github.io%2Fbelvia-f0e68c?style=for-the-badge&labelColor=1e3a5f" alt="live" /></a>
   <img src="https://img.shields.io/badge/PWA-Home%20Screen-06b6d4?style=for-the-badge&labelColor=1e3a5f" alt="pwa" />
   <img src="https://img.shields.io/badge/no%20account-no%20server-22c55e?style=for-the-badge&labelColor=1e3a5f" alt="private" />
-  <img src="https://img.shields.io/github/license/CemalSakin/belvia?style=for-the-badge&labelColor=1e3a5f&color=f59e0b" alt="mit" />
+  <img src="https://img.shields.io/github/license/tahsinsakin/belvia?style=for-the-badge&labelColor=1e3a5f&color=f59e0b" alt="mit" />
   <img src="https://img.shields.io/badge/TypeScript-Expo-3178C6?style=for-the-badge&labelColor=1e3a5f" alt="ts" />
 </p>
 
@@ -37,7 +37,7 @@ Hesap yok. Sunucu yok. Analitik yok. Plan telefonda kalıyor.
 
 ## Aç
 
-1. [cemalsakin.github.io/belvia](https://cemalsakin.github.io/belvia/) — Safari.
+1. [tahsinsakin.github.io/belvia](https://tahsinsakin.github.io/belvia/) — Safari.
 2. Paylaş → **Ana Ekrana Ekle**.
 3. Kendi tripini yaz ya da sample itinerary yükle.
 

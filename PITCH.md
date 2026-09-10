@@ -22,4 +22,4 @@ Ne zaman orada bulunmalısınız?
 
 Her şeyi gösteriyor. Tüm yolları, gitmeniz gereken yolları, saatleri, her şeyi gösteriyor. Ve her şeyi çok basit yapıyor.
 
-Canlı: https://cemalsakin.github.io/belvia/
+Canlı: https://tahsinsakin.github.io/belvia/

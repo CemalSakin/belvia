@@ -32,10 +32,10 @@ Yollar, saatler, sıradaki iş, çanta. Hepsi aynı ekranda. Karışık olan şe
 Hesap yok. Sunucu yok. Plan telefonda kalıyor.
 
 Açıp bakmak isteyen için:
-https://cemalsakin.github.io/belvia/
+https://tahsinsakin.github.io/belvia/
 
 Kaynak:
-https://github.com/CemalSakin/belvia
+https://github.com/tahsinsakin/belvia
 
 Tahsin Sakin
 
@@ -51,7 +51,7 @@ Uçak, otobüs, oda, şehir içi — her biri kendi yerinde duruyor. BudVia onla
 
 Nerede başlıyor, ne zaman başlıyor, ne kadar erken çıkmalısın, ne zaman orada olmalısın. Yollar, saatler, çanta. Hepsi tek yerde.
 
-https://cemalsakin.github.io/belvia/
+https://tahsinsakin.github.io/belvia/
 
 ---
 

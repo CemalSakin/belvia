@@ -76,4 +76,4 @@ This build is a private itinerary companion. There is no login. Reviewers can ta
 
 - Support: https://www.linkedin.com/in/tahsinsakin
 - Privacy: this repository, SECURITY.md
-- Source: https://github.com/CemalSakin/belvia
+- Source: https://github.com/tahsinsakin/belvia
