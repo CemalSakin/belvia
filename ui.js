@@ -16,9 +16,7 @@ function exampleCard(how, result, who, pic){
 }
 function tripSrc(){
   if(window.EXAMPLE_TRIP && window.EXAMPLE_TRIP.length>40) return window.EXAMPLE_TRIP;
-  if(window.EX_SCHED && window.EX_SCHED.length>40) return window.EX_SCHED;
-  const a=(window._ET1||"")+(window._ET2||"");
-  return a ? "data:image/jpeg;base64,"+a : "";
+  return "./trip.jpg?v=t1";
 }
 function tripExample(){
   const src = tripSrc();
@@ -53,7 +51,7 @@ function nextUp(){
   return S.reminders.filter(r=>r.at && !S.done[r.id]).map(r=>({r,t:Date.parse(r.at.length===16?r.at+":00":r.at)})).filter(x=>!Number.isNaN(x.t)&&x.t>=now-36e5).sort((a,b)=>a.t-b.t)[0];
 }
 function stamp(iso){ const [d,t="09:00"]=String(iso).split("T"); return d.replace(/-/g,"")+"T"+t.replace(":","")+"00"; }
-function fold(s){ const t=String(s).replace(/\n/g,"\\n").replace(/,/g,"\\,"); const o=[]; for(let i=0;i<t.length;i+=74) o.push((i?" ":"")+t.slice(i,i+74)); return o.join("\r\n"); }
+function fold(s){ const t=String(s).replace(/\n/g,"\\n").replace(/,/g,"\\,"); const o=[]; for(let i=0;i<t.length;i+=74) o.push((i?" ":"")+t.slice(i,i,74)); return o.join("\r\n"); }
 function buildIcs(kind){
   const now=stamp(new Date().toISOString().slice(0,16));
   const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//BudVia//Travel//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH","X-WR-CALNAME:"+(S.meta.title||"BudVia")];
