@@ -194,15 +194,15 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
   </div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="./icon.js?v=cut1"></script>
-<script src="./b1.js?v=cut1"></script>
-<script src="./b2.js?v=cut1"></script>
-<script src="./b3.js?v=cut1"></script>
-<script src="./brand.js?v=cut1"></script>
+<script src="./icon.js?v=cut2"></script>
+<script src="./b1.js?v=cut2"></script>
+<script src="./b2.js?v=cut2"></script>
+<script src="./b3.js?v=cut2"></script>
+<script src="./brand.js?v=cut2"></script>
 <script src="./app.js"></script>
-<script src="./ui.js?v=cut1"></script>
-<script src="./pages.js?v=cut1"></script>
-<script src="./events.js?v=cut1"></script>
+<script src="./ui.js?v=cut2"></script>
+<script src="./pages.js?v=cut2"></script>
+<script src="./events.js?v=cut2"></script>
 <script>
 (function(){
   const c=document.getElementById("dither"); if(!c) return;
@@ -210,7 +210,7 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
   const B=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
   function paint(){
     const cell=6;
-    const W=innerWidth||430, H=innerHeight||800;
+  const W=innerWidth||430, H=innerHeight||800;
     const w=Math.max(1,Math.ceil(W/cell)), h=Math.max(1,Math.ceil(H/cell));
     c.width=w; c.height=h;
     c.style.width=W+"px"; c.style.height=H+"px";
