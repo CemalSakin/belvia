@@ -79,8 +79,8 @@ function setTab(id){
   if(id==="map") setTimeout(ensureMap, 80);
 }
 function paintChrome(){
-  $("hdrTitle").textContent = S.meta.title || "BudVia";
-  $("hdrSub").textContent = hasTrip() ? rangeLabel() : "Welcome to BudVia";
+  $("hdrTitle").textContent = "BudVia";
+  $("hdrSub").textContent = "The ultimate wingman for all your journeys.";
   $("pills").innerHTML = TABS.map(t=>'<button type="button" data-go="'+t+'"'+(t===tab?' class="on"':'')+'>'+LABELS[t]+'</button>').join("");
   const icons={
     today:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>',
