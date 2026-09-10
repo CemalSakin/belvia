@@ -17,6 +17,8 @@ The lowest fare is on Wizz. The coach is on FlixBus. The room is on Airbnb or Bo
 
 BudVia is that second job.
 
+Live: [tahsinsakin.github.io/belvia](https://tahsinsakin.github.io/belvia/)
+
 ---
 
 ## Install
@@ -27,10 +29,10 @@ Full steps: [`INSTALL.md`](INSTALL.md).
 |---|---|
 | iPhone | Safari → [open BudVia](https://tahsinsakin.github.io/belvia/) → Share → **Add to Home Screen** |
 | Android | Chrome → [open BudVia](https://tahsinsakin.github.io/belvia/) → menu → **Install app** |
-| Google Play | Native bundle is prepared in `mobile/`. Listing copy is [`PLAY_STORE.md`](PLAY_STORE.md). The store page is not live until Play review accepts an AAB. |
+| Google Play | Native bundle is prepared in `mobile/`. Listing copy is [`PLAY_STORE.md`](PLAY_STORE.md). Not live until Play accepts an AAB. |
 | App Store | Listing copy is [`APP_STORE.md`](APP_STORE.md). Same rule. |
 
-No sign-in on any of those paths. Privacy policy: [privacy.html](https://tahsinsakin.github.io/belvia/privacy.html).
+No sign-in. Privacy: [privacy.html](https://tahsinsakin.github.io/belvia/privacy.html).
 
 ---
 
@@ -38,7 +40,7 @@ No sign-in on any of those paths. Privacy policy: [privacy.html](https://tahsins
 
 An on-device itinerary for trips you already booked.
 
-It does not sell flights, coaches, or rooms. It is not a reservation site. It does not replace Wizz, FlixBus, Airbnb, or Booking. It holds the plan those apps refuse to hold together, and a tap opens the same app you used to buy the ticket.
+It does not sell flights, coaches, or rooms. It is not a reservation site. It does not replace Wizz, FlixBus, Airbnb, or Booking. It holds the plan those apps refuse to hold together. A tap opens the same app you used to buy the ticket.
 
 The trip sits in one place:
 
@@ -50,7 +52,9 @@ The trip sits in one place:
 - What is in the bag
 - What is next
 
-No account. No server. No analytics. The plan stays on this phone. Clear the trip and it is gone.
+No account. No server. No analytics. The plan stays on this phone.
+
+This is beta. AI comes later. Then flights, coaches, rooms, routes, and times show in the app itself — in colour, with live alerts. Not a sample screen. Direct.
 
 ## What it is not
 
@@ -62,23 +66,23 @@ No account. No server. No analytics. The plan stays on this phone. Clear the tri
 | A tracking product | No login, no backend, no analytics |
 | Travel advice | The itinerary you actually have |
 
-PWA data: `localStorage` key `belvia-v2`. Native data: app storage on that phone.
+PWA data: `localStorage` key `belvia-v2`.
 
 ## Screens
 
 | Screen | Purpose |
 |---|---|
-| Trip | Arrival view, flight card, next action |
-| Schedule | Dated reminders — times with dates, not times alone |
-| Places | Pins and directions, opened in the system maps app |
-| Bag | Packing list for the sample week |
-| Tickets | Wizz, FlixBus, Airbnb, Booking, MOL Bubi |
+| Trip | Name, two days, next action |
+| Plan | One row. One time. |
+| Places | Pins. Map opens outside. |
+| Bag | Tick what is in the bag. |
+| Tickets | One card for each ticket. |
 
 ```mermaid
 flowchart LR
   A[Wizz / FlixBus / Airbnb / Booking] -->|already bought| B[BudVia]
-  B --> C[Schedule]
-  B --> D[Maps]
+  B --> C[Plan]
+  B --> D[Places]
   B --> E[Bag]
   B -->|tap opens the same app| A
 ```
