@@ -9,7 +9,7 @@ function paintPlan(){
   let html='<p class="kicker">Itinerary</p><h2>Schedule</h2><p class="muted">One row is one thing that happens at one time.</p><div class="stack">';
   if(!keys.length) html+='<div class="banner">Empty. Add the first reminder below, or load the sample trip on Trip.</div>';
   keys.forEach(k=>{
-    html+='<div class="card"><div class="pad"><p class="kicker">'+(k==="prep"?"Prep":k)+'</p><h3>'+(k==="prep"?"Before departure":fmtWhen(k+"T12:00").day)+'</h3></div>';
+    html+='<div class="card"><div class="pad"><p class="kicker">'+(k==="prep"?"Before you leave":k)+'</p><h3>'+(k==="prep"?"Do these first":fmtWhen(k+"T12:00").day)+'</h3></div>';
     groups[k].forEach(r=>{
       const w=fmtWhen(r.at), place=placeBy(r.place);
       html+='<div class="row'+(S.done[r.id]?' on':'')+'"><button type="button" class="check" data-act="toggle" data-id="'+esc(r.id)+'"></button><span class="when"><span>'+esc(w.day)+'</span><b>'+esc(w.time)+'</b></span><span style="flex:1"><p class="ttl">'+esc(r.title)+'</p>'+(r.notes?'<p class="note">'+esc(r.notes)+'</p>':'')+'</span>'+(place?'<a class="act" href="'+esc(mapsUrl(place))+'" rel="noopener noreferrer" target="_blank">Maps</a>':'')+'<button class="act" type="button" data-act="del-rem" data-id="'+esc(r.id)+'">Delete</button></div>';
@@ -18,9 +18,9 @@ function paintPlan(){
   });
   html+='</div><div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">New reminder</p><h3>Write what happens</h3><p class="note">Title is the action. Date and time are the clock. Notes are the extra sentence.</p></div>';
   html+='<div class="field"><label>Title</label><input id="rTitle" placeholder="Leave for the airport" /></div>';
-  html+='<p class="hint">Write the action: Leave for Népliget. Not a place name alone.</p>';
+  html+='<p class="hint">Write the action: Leave for N\u00e9pliget. Not a place name alone.</p>';
   html+='<div class="grid2"><div class="field"><label>Date</label><input id="rDate" type="date" /></div><div class="field"><label>Time</label><input id="rTime" type="time" /></div></div>';
-  html+='<p class="hint">Example clock: 17 Sep · 04:45</p>';
+  html+='<p class="hint">Example clock: 17 Sep \u00b7 04:45</p>';
   html+='<div class="field"><label>List</label><select id="rList">'+LISTS.map(l=>'<option value="'+l[0]+'">'+l[1]+'</option>').join("")+'</select></div>';
   html+='<div class="field"><label>Notes</label><textarea id="rNotes" rows="2" placeholder="Ride-hail. Do not walk this hour."></textarea></div>';
   html+='<div class="pad"><button class="btn btn-a" type="button" data-act="add">Add reminder</button></div></div>';

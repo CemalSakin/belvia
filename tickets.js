@@ -62,7 +62,7 @@ function renderSimGate(){
   html += '<div class="field" style="padding-top:12px"><label>Name</label><input id="simName" placeholder="Bumble" /></div>';
   html += '<div class="field"><label>Link</label><input id="simLink" placeholder="https://bumble.com/" /></div>';
   html += '<div class="field"><label>Note</label><input id="simNote" placeholder="Open after the local number works" /></div>';
-  html += '<div class="pad"><button class="btn btn-a" type="button" data-act="add-sim">Add SIM app</button></div></div>';
+  html += '<div class="pad"><button class="btn btn-a" type="button" data-act="add-sim">Add after SIM apps</button></div></div>';
   return html;
 }
 function renderAddTicket(){
