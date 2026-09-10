@@ -1,93 +1,121 @@
-import { AppPressable } from "@/components/ui/app-pressable";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Surface } from "@/components/ui/surface";
-import { formatMetricValue, formatTrendPercent, progressRatio } from "@/lib/format-metric";
+import { useElevatedChrome } from "@/hooks/use-elevated-chrome";
+import { formatMetricValue, formatTrendPercent } from "@/lib/format-metric";
 import type { MetricCardProps, MetricTrend } from "@/types/metrics";
+import * as Haptics from "expo-haptics";
+import { Minus, TrendingDown, TrendingUp } from "lucide-react-native";
 import { memo, useCallback, useMemo } from "react";
-import { Text, View } from "react-native";
+import { Platform, Text, View } from "react-native";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
 
-function trendClass(direction: MetricTrend["direction"]): string {
+const SPRING_CONFIG = {
+  damping: 18,
+  stiffness: 180,
+  mass: 0.8,
+} as const;
+
+function trendTone(direction: MetricTrend["direction"]): {
+  chip: string;
+  label: string;
+  icon: string;
+} {
   switch (direction) {
     case "up":
-      return "text-ink";
+      return { chip: "bg-emerald-500/10", label: "text-emerald-400", icon: "#10b981" };
     case "down":
-      return "text-muted";
+      return { chip: "bg-rose-500/10", label: "text-rose-400", icon: "#f43f5e" };
     case "neutral":
-      return "text-faint";
-  }
-}
-
-function trendMark(direction: MetricTrend["direction"]): string {
-  switch (direction) {
-    case "up":
-      return "↑";
-    case "down":
-      return "↓";
-    case "neutral":
-      return "→";
+      return { chip: "bg-slate-800", label: "text-slate-400", icon: "#94a3b8" };
   }
 }
 
 function MetricCardBase({ data, isLoading, onPress }: MetricCardProps) {
-  const handlePress = useCallback(() => {
-    if (data) {
-      onPress?.(data.id);
+  const scale = useSharedValue(1);
+  const chrome = useElevatedChrome();
+
+  const triggerHaptic = useCallback(() => {
+    const run = Platform.select({
+      web: () => undefined,
+      default: () => {
+        void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      },
+    });
+    run();
+  }, []);
+
+  const handlePressAction = useCallback(() => {
+    if (data && onPress) {
+      onPress(data.id);
     }
   }, [data, onPress]);
 
-  const progress = useMemo(
-    () => (data ? progressRatio(data.value, data.targetValue) : null),
-    [data],
+  const gesture = useMemo(
+    () =>
+      Gesture.Tap()
+        .enabled(!isLoading && Boolean(data) && Boolean(onPress))
+        .onBegin(() => {
+          "worklet";
+          scale.value = withSpring(0.97, SPRING_CONFIG);
+          runOnJS(triggerHaptic)();
+        })
+        .onFinalize((_event, success) => {
+          "worklet";
+          scale.value = withSpring(1, SPRING_CONFIG);
+          if (success) {
+            runOnJS(handlePressAction)();
+          }
+        }),
+    [data, handlePressAction, isLoading, onPress, scale, triggerHaptic],
   );
 
-  if (isLoading) {
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
+  if (isLoading || !data) {
     return (
-      <Surface>
-        <View className="gap-3 p-4" accessibilityLabel="Loading metric" accessibilityState={{ busy: true }}>
-          <Skeleton className="h-3 w-24" />
-          <Skeleton className="h-8 w-32" />
-          <Skeleton className="h-3 w-40" />
-          <Skeleton className="h-1.5 w-full" />
-        </View>
-      </Surface>
+      <View
+        accessibilityState={{ busy: isLoading }}
+        className="mb-4 w-full overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 p-5"
+        style={chrome}
+      >
+        <View className="mb-4 h-4 w-28 rounded-md bg-slate-800" />
+        <View className="mb-3 h-8 w-20 rounded-md bg-slate-800" />
+        <View className="h-4 w-36 rounded-md bg-slate-800/60" />
+      </View>
     );
   }
 
-  if (!data) {
-    return (
-      <Surface>
-        <View className="p-4">
-          <Text className="text-[14px] text-muted">No metric yet</Text>
-        </View>
-      </Surface>
-    );
-  }
-
-  const body = (
-    <View className="p-4">
-      <Text className="text-[11px] font-bold uppercase tracking-[0.08em] text-faint">{data.title}</Text>
-      <Text className="mt-2 text-[28px] font-bold tracking-tight text-ink">
-        {formatMetricValue(data.value, data.unit)}
-      </Text>
-      <Text className={`mt-2 text-[12px] font-semibold ${trendClass(data.trend.direction)}`}>
-        {`${trendMark(data.trend.direction)} ${formatTrendPercent(data.trend.percentage)} · ${data.trend.periodLabel}`}
-      </Text>
-      {progress !== null ? (
-        <View className="mt-3 h-1.5 overflow-hidden rounded-full bg-fill">
-          <View className="h-full rounded-full bg-ink" style={{ width: `${Math.round(progress * 100)}%` }} />
-        </View>
-      ) : null}
-    </View>
-  );
-
-  if (!onPress) {
-    return <Surface>{body}</Surface>;
-  }
+  const tone = trendTone(data.trend.direction);
+  const valueLabel = formatMetricValue(data.value, undefined);
 
   return (
-    <AppPressable accessibilityLabel={`${data.title} ${formatMetricValue(data.value, data.unit)}`} onPress={handlePress}>
-      <Surface>{body}</Surface>
-    </AppPressable>
+    <GestureDetector gesture={gesture}>
+      <Animated.View
+        accessibilityLabel={`${data.title}, ${valueLabel}${data.unit ? ` ${data.unit}` : ""}`}
+        accessibilityRole="button"
+        accessible
+        className="mb-4 w-full rounded-2xl border border-slate-800 bg-slate-900/90 p-5"
+        style={[animatedStyle, chrome]}
+      >
+        <View className="mb-3 flex-row items-center justify-between">
+          <Text className="text-sm font-medium uppercase tracking-wider text-slate-400">{data.title}</Text>
+          <View className={`flex-row items-center rounded-full px-2 py-1 ${tone.chip}`}>
+            {data.trend.direction === "up" ? <TrendingUp color={tone.icon} size={12} /> : null}
+            {data.trend.direction === "down" ? <TrendingDown color={tone.icon} size={12} /> : null}
+            {data.trend.direction === "neutral" ? <Minus color={tone.icon} size={12} /> : null}
+            <Text className={`ml-1 text-xs font-semibold ${tone.label}`}>
+              {formatTrendPercent(data.trend.percentage)}
+            </Text>
+          </View>
+        </View>
+        <View className="mb-2 flex-row items-baseline">
+          <Text className="font-mono text-3xl font-bold tracking-tight text-white">{valueLabel}</Text>
+          {data.unit ? <Text className="ml-1.5 text-base font-medium text-slate-500">{data.unit}</Text> : null}
+        </View>
+        <Text className="text-xs font-medium text-slate-500">{data.trend.periodLabel}</Text>
+      </Animated.View>
+    </GestureDetector>
   );
 }
 
