@@ -12,7 +12,7 @@ function paintPlan(){
     html+='</div>';
   });
   html+='</div><div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">New</p><h3>Add a reminder</h3></div><div class="field"><label>Title</label><input id="rTitle" placeholder="Mudam morning ticket" /></div><div class="grid2"><div class="field"><label>Date</label><input id="rDate" type="date" /></div><div class="field"><label>Time</label><input id="rTime" type="time" /></div></div><div class="field"><label>List</label><select id="rList">'+LISTS.map(l=>'<option value="'+l[0]+'">'+l[1]+'</option>').join("")+'</select></div><div class="field"><label>Notes</label><textarea id="rNotes" rows="2" placeholder="Optional"></textarea></div><div class="pad"><button class="btn btn-a" type="button" data-act="add">Add reminder</button></div></div>';
-  html+=exampleShot("./IMG_0555.jpeg","Example schedule");
+  html+=exampleShot(EX.schedule,"Example schedule");
   $("page-plan").innerHTML=html;
 }
 function paintMap(){
@@ -21,7 +21,7 @@ function paintMap(){
   else S.places.forEach(p=>{ html+='<a class="row" href="'+esc(mapsUrl(p))+'" rel="noopener noreferrer"><span style="flex:1"><p class="ttl">'+esc(p.name)+'</p><p class="note">'+esc(p.address)+'</p></span><span class="act">Directions</span></a>'; });
   html+='</div>';
   if(S.routes.length){ html+='<div class="card" style="margin-top:12px"><div class="pad"><p class="kicker">Legs</p><h3>Saved directions</h3></div>'; S.routes.forEach(r=>{ html+='<a class="row" href="'+esc(routeUrl(r))+'" rel="noopener noreferrer"><span style="flex:1"><p class="ttl">'+esc(r.label)+'</p><p class="note">'+esc(r.when)+'</p></span><span class="act">Open</span></a>'; }); html+='</div>'; }
-  html+=exampleShot("./IMG_0557.jpeg","Example routes");
+  html+=exampleShot(EX.routes,"Example routes");
   $("page-map").innerHTML=html; map=null; mapSig="";
 }
 function ensureMap(){
@@ -42,10 +42,10 @@ function paintPack(){
   let html='<p class="kicker" id="packCount">'+done+' / '+total+' packed</p><h2>Bag</h2><p class="muted">Pack list for this trip.</p><div class="stack">';
   PACK.forEach(g=>{ html+='<div class="card"><div class="pad"><p class="kicker">Kit</p><h3>'+esc(g[0])+'</h3></div>'; g[1].forEach(item=>{ html+='<button type="button" class="row'+(S.packed[item[0]]?' on':'')+'" data-act="pack" data-id="'+item[0]+'"><span class="check"></span><span><p class="ttl">'+esc(item[1])+'</p>'+(item[2]?'<p class="note">'+esc(item[2])+'</p>':'')+'</span></button>'; }); html+='</div>'; });
   html+='</div><div class="card" style="margin-top:12px"><div class="field" style="padding-top:14px"><label>Notes</label><textarea id="extra" rows="3" placeholder="Adapters, meds, gifts">'+esc(S.extra)+'</textarea></div></div>';
-  html+=exampleShot("./IMG_0559.jpeg","Example bag");
+  html+=exampleShot(EX.bag,"Example bag");
   $("page-pack").innerHTML=html;
 }
 function paintApps(){
-  $("page-apps").innerHTML='<p class="kicker">Bookings</p><h2>Tickets</h2><p class="muted">Open the apps where you bought the cheap seats and rooms.</p><div class="card" style="margin-top:12px">'+APPS.map(a=>'<button type="button" class="row" data-act="app" data-scheme="'+a[2]+'"><span style="flex:1"><p class="ttl">'+esc(a[1])+'</p><p class="note">'+esc(a[3])+'</p></span><span class="act">Open</span></button>').join("")+'</div>'+exampleShot("./IMG_0556.jpeg","Example tickets")+exampleShot("./IMG_0564.jpeg","Example apps")+'<div class="card" style="margin-top:12px"><div class="pad"><p class="kicker">Contact</p><h3>BUD&VIA</h3><img class="brandshot" alt="BUD&VIA" src="./0875CF7C-5ACB-48B1-B2CD-57E02C5C9B58.jpeg" style="filter:none;min-height:0;height:auto;width:100%;object-fit:contain;object-position:top"/><p class="note">An idiot admires complexity, a genius admires simplicity.</p><p class="note">\u2014 Terry A. Davis</p><p class="note">Publisher: Tahsin Sakin.</p><p class="note"><a class="act" href="https://www.linkedin.com/in/tahsinsakin" rel="noopener noreferrer">LinkedIn</a></p></div></div>';
+  $("page-apps").innerHTML='<p class="kicker">Bookings</p><h2>Tickets</h2><p class="muted">Open the apps where you bought the cheap seats and rooms.</p><div class="card" style="margin-top:12px">'+APPS.map(a=>'<button type="button" class="row" data-act="app" data-scheme="'+a[2]+'"><span style="flex:1"><p class="ttl">'+esc(a[1])+'</p><p class="note">'+esc(a[3])+'</p></span><span class="act">Open</span></button>').join("")+'</div>'+exampleShot(EX.tickets,"Example tickets")+exampleShot(EX.apps,"Example apps")+'<div class="card" style="margin-top:12px"><div class="pad"><p class="kicker">Contact</p><h3>BUD&VIA</h3><img class="example-shot" alt="BUD&VIA" src="'+EX.otter+'"/><p class="note">An idiot admires complexity, a genius admires simplicity.</p><p class="note">\u2014 Terry A. Davis</p><p class="note">Publisher: Tahsin Sakin.</p><p class="note"><a class="act" href="https://www.linkedin.com/in/tahsinsakin" rel="noopener noreferrer">LinkedIn</a></p></div></div>';
 }
 function paintAll(){ paintChrome(); paintToday(); paintPlan(); paintMap(); paintPack(); paintApps(); }
