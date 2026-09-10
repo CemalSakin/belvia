@@ -1,7 +1,13 @@
 const $ = (id) => document.getElementById(id);
-function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({
-  "&":"&","<":"<",">":">","\"":""","'":"&#39;"
-}[c])); }
+function esc(s){
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+    if(c === "&") return "&";
+    if(c === "<") return "<";
+    if(c === ">") return ">";
+    if(c === '"') return """;
+    return "&#39;";
+  });
+}
 function load(){ try { const raw = localStorage.getItem(KEY); return raw ? Object.assign(emptyState(), JSON.parse(raw)) : emptyState(); } catch(e){ return emptyState(); } }
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
 let S = load();
