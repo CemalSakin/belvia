@@ -7,14 +7,14 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <meta name="apple-mobile-web-app-title" content="BudVia" />
-<meta name="theme-color" content="#14301f" />
+<meta name="theme-color" content="#1e3a5f" />
 <meta name="referrer" content="no-referrer" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com; connect-src 'none'; font-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'" />
 <title>BudVia</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <style>
 :root {
-  --navy:#7eabc4;
+  --navy:#1e3a5f;
   --wood:#2b160c; --wood-lit:#6b4224; --wood-ink:#1a0c06;
   --moss:#14301f; --moss-lit:#1d4630;
   --leaf:#c45a1a; --leaf-lit:#d9782e; --leaf-dim:#8a3d12;
@@ -24,7 +24,7 @@
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;border-radius:0 !important}
 html,body{
-  margin:0;background:var(--navy);color:#123044;
+  margin:0;background:var(--navy);color:var(--plaque);
   font-family:ui-monospace,Menlo,"SF Mono",Consolas,monospace;
   overflow:hidden;
   height:100%;height:100vh;height:100svh;height:100dvh;
@@ -109,10 +109,8 @@ h2::before{content:"";position:absolute;inset:-9px;z-index:-1;pointer-events:non
 h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var(--plaque)}
 .kicker{display:inline-block;margin:0 0 8px;padding:4px 8px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--plaque);background:var(--moss);border:4px solid var(--wood);box-shadow:inset 0 0 0 1px var(--wood-lit),3px 3px 0 var(--wood-ink)}
 .card .kicker,.ticket .kicker,.sheet .kicker{display:block;margin:0 0 6px;padding:0;color:var(--plaque);background:transparent;border:0;box-shadow:none;opacity:.8}
-.muted{color:#123044;font-size:12px;line-height:1.45;text-shadow:none}
-.card .muted,.ticket .muted,.sheet .muted{color:var(--plaque);text-shadow:0 1px 0 #0b1a2e}
-.note{color:#123044;font-size:11px;line-height:1.4;margin-top:3px;opacity:.9}
-.card .note,.ticket .note,.sheet .note{color:var(--plaque);opacity:.8}
+.muted{color:var(--plaque);font-size:12px;line-height:1.45;text-shadow:0 1px 0 #0b1a2e}
+.note{color:var(--plaque);font-size:11px;line-height:1.4;margin-top:3px;opacity:.8}
 .stack{display:flex;flex-direction:column;gap:10px}
 .card,.ticket,.banner,.sheet{
   color:var(--plaque);
@@ -216,35 +214,36 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
   </div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="./icon.js?v=pos5"></script>
-<script src="./brand.js?v=pos5"></script>
-<script src="./et1.js?v=pos5"></script>
-<script src="./et2.js?v=pos5"></script>
-<script src="./example.js?v=pos5"></script>
-<script src="./ex_sched.js?v=pos5"></script>
-<script src="./ex_tix.js?v=pos5"></script>
+<script src="./icon.js?v=old1"></script>
+<script src="./brand.js?v=old1"></script>
+<script src="./et1.js?v=old1"></script>
+<script src="./et2.js?v=old1"></script>
+<script src="./example.js?v=old1"></script>
+<script src="./ex_sched.js?v=old1"></script>
+<script src="./ex_tix.js?v=old1"></script>
 <script src="./app.js"></script>
-<script src="./ui.js?v=pos5"></script>
-<script src="./pages.js?v=pos5"></script>
+<script src="./ui.js?v=old1"></script>
+<script src="./pages.js?v=old1"></script>
 <script src="./events.js"></script>
 <script>
 (function(){
   const c=document.getElementById("dither"); if(!c) return;
-  const N=[0x8e,0xb8,0xcc], K=[0x4e,0x7a,0x96];
+  const N=[0x1e,0x3a,0x5f], K=[0xf0,0xe6,0x8c];
   const B=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
   function paint(){
-    const cell=4;
+    const cell=5;
     const W=innerWidth||430, H=innerHeight||800;
     const w=Math.max(1,Math.ceil(W/cell)), h=Math.max(1,Math.ceil(H/cell));
     c.width=w; c.height=h;
+    c.style.width=W+"px"; c.style.height=H+"px";
     const ctx=c.getContext("2d");
     const img=ctx.createImageData(w,h); const p=img.data;
     for(let y=0;y<h;y++){
       for(let x=0;x<w;x++){
         const i=(y*w+x)*4;
-        const n=((x*13+y*7)%17)/17;
-        const t=0.52+(B[y&3][x&3]/16-0.5)*0.12;
-        const col=n>t?K:N;
+        const n=Math.sin(x*0.17)+Math.cos(y*0.13)+((x*13+y*7)%11)/11;
+        const t=0.45+(B[y&3][x&3]/16-0.5)*0.5;
+        const col=(n*0.35+0.5)>t?K:N;
         p[i]=col[0]; p[i+1]=col[1]; p[i+2]=col[2]; p[i+3]=255;
       }
     }
