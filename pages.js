@@ -28,8 +28,8 @@ function ensureMap(){
   if(map && mapSig===sig){ map.invalidateSize(); return; }
   if(map){ try{ map.remove(); }catch(e){} map=null; }
   const start=S.places[0]||{lat:47.5,lng:19.05};
-  map=L.map(el,{zoomControl:false,attributionControl:false});
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:19}).addTo(map);
+  map=L.map(el,{zoomControl:true,attributionControl:false});
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"\u00a9 OpenStreetMap"}).addTo(map);
   const pts=[]; S.places.forEach(p=>{ L.circleMarker([p.lat,p.lng],{radius:7,color:"#fff",weight:2,fillColor:"#1d1d1f",fillOpacity:1}).addTo(map); pts.push([p.lat,p.lng]); });
   if(pts.length>1) map.fitBounds(pts,{padding:[24,24]}); else map.setView([start.lat,start.lng],12);
   mapSig=sig; setTimeout(function(){ if(map) map.invalidateSize(); },80);
