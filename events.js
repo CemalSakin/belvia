@@ -28,9 +28,19 @@ document.addEventListener("change", function(e){ if(e.target && e.target.id==="e
   let tm; pager.addEventListener("scroll", function(){ clearTimeout(tm); tm=setTimeout(function(){ const w=pager.clientWidth||1; const i=Math.round(pager.scrollLeft/w); const id=TABS[Math.max(0,Math.min(TABS.length-1,i))]; if(id!==tab){ tab=id; document.querySelectorAll("#pills button, #dock button").forEach(b=>b.classList.toggle("on", b.getAttribute("data-go")===id)); if(id==="map") ensureMap(); } },50); }, {passive:true});
 })();
 window.addEventListener("resize", function(){ const pager=$("pager"); pager.scrollLeft=TABS.indexOf(tab)*pager.clientWidth; if(map) map.invalidateSize(); });
-paintAll();
-(function(){
-  var s=document.createElement("script");
-  s.src="./install.js?v=lock3";
-  document.body.appendChild(s);
-})();
+function loadScript(src){
+  return new Promise(function(ok){
+    var s=document.createElement("script");
+    s.src=src;
+    s.onload=function(){ ok(); };
+    s.onerror=function(){ ok(); };
+    document.body.appendChild(s);
+  });
+}
+loadScript("./i18n.js?v=lock3").then(function(){
+  return loadScript("./tickets.js?v=lock3");
+}).then(function(){
+  return loadScript("./install.js?v=lock3");
+}).then(function(){
+  paintAll();
+});
