@@ -15,6 +15,6 @@ BudVia does not collect accounts or talk to an API you own.
 
 ## Reporting
 
-Contact Tahsin Sakin via [LinkedIn](https://www.linkedin.com/in/tahsinsakin).
+Contact Tahsin Sakin via [LinkedIn](https://www.linkedin.com/in/tahsin-sakin-390961199).
 
 Do not open issues that contain live booking codes, passport data, or exact stay addresses.
