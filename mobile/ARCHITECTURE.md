@@ -1,12 +1,10 @@
-# Belvia architecture
+# Belvia mobile architecture
 
-Expo SDK 51 managed. React Native 0.74. TypeScript strict. Expo Router v3. NativeWind v4.
+Expo SDK 51 managed. New Architecture on. TypeScript strict + exactOptionalPropertyTypes.
 
-Rules in force:
-- no `any`
-- `Platform.select` only for OS splits (shadow vs elevation, maps scheme)
-- `useSafeAreaInsets` on chrome and tab bar
-- FlashList + `estimatedItemSize` for schedule/bag/places/tickets
-- Pressable + haptics, iOS `active:opacity-70`, Android ripple
-- Zustand persist on device, no server
-- Discriminated `AsyncState<T>` ready for later server state
+Pulse tab is the analysis surface: Skia trend scrubber, KPI tiles, FlashList exams.
+
+Motion is GPU-only (transform / opacity) with Reanimated springs from `lib/physics.ts`.
+No linear 300ms ease-in-out.
+
+Data: Zod schemas + TanStack Query. Fixture client until a live base URL exists.

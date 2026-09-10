@@ -1,17 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
+  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./hooks/**/*.{ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
       colors: {
-        ink: "#1D1D1F",
-        muted: "#6E6E73",
-        faint: "#8E8E93",
-        fill: "#F2F2F4",
-        line: "rgba(0,0,0,0.08)",
-      },
-    },
+        oled: "#000000",
+        obsidian: "#09090b",
+        glass: "#121215",
+        cyan: "#06b6d4",
+        teal: "#14b8a6",
+        lime: "#84cc16",
+        crimson: "#f43f5e"
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 };

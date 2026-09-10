@@ -5,24 +5,18 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "belvia",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": false,
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "app.belvia.trip",
-      "infoPlist": {
-        "LSApplicationQueriesSchemes": ["wizzair", "flixbus", "airbnb", "maps", "googlegmail"]
-      }
+      "bundleIdentifier": "app.belvia.trip"
     },
     "android": {
       "package": "app.belvia.trip",
-      "adaptiveIcon": {
-        "backgroundColor": "#F2F2F4"
-      }
+      "adaptiveIcon": { "backgroundColor": "#000000" },
+      "navigationBarColor": "#000000"
     },
-    "plugins": ["expo-router", "expo-system-ui"],
-    "experiments": {
-      "typedRoutes": true
-    }
+    "plugins": ["expo-router", "expo-system-ui", "expo-blur", "@shopify/react-native-skia"],
+    "experiments": { "typedRoutes": true }
   }
 }
