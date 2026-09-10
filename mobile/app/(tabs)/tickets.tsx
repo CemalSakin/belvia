@@ -32,7 +32,7 @@ export default function TicketsScreen() {
     <ScreenShell kicker="Bookings" title="Tickets">
       <View className="flex-1 px-4">
         <Text className="mb-3 text-[14px] leading-5 text-muted">
-          Open the apps where you bought the cheap seats and rooms. Belvia does not restack the fare.
+          Open the apps where you bought the cheap seats and rooms. BudVia does not restack the fare.
         </Text>
         <Surface className="min-h-[180px]">
           <FlashList data={apps} estimatedItemSize={64} keyExtractor={(item) => item.id} renderItem={renderItem} />
