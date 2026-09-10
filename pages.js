@@ -1,3 +1,5 @@
+if(typeof window.t!=="function") window.t=function(k){ return k; };
+if(typeof window.renderTicketBoard!=="function") window.renderTicketBoard=function(){ return ""; };
 function paintPlan(){
   const groups={}; S.reminders.forEach(r=>{ const k=r.at?r.at.slice(0,10):"prep"; (groups[k]||(groups[k]=[])).push(r); });
   const keys=Object.keys(groups).sort();
