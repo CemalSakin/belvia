@@ -15,6 +15,7 @@ document.addEventListener("click", function(e){
   else if(act==="export-close"){ $("export").classList.remove("show"); }
   else if(act==="ics-cal"){ if(!S.reminders.some(r=>r.at)){ alert("Add timed reminders first."); return; } downloadIcs("BudVia-Calendar.ics", buildIcs("event")); }
   else if(act==="ics-rem"){ if(!S.reminders.some(r=>r.at)){ alert("Add timed reminders first."); return; } downloadIcs("BudVia-Reminders.ics", buildIcs("todo")); }
+  else if(act==="install"){ if(window.BudViaInstall) window.BudViaInstall.add(); }
 });
 $("export").addEventListener("click", function(e){ if(e.target.id==="export") $("export").classList.remove("show"); });
 document.addEventListener("keydown", function(e){ if(e.key==="Escape") $("export").classList.remove("show"); });
@@ -27,3 +28,8 @@ document.addEventListener("change", function(e){ if(e.target && e.target.id==="e
 })();
 window.addEventListener("resize", function(){ const pager=$("pager"); pager.scrollLeft=TABS.indexOf(tab)*pager.clientWidth; if(map) map.invalidateSize(); });
 paintAll();
+(function(){
+  var s=document.createElement("script");
+  s.src="./install.js?v=home1";
+  document.body.appendChild(s);
+})();
