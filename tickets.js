@@ -7,7 +7,7 @@ function liveSim(){
   return S.sim;
 }
 function sampleTicket(){
-  return {id:"ex1",kind:"flight",carrier:"Wizz Air",code:"W6 2488",from:"ESB",to:"BUD",fromCity:"Ankara",toCity:"Budapest",at:"2026-09-14T10:25",land:"2026-09-14T11:55",pnr:"\u2022\u2022\u2022\u2022\u2022\u2022",scheme:"wizzair://",note:"Sample. Delete it. Add your own."};
+  return {id:"ex1",kind:"flight",carrier:"Wizz Air",code:"W6 2488",from:"ESB",to:"BUD",fromCity:"Ankara",toCity:"Budapest",at:"2026-09-14T10:25",land:"2026-09-14T11:55",pnr:"\u2022\u2022\u2022\u2022\u2022\u2022",scheme:"wizzair://",note:"Sample. Delete it. Add yours."};
 }
 function untilLabel(iso){
   if(!iso) return "";
@@ -54,7 +54,7 @@ function renderAirPair(){
 }
 function renderSimGate(){
   const list = liveSim();
-  let html = '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">After the SIM</p><h3>Apps after the local SIM</h3><p class="note">Add apps you open only after the local number works.</p></div>';
+  let html = '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">After the SIM</p><h3>Apps after the SIM</h3><p class="note">Add apps you open after the local number works.</p></div>';
   if(!list.length) html += '<div class="pad"><p class="muted">None yet. Add one below.</p></div>';
   list.forEach(function(app, i){
     html += '<div class="row"><span class="when"><b>'+(i+1)+'</b><span>After SIM</span></span><span style="flex:1"><p class="ttl">'+esc(app.name)+'</p><p class="note">'+esc(app.note||"")+'</p></span><button class="act" type="button" data-act="app" data-scheme="'+esc(app.scheme||"")+'">Open</button><button class="act" type="button" data-act="del-sim" data-id="'+esc(app.id)+'">Delete</button></div>';
@@ -66,7 +66,7 @@ function renderSimGate(){
   return html;
 }
 function renderAddTicket(){
-  return '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">New ticket</p><h3>Add a ticket</h3></div>'+
+  return '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">New</p><h3>Add a ticket</h3></div>'+
     '<div class="field"><label>Type</label><select id="tKind"><option value="flight">Flight</option><option value="coach">Bus</option><option value="stay">Stay</option></select></div>'+
     '<div class="field"><label>Company</label><input id="tCarrier" placeholder="Wizz Air" /></div>'+
     '<div class="grid2"><div class="field"><label>From</label><input id="tFrom" placeholder="ESB" /></div><div class="field"><label>To</label><input id="tTo" placeholder="BUD" /></div></div>'+
@@ -77,7 +77,7 @@ function renderAddTicket(){
 }
 function renderTicketBoard(){
   const list = liveTickets();
-  let html = '<p class="kicker">Your tickets</p><h2>Tickets</h2><p class="muted">One card for each ticket. Add yours. Delete what you do not need.</p>';
+  let html = '<p class="kicker">Your tickets</p><h2>Tickets</h2><p class="muted">One card for each ticket.</p>';
   if(list.length){
     list.forEach(function(item){ html += renderTicket(item); });
   } else if(!S.hideSample){
@@ -86,7 +86,7 @@ function renderTicketBoard(){
   }
   html += renderAddTicket();
   html += renderSimGate();
-  html += '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">Home screen</p><h3>Add to Home Screen</h3><p class="note">Safari or Chrome. Share, then Add to Home Screen. The trip stays on this phone.</p></div><div class="pad" style="padding-top:0"><button class="btn btn-a" type="button" data-act="install">Add to Home Screen</button></div></div>';
+  html += '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">Home screen</p><h3>Add to Home Screen</h3><p class="note">Safari or Chrome. Share, then Add to Home Screen. The trip stays here.</p></div><div class="pad" style="padding-top:0"><button class="btn btn-a" type="button" data-act="install">Add to Home Screen</button></div></div>';
   html += '<div class="card" style="margin-top:12px"><div class="pad"><p class="kicker">Save</p><h3>Calendar</h3><p class="note">Saves a file on this phone. Nothing is sent away.</p></div><div class="pad" style="padding-top:0"><button class="btn btn-a" type="button" data-act="export">Add to Calendar</button></div></div>';
   return html;
 }
