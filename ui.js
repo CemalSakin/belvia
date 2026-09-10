@@ -23,7 +23,7 @@ function tripSrc(){
 function tripExample(){
   const src = tripSrc();
   if(!src) return "";
-  return '<div class="card shotcard" style="margin-top:14px"><p class="kicker" style="margin:10px 12px 8px">Example</p><img class="shot" alt="Tekin Abi Ile Dans Saati" width="419" height="760" decoding="async" src="'+src+'"/></div>';
+  return '<div class="card" style="margin-top:18px"><div class="pad"><p class="kicker">Example</p></div><img class="shot" alt="Example trip" decoding="async" src="'+src+'" style="background:transparent;filter:none;min-height:0;object-fit:contain"/></div>';
 }
 function load(){ try { const raw = localStorage.getItem(KEY); return raw ? Object.assign(emptyState(), JSON.parse(raw)) : emptyState(); } catch(e){ return emptyState(); } }
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
@@ -109,7 +109,7 @@ function paintToday(){
   const root=$("page-today");
   const ex=tripExample();
   if(!hasTrip()){
-    root.innerHTML='<p class="kicker">BUD&VIA</p><h2>Welcome to BudVia</h2>'+davisQuote()+ex+'<div class="stack" style="margin-top:16px"><div class="card"><div class="pad"><p class="kicker">New trip</p><h3>Title and dates</h3></div><div class="field"><label>Title</label><input id="nTitle" placeholder="8-day December trip to Luxembourg" /></div><div class="grid2"><div class="field"><label>Starts</label><input id="nStart" type="date" /></div><div class="field"><label>Ends</label><input id="nEnd" type="date" /></div></div><div class="field"><label>Booking code</label><input id="nPnr" placeholder="Optional" autocomplete="off" /></div><div class="pad"><button class="btn btn-a" type="button" data-act="create">Create trip</button></div></div><button class="btn btn-g" type="button" data-act="demo">Load sample itinerary</button></div>';
+    root.innerHTML='<p class="kicker">BUD&VIA</p><h2>Welcome to BudVia</h2>'+davisQuote()+'<div class="stack" style="margin-top:16px"><div class="card"><div class="pad"><p class="kicker">New trip</p><h3>Title and dates</h3></div><div class="field"><label>Title</label><input id="nTitle" placeholder="8-day December trip to Luxembourg" /></div><div class="grid2"><div class="field"><label>Starts</label><input id="nStart" type="date" /></div><div class="field"><label>Ends</label><input id="nEnd" type="date" /></div></div><div class="field"><label>Booking code</label><input id="nPnr" placeholder="Optional" autocomplete="off" /></div><div class="pad"><button class="btn btn-a" type="button" data-act="create">Create trip</button></div></div><button class="btn btn-g" type="button" data-act="demo">Load sample itinerary</button></div>'+ex;
     return;
   }
   const n=nextUp();
