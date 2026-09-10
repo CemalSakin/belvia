@@ -1,7 +1,23 @@
-@media (min-width: 880px){
-  #app{
-    max-width: 430px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+nav.pills, #langBar { display: none !important; }
+nav.dock {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
+  justify-items: center;
+  position: relative;
+  z-index: 4;
+}
+nav.dock button {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 52px;
+}
+.row .act {
+  min-width: 52px;
+  text-align: center;
+  border: 2px solid var(--wood-lit);
+  padding: 6px 8px;
+  margin-left: 4px;
 }
