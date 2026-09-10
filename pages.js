@@ -1,8 +1,8 @@
 function paintPlan(){
   const groups={}; S.reminders.forEach(r=>{ const k=r.at?r.at.slice(0,10):"prep"; (groups[k]||(groups[k]=[])).push(r); });
   const keys=Object.keys(groups).sort();
-  let html='<p class="kicker">Schedule</p><h2>Plan</h2><div class="stack">';
-  if(!keys.length) html+='<div class="banner">No reminders yet. Add one below, or load the sample from Today.</div>';
+  let html='<p class="kicker">Itinerary</p><h2>Schedule</h2><div class="stack">';
+  if(!keys.length) html+='<div class="banner">No reminders yet. Add one below, or load the sample from Trip.</div>';
   keys.forEach(k=>{
     html+='<div class="card"><div class="pad"><p class="kicker">'+(k==="prep"?"Prep":k)+'</p><h3>'+(k==="prep"?"Before departure":fmtWhen(k+"T12:00").day)+'</h3></div>';
     groups[k].forEach(r=>{
@@ -15,7 +15,7 @@ function paintPlan(){
   $("page-plan").innerHTML=html;
 }
 function paintMap(){
-  let html='<p class="kicker">Places</p><h2>Map</h2><div class="mapwrap card"><button class="mapclose" type="button" data-act="go" data-go="today">Close</button><div id="map"></div></div><div class="card" style="margin-top:12px">';
+  let html='<p class="kicker">Route</p><h2>Places</h2><div class="mapwrap card"><button class="mapclose" type="button" data-act="go" data-go="today">Close</button><div id="map"></div></div><div class="card" style="margin-top:12px">';
   if(!S.places.length) html+='<div class="pad"><p class="muted">No places yet. Load the sample itinerary to drop pins.</p></div>';
   else S.places.forEach(p=>{ html+='<a class="row" href="'+esc(mapsUrl(p))+'" rel="noopener noreferrer"><span style="flex:1"><p class="ttl">'+esc(p.name)+'</p><p class="note">'+esc(p.address)+'</p></span><span class="act">Directions</span></a>'; });
   html+='</div>';
@@ -37,12 +37,12 @@ function ensureMap(){
 function paintPack(){
   const done=PACK.reduce((n,g)=>n+g[1].filter(i=>S.packed[i[0]]).length,0);
   const total=PACK.reduce((n,g)=>n+g[1].length,0);
-  let html='<p class="kicker" id="packCount">'+done+' / '+total+'</p><h2>Pack</h2><div class="stack">';
-  PACK.forEach(g=>{ html+='<div class="card"><div class="pad"><p class="kicker">Bag</p><h3>'+esc(g[0])+'</h3></div>'; g[1].forEach(item=>{ html+='<button type="button" class="row'+(S.packed[item[0]]?' on':'')+'" data-act="pack" data-id="'+item[0]+'"><span class="check"></span><span><p class="ttl">'+esc(item[1])+'</p>'+(item[2]?'<p class="note">'+esc(item[2])+'</p>':'')+'</span></button>'; }); html+='</div>'; });
+  let html='<p class="kicker" id="packCount">'+done+' / '+total+' packed</p><h2>Bag</h2><div class="stack">';
+  PACK.forEach(g=>{ html+='<div class="card"><div class="pad"><p class="kicker">Packing</p><h3>'+esc(g[0])+'</h3></div>'; g[1].forEach(item=>{ html+='<button type="button" class="row'+(S.packed[item[0]]?' on':'')+'" data-act="pack" data-id="'+item[0]+'"><span class="check"></span><span><p class="ttl">'+esc(item[1])+'</p>'+(item[2]?'<p class="note">'+esc(item[2])+'</p>':'')+'</span></button>'; }); html+='</div>'; });
   html+='</div><div class="card" style="margin-top:12px"><div class="field" style="padding-top:14px"><label>Notes</label><textarea id="extra" rows="3" placeholder="Adapters, meds, gifts">'+esc(S.extra)+'</textarea></div></div>';
   $("page-pack").innerHTML=html;
 }
 function paintApps(){
-  $("page-apps").innerHTML='<p class="kicker">Installed apps</p><h2>Apps</h2><p class="muted">Opens what is already on the phone.</p><div class="card" style="margin-top:12px">'+APPS.map(a=>'<button type="button" class="row" data-act="app" data-scheme="'+a[2]+'"><span style="flex:1"><p class="ttl">'+esc(a[1])+'</p><p class="note">'+esc(a[3])+'</p></span><span class="act">Open</span></button>').join("")+'</div><div class="card" style="margin-top:12px"><div class="pad"><p class="kicker">Privacy</p><h3>This copy never leaves the phone</h3><p class="note">No login, no analytics. Publisher: Tahsin Sakin.</p><p class="note"><a class="act" href="https://www.linkedin.com/in/tahsinsakin" rel="noopener noreferrer">LinkedIn</a></p></div></div>';
+  $("page-apps").innerHTML='<p class="kicker">Bookings</p><h2>Tickets</h2><p class="muted">Open the apps where you bought the cheap seats and rooms.</p><div class="card" style="margin-top:12px">'+APPS.map(a=>'<button type="button" class="row" data-act="app" data-scheme="'+a[2]+'"><span style="flex:1"><p class="ttl">'+esc(a[1])+'</p><p class="note">'+esc(a[3])+'</p></span><span class="act">Open</span></button>').join("")+'</div><div class="card" style="margin-top:12px"><div class="pad"><p class="kicker">Privacy</p><h3>This copy never leaves the phone</h3><p class="note">No login, no analytics. Publisher: Tahsin Sakin.</p><p class="note"><a class="act" href="https://www.linkedin.com/in/tahsinsakin" rel="noopener noreferrer">LinkedIn</a></p></div></div>';
 }
 function paintAll(){ paintChrome(); paintToday(); paintPlan(); paintMap(); paintPack(); paintApps(); }
