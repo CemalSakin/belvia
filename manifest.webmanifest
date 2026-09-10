@@ -1,0 +1,17 @@
+{
+  "name": "BudVia",
+  "short_name": "BudVia",
+  "description": "On-device itinerary for trips booked across several apps. No account. No server.",
+  "id": "/belvia/",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "background_color": "#1e3a5f",
+  "theme_color": "#1e3a5f",
+  "orientation": "portrait",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["travel", "lifestyle"],
+  "prefer_related_applications": false
+}
