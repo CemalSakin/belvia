@@ -1,5 +1,5 @@
 const TABS = ["today","plan","map","pack","apps"];
-const LABELS = { today:"Today", plan:"Plan", map:"Map", pack:"Pack", apps:"Apps" };
+const LABELS = { today:"Trip", plan:"Schedule", map:"Places", pack:"Bag", apps:"Tickets" };
 const KEY = "belvia-v2";
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const WEEK = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
