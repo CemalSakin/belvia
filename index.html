@@ -25,26 +25,26 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;image-rendering:pixelated;border-radius:0 !important}
 html,body{height:100%;margin:0;background:var(--navy);color:var(--plaque);font-family:ui-monospace,Menlo,"SF Mono",monospace;overflow:hidden}
 button{cursor:pointer;font:inherit;color:inherit}
-#dither{position:fixed;inset:0;width:100%;height:100%;z-index:0;image-rendering:pixelated}
-#app{position:relative;z-index:1;width:100%;max-width:430px;height:100dvh;height:100svh;margin:0 auto;display:grid;grid-template-rows:auto minmax(0,1fr) auto}
-header.top{grid-row:1;background:var(--moss);color:var(--plaque);border-bottom:5px solid var(--wood);padding:calc(10px + var(--safe-t)) 12px 10px;position:relative;z-index:5;box-shadow:inset 0 -2px 0 var(--wood-lit)}
+#dither{position:fixed;inset:0;width:100%;height:100%;z-index:0;image-rendering:pixelated;pointer-events:none}
+#app{position:relative;z-index:1;width:100%;max-width:430px;height:100dvh;height:100svh;margin:0 auto;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden}
+header.top{grid-row:1;flex-shrink:0;background:var(--moss);color:var(--plaque);border-bottom:5px solid var(--wood);padding:calc(8px + var(--safe-t)) 12px 8px;position:relative;z-index:5;box-shadow:inset 0 -2px 0 var(--wood-lit)}
 .barrow{display:flex;align-items:center;gap:10px;min-height:36px}
 .mark{width:36px;height:36px;flex:0 0 auto;background:var(--wood);overflow:hidden;border:2px solid var(--wood-lit)}
-.mark img{width:100%;height:100%;object-fit:cover;image-rendering:auto;display:block}
+.mark img{width:100%;height:100%;object-fit:cover;image-rendering:auto !important;display:block}
 .brand{flex:1;min-width:0;color:var(--plaque)}
 .brand h1{margin:0;font-size:15px;font-weight:700;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase}
-.brand p{margin:2px 0 0;font-size:10px;font-weight:600;opacity:.75}
+.brand p{margin:3px 0 0;font-size:9px;line-height:1.25;font-weight:600;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .iconbtn{flex:0 0 auto;width:36px;height:36px;border:0;background:var(--wood);color:var(--plaque);display:grid;place-items:center}
 .iconbtn svg{width:18px;height:18px}
-nav.pills{display:flex;gap:4px;margin-top:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.pills{display:flex;flex-wrap:nowrap;gap:4px;margin-top:8px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 nav.pills::-webkit-scrollbar{display:none}
-nav.pills button{flex:0 0 auto;height:28px;padding:0 10px;border:2px solid var(--wood-lit);background:transparent;color:var(--plaque);font-size:11px;font-weight:700;text-transform:uppercase}
+nav.pills button{flex:0 0 auto;height:28px;padding:0 10px;border:2px solid var(--wood-lit);background:transparent;color:var(--plaque);font-size:11px;font-weight:700;text-transform:uppercase;white-space:nowrap}
 nav.pills button.on{background:var(--wood);color:var(--plaque)}
-.pager{grid-row:2;min-height:0;display:grid;grid-auto-flow:column;grid-auto-columns:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.pager{grid-row:2;min-height:0;height:100%;display:grid;grid-auto-flow:column;grid-auto-columns:100%;grid-auto-rows:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .pager::-webkit-scrollbar{display:none}
-.page{min-width:0;min-height:0;overflow-x:hidden;overflow-y:auto;scroll-snap-align:start;scroll-snap-stop:always;padding:16px 12px 24px;-webkit-overflow-scrolling:touch;touch-action:pan-y}
-nav.dock{grid-row:3;display:grid;grid-template-columns:repeat(5,1fr);background:var(--moss);color:var(--plaque);border-top:5px solid var(--wood);padding:6px 2px calc(8px + var(--safe-b));position:relative;z-index:5}
-nav.dock button{border:0;background:none;color:var(--plaque);opacity:.45;font-size:9px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;text-transform:uppercase}
+.page{min-width:0;height:100%;max-height:100%;overflow-x:hidden;overflow-y:scroll;scroll-snap-align:start;scroll-snap-stop:always;padding:16px 12px 28px;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain}
+nav.dock{grid-row:3;flex-shrink:0;display:grid;grid-template-columns:repeat(5,1fr);background:var(--moss);color:var(--plaque);border-top:5px solid var(--wood);padding:6px 2px calc(8px + var(--safe-b));position:relative;z-index:5}
+nav.dock button{border:0;background:none;color:var(--plaque);opacity:.45;font-size:9px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;text-transform:uppercase;white-space:nowrap}
 nav.dock button.on{opacity:1;background:var(--wood)}
 nav.dock svg{width:18px;height:18px}
 h2{
@@ -97,8 +97,8 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 .ticket .meta b{display:block;font-variant-numeric:tabular-nums}
 .ticket .meta span{font-size:10px;font-weight:650}
 .banner{padding:12px 14px;font-size:12px}
-.brandshot{width:100%;margin:10px 0;border:5px solid var(--wood);display:block;image-rendering:auto}
-#map{height:280px;background:#1e3a5f;touch-action:none;filter:grayscale(1) contrast(1.15) sepia(.55)}
+.brandshot{width:100%;max-height:240px;object-fit:cover;object-position:center top;margin:10px 0;border:5px solid var(--wood);display:block;image-rendering:auto !important}
+#map{height:220px;background:#1e3a5f;touch-action:none;filter:grayscale(1) contrast(1.15) sepia(.55)}
 .mapwrap{position:relative;padding:8px}
 .mapclose{position:absolute;top:16px;left:16px;z-index:2;height:34px;padding:0 12px;border:0;background:var(--wood);color:var(--plaque);font-size:12px;font-weight:700}
 .overlay{position:fixed;inset:0;z-index:20;background:rgba(20,48,31,.72);display:none;align-items:flex-end;justify-content:center}
@@ -112,7 +112,7 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
   <header class="top">
     <div class="barrow">
       <div class="mark" aria-hidden="true">B</div>
-      <div class="brand"><h1 id="hdrTitle">BudVia</h1><p id="hdrSub">Welcome to BudVia</p></div>
+      <div class="brand"><h1 id="hdrTitle">BudVia</h1><p id="hdrSub">The ultimate wingman for all your journeys.</p></div>
       <button class="iconbtn" data-act="export" type="button" aria-label="Export">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 13v6h14v-6"/></svg>
       </button>
