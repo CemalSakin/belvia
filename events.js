@@ -13,7 +13,7 @@ document.addEventListener("click", function(e){
   if(act==="toggle"){ const id=actEl.getAttribute("data-id"); S.done[id]=!S.done[id]; save(); paintPlan(); paintToday(); }
   else if(act==="pack"){ const id=actEl.getAttribute("data-id"); S.packed[id]=!S.packed[id]; save(); paintPack(); }
   else if(act==="create"){ S.meta.title=((($("nTitle")||{}).value)||"").trim()||"Trip"; S.meta.start=(($("nStart")||{}).value)||""; S.meta.end=(($("nEnd")||{}).value)||""; S.meta.pnr=((($("nPnr")||{}).value)||"").trim(); S.meta.sample=false; save(); paintAll(); }
-  else if(act==="demo"){ S=demoState(); S.tickets=S.tickets||[]; S.sim=S.sim||[]; S.packExtra=S.packExtra||[]; S.packGone=S.packGone||{}; save(); paintAll(); }
+  else if(act==="demo"){ S=demoState(); S.tickets=S.tickets||[]; S.sim=S.sim||[]; S.packExtra=S.packExtra||[]; save(); paintAll(); }
   else if(act==="wipe"){ if(confirm("Remove this trip from this phone?")){ S=emptyState(); save(); paintAll(); } }
   else if(act==="add"){ const title=((($("rTitle")||{}).value)||"").trim(); if(!title) return; const date=($("rDate")||{}).value; const time=($("rTime")||{}).value; S.reminders.push({id:"u"+Date.now(),title,notes:((($("rNotes")||{}).value)||"").trim(),list:(($("rList")||{}).value)||"prep",at:date?(date+"T"+(time||"09:00")):""}); save(); paintPlan(); paintToday(); }
   else if(act==="del-rem"){ S.reminders=S.reminders.filter(r=>r.id!==actEl.getAttribute("data-id")); save(); paintPlan(); paintToday(); }
@@ -21,14 +21,14 @@ document.addEventListener("click", function(e){
   else if(act==="del-route"){ S.routes=S.routes.filter(r=>r.id!==actEl.getAttribute("data-id")); save(); paintMap(); }
   else if(act==="add-place"){
     const name=((($("pName")||{}).value)||"").trim(); if(!name) return;
-    S.places.push({id:"p"+Date.now(),name:name,address:((($("pAddr")||{}).value)||"").trim(),lat:47.5,lng:19.05});
+    S.places.push({id:"p"+Date.now(),name:name,address:((($("pAddr")||{}).value)||"").trim(),lat:47.4979,lng:19.0402});
     save(); paintMap();
   }
-  else if(act==="del-pack"){ S.packGone=S.packGone||{}; S.packGone[actEl.getAttribute("data-id")]=true; if(S.packExtra) S.packExtra=S.packExtra.filter(x=>x.id!==actEl.getAttribute("data-id")); save(); paintPack(); }
+  else if(act==="del-pack"){ if(S.packExtra) S.packExtra=S.packExtra.filter(x=>x.id!==actEl.getAttribute("data-id")); save(); paintPack(); }
   else if(act==="add-pack"){
     S.packExtra=S.packExtra||[];
-    const label=((($("packName")||{}).value)||"").trim(); if(!label) return;
-    S.packExtra.push({id:"x"+Date.now(),label:label,note:((($("packNote")||{}).value)||"").trim()});
+    const label=((($("packTitle")||{}).value)||"").trim(); if(!label) return;
+    S.packExtra.push({id:"x"+Date.now(),title:label});
     save(); paintPack();
   }
   else if(act==="del-ticket"){ if(!S.tickets) S.tickets=[]; const id=actEl.getAttribute("data-id"); S.tickets=S.tickets.filter(x=>x.id!==id); if(id==="ex1") S.hideSample=true; save(); paintApps(); paintToday(); }
@@ -78,6 +78,5 @@ loadScript("./i18n.js?v=en3").then(function(){
   if(!S.tickets) S.tickets=[];
   if(!S.sim) S.sim=[];
   if(!S.packExtra) S.packExtra=[];
-  if(!S.packGone) S.packGone={};
   paintAll();
 });
