@@ -1,1 +1,1 @@
-window.EX_TIX=window.EXAMPLE_TRIP||"";
+window.EX_TIX="";
