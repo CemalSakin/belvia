@@ -1,51 +1,70 @@
-# Belvia
+# BudVia
 
-Cheap tickets live in five different apps. Belvia puts the whole trip on one phone, on this device.
+Bir haftalık tatilini ikiye mi bölmen gerekti?
+Çok mu fazla biletin var?
+Hepsini organize edemiyor musun?
 
-You book the flight on Wizz, the coach on FlixBus, the room on Airbnb or Booking, then a bike pass, a dinner table, a dating app pin. Each confirmation sits in a different inbox. Belvia is the single timeline that holds them together: times, maps, packing, and a tap that opens the app you already used to buy the ticket.
+Tek bir uygulamada birleştirdim. Bu kadar basit.
 
-No account. No server. No analytics. The itinerary never leaves the phone that opened the page.
+Canlı: [cemalsakin.github.io/belvia](https://cemalsakin.github.io/belvia/)
 
-## The problem it solves
+---
 
-Hunting for the cheapest seat means splitting a trip across airlines, coaches, hosts and side apps. Reconstructing that trip the night before departure is slow and easy to get wrong. Belvia does not sell tickets. It collects what you already bought and turns it into one private plan you can swipe through.
+## Direkt ne diyor?
 
-- Flight and coach times on one card
-- Reminders with full dates, not just a clock
-- Apple Maps directions for each leg
-- Packing list that stays on the device
-- Deep links into Wizz Air, FlixBus, Airbnb, Booking, MOL Bubi, Bumble, Timeleft, Nomadtable — only if they are already installed
-- Calendar and Reminders export as `.ics`
+Ucuz tatil şöyle işliyor. Uçak bir yerde, otobüs başka yerde, oda başka yerde. Wizz, FlixBus, Airbnb, Booking, şehir içi bisiklet, akşam yemeği. Her biri kendi uygulamasında, her teyit kendi kutusunda.
 
-## Dates
+Bir haftalık işi ikiye bölüyorsun. Sonra üçe. Sonra “biletlerim çok, hangisi hangisi” diye bakıyorsun. Gidilecek saat, kalkış saati, ne kadar erken evden çıkman gerektiği, kapıda ne zaman olman gerektiği — hepsi dağınık.
 
-| | |
-|---|---|
-| Listing prepared | 10 September 2026 |
-| Intended App Store release | 12 September 2026 |
-| Sample itinerary | 14–21 September 2026, Ankara → Budapest → Vienna |
+BudVia bunu tek yerde topluyor.
 
-The sample is optional and censored: booking codes are masked, street numbers are omitted, pins sit on public landmarks. Start empty and type your own trip if you prefer.
+Bilet satmıyor. Rezervasyon sitesi değil. Zaten aldığın şeyleri birleştiriyor.
 
-## Open on iPhone
+Üstüne üstlük hepsi uygulama içinden tık diye açılıyor. Wizz’i Wizz’den aldıysan Wizz açılıyor. Otobüs FlixBus’taysa FlixBus açılıyor. Odaya gitmek istiyorsan Airbnb veya Booking. Ayrı ayrı aramıyorsun.
 
-1. Open `index.html` in Safari, or GitHub Pages once it is on.
-2. Share → **Add to Home Screen**.
-3. Create a trip with dates, or tap **Load sample itinerary**.
+Sonra trip’in kendisi:
 
-Data lives in `localStorage` key `belvia-v2`. Clear trip removes it.
+- Nerede başlıyor?
+- Ne zaman başlıyor?
+- Ne kadar erken çıkmalısın?
+- Ne zaman orada bulunmalısın?
+- Hangi yol, hangi saat, sıradaki iş ne?
 
-## App Store
+Hepsini gösteriyor. Saatleri gösteriyor. Yolları gösteriyor. Çantayı gösteriyor. Bugün ne yapacağını gösteriyor.
 
-Native review still needs an Apple Developer account and an Xcode wrapper. The store text, keywords and privacy answers are in [`APP_STORE.md`](APP_STORE.md). Belvia itself is a PWA you can ship today as a Home Screen app.
+Hesap yok. Sunucu yok. Analitik yok. Plan telefonda kalıyor.
 
-GitHub Pages target:
+## Ne işe yarar, madde madde
 
-`https://cemalsakin.github.io/belvia/`
+- Uçuş ve otobüs saatleri tek kartta
+- Tarihli hatırlatmalar — sadece saat değil, gün de var
+- Her bacak için harita / yol tarifi
+- Cihazda kalan çanta listesi
+- Wizz Air, FlixBus, Airbnb, Booking, MOL Bubi ve benzeri uygulamalara tık — telefonda varsa açılır
+- Takvime veya Anımsatıcılara `.ics` ile çıkış
+
+Örnek plan: 14–21 Eylül 2026, Ankara → Budapeşte → Viyana. Rezervasyon kodları maskeli, sokak numaraları yok.
+
+## Telefonda aç
+
+1. [cemalsakin.github.io/belvia](https://cemalsakin.github.io/belvia/) — Safari tercih
+2. Paylaş → **Ana Ekrana Ekle**
+3. Kendi tarihlerini yaz veya örnek trip’i yükle
+
+Veri `localStorage` anahtarı `belvia-v2` içinde. Trip’i silersen gider.
+
+Mağaza metni: [`APP_STORE.md`](APP_STORE.md)  
+LinkedIn için hazır metin: [`LINKEDIN.md`](LINKEDIN.md)
+
+## English, short
+
+Cheap tickets live in five apps. BudVia puts the trip you already bought on one phone: times, routes, when to leave, when to be there, and a tap that opens the same app you booked with. No account. No server. The itinerary does not leave the device.
 
 ## Publisher
 
 Tahsin Sakin  
-[linkedin.com/in/tahsinsakin](https://www.linkedin.com/in/tahsinsakin)
+[linkedin.com/in/tahsin-sakin-390961199](https://www.linkedin.com/in/tahsin-sakin-390961199)
 
-MIT License. See `LICENSE`.
+Repo adı tarihsel olarak **Belvia**. Ekranda gördüğün yüz **BudVia**.
+
+MIT. `LICENSE`.
