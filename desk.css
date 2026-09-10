@@ -1,14 +1,20 @@
-nav.pills, #langBar { display: none !important; }
+#langBar { display: none !important; }
+nav.pills {
+  display: flex !important;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow-x: auto;
+}
 nav.dock {
-  display: grid !important;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  display: flex !important;
+  justify-content: center;
   align-items: stretch;
-  justify-items: center;
   position: relative;
   z-index: 4;
 }
 nav.dock button {
-  width: 100%;
+  flex: 1 1 0;
+  max-width: 84px;
   justify-content: center;
   align-items: center;
   text-align: center;
