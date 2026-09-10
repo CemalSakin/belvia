@@ -5,7 +5,7 @@ const EX = {
   tickets: "./IMG_0556.jpeg",
   routes: "./IMG_0557.jpeg",
   bag: "./IMG_0559.jpeg",
-  apps: "./IMG_0564.jpeg",
+  apps: "./apps-ex.jpg",
   otter: "./0875CF7C-5ACB-48B1-B2CD-57E02C5C9B58.jpeg"
 };
 function esc(s){
