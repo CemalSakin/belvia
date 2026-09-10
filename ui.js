@@ -99,7 +99,7 @@ function paintChrome(){
 }
 function paintToday(){
   const root=$("page-today");
-  const shot=exampleShot("./trip.jpg","Example trip");
+  const shot=exampleShot("./IMG_0554.jpeg","Example trip");
   if(!hasTrip()){
     root.innerHTML='<p class="kicker">BUD&VIA</p><h2>Welcome to BudVia</h2>'+senecaQuote()+'<div class="stack" style="margin-top:16px"><div class="card"><div class="pad"><p class="kicker">New trip</p><h3>Title and dates</h3></div><div class="field"><label>Title</label><input id="nTitle" placeholder="8-day December trip to Luxembourg" /></div><div class="grid2"><div class="field"><label>Starts</label><input id="nStart" type="date" /></div><div class="field"><label>Ends</label><input id="nEnd" type="date" /></div></div><div class="field"><label>Booking code</label><input id="nPnr" placeholder="Optional" autocomplete="off" /></div><div class="pad"><button class="btn btn-a" type="button" data-act="create">Create trip</button></div></div><button class="btn btn-g" type="button" data-act="demo">Load sample itinerary</button></div>'+shot;
     return;
