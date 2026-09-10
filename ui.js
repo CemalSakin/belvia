@@ -1,11 +1,11 @@
 const $ = (id) => document.getElementById(id);
 function esc(s){
   return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
-    if(c === "&") return "&";
-    if(c === "<") return "<";
-    if(c === ">") return ">";
-    if(c === '"') return """;
-    return "&#39;";
+    if(c === "&") return "\u0026amp;";
+    if(c === "<") return "\u0026lt;";
+    if(c === ">") return "\u0026gt;";
+    if(c === '"') return "\u0026quot;";
+    return "\u0026#39;";
   });
 }
 function load(){ try { const raw = localStorage.getItem(KEY); return raw ? Object.assign(emptyState(), JSON.parse(raw)) : emptyState(); } catch(e){ return emptyState(); } }
