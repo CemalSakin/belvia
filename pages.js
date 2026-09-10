@@ -1,8 +1,3 @@
-function shotCard(src, label){
-  if(!src) return "";
-  if(src.indexOf("/9j/")<0 && src.indexOf(".jpg")<0) return "";
-  return '<div class="card" style="margin-top:18px"><div class="pad"><p class="kicker">Example</p></div><img class="shot" alt="'+(label||"Example")+'" decoding="async" src="'+src+'" style="background:transparent;filter:none;min-height:0;height:auto;width:100%;object-fit:contain;object-position:top"/></div>';
-}
 function paintPlan(){
   const groups={}; S.reminders.forEach(r=>{ const k=r.at?r.at.slice(0,10):"prep"; (groups[k]||(groups[k]=[])).push(r); });
   const keys=Object.keys(groups).sort();
@@ -17,7 +12,6 @@ function paintPlan(){
     html+='</div>';
   });
   html+='</div><div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">New</p><h3>Add a reminder</h3></div><div class="field"><label>Title</label><input id="rTitle" placeholder="Mudam morning ticket" /></div><div class="grid2"><div class="field"><label>Date</label><input id="rDate" type="date" /></div><div class="field"><label>Time</label><input id="rTime" type="time" /></div></div><div class="field"><label>List</label><select id="rList">'+LISTS.map(l=>'<option value="'+l[0]+'">'+l[1]+'</option>').join("")+'</select></div><div class="field"><label>Notes</label><textarea id="rNotes" rows="2" placeholder="Optional"></textarea></div><div class="pad"><button class="btn btn-a" type="button" data-act="add">Add reminder</button></div></div>';
-  html+=shotCard(window.EX_SCHED,"Schedule example");
   $("page-plan").innerHTML=html;
 }
 function paintMap(){
@@ -52,6 +46,6 @@ function paintPack(){
 }
 function paintApps(){
   const shot=window.BUDVIA_SHOT||window.BUDVIA_ICON||"./budvia.jpg";
-  $("page-apps").innerHTML='<p class="kicker">Bookings</p><h2>Tickets</h2><p class="muted">Open the apps where you bought the cheap seats and rooms.</p><div class="card" style="margin-top:12px">'+APPS.map(a=>'<button type="button" class="row" data-act="app" data-scheme="'+a[2]+'"><span style="flex:1"><p class="ttl">'+esc(a[1])+'</p><p class="note">'+esc(a[3])+'</p></span><span class="act">Open</span></button>').join("")+'</div>'+shotCard(window.EX_TIX,"Tickets example")+'<div class="card" style="margin-top:12px"><div class="pad"><p class="kicker">Contact</p><h3>BUD&VIA</h3><img class="brandshot" alt="BUD&VIA" src="'+shot+'"/><p class="note">An idiot admires complexity, a genius admires simplicity.</p><p class="note">\u2014 Terry A. Davis</p><p class="note">Physical copy: this otter, printed on a card in the bag pocket.</p><p class="note">Publisher: Tahsin Sakin.</p><p class="note"><a class="act" href="https://www.linkedin.com/in/tahsinsakin" rel="noopener noreferrer">LinkedIn</a></p><p class="note" style="opacity:.4;font-size:9px;letter-spacing:.16em">TO BE CONTINUED \u2192</p></div></div>';
+  $("page-apps").innerHTML='<p class="kicker">Bookings</p><h2>Tickets</h2><p class="muted">Open the apps where you bought the cheap seats and rooms.</p><div class="card" style="margin-top:12px">'+APPS.map(a=>'<button type="button" class="row" data-act="app" data-scheme="'+a[2]+'"><span style="flex:1"><p class="ttl">'+esc(a[1])+'</p><p class="note">'+esc(a[3])+'</p></span><span class="act">Open</span></button>').join("")+'</div><div class="card" style="margin-top:12px"><div class="pad"><p class="kicker">Contact</p><h3>BUD&VIA</h3><img class="brandshot" alt="BUD&VIA" src="'+shot+'"/><p class="note">An idiot admires complexity, a genius admires simplicity.</p><p class="note">\u2014 Terry A. Davis</p><p class="note">Physical copy: this otter, printed on a card in the bag pocket.</p><p class="note">Publisher: Tahsin Sakin.</p><p class="note"><a class="act" href="https://www.linkedin.com/in/tahsinsakin" rel="noopener noreferrer">LinkedIn</a></p><p class="note" style="opacity:.4;font-size:9px;letter-spacing:.16em">TO BE CONTINUED \u2192</p></div></div>';
 }
 function paintAll(){ paintChrome(); paintToday(); paintPlan(); paintMap(); paintPack(); paintApps(); }
