@@ -1,5 +1,6 @@
 function shotCard(src, label){
   if(!src) return "";
+  if(src.indexOf("/9j/")<0 && src.indexOf(".jpg")<0) return "";
   return '<div class="card" style="margin-top:18px"><div class="pad"><p class="kicker">Example</p></div><img class="shot" alt="'+(label||"Example")+'" decoding="async" src="'+src+'" style="background:transparent;filter:none;min-height:0;height:auto;width:100%;object-fit:contain;object-position:top"/></div>';
 }
 function paintPlan(){
