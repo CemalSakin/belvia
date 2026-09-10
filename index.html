@@ -47,11 +47,7 @@ header.top{background:var(--moss);color:var(--plaque);border-bottom:5px solid va
 .brand p{margin:3px 0 0;font-size:8px;line-height:1.3;font-weight:600;opacity:.85;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .iconbtn{flex:0 0 auto;width:36px;height:36px;border:0;background:var(--wood);color:var(--plaque);display:grid;place-items:center}
 .iconbtn svg{width:18px;height:18px}
-nav.pills{display:flex;flex-wrap:nowrap;justify-content:center;gap:4px;margin-top:8px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
-nav.pills::-webkit-scrollbar{display:none}
-nav.pills button{flex:0 0 auto;height:28px;padding:0 10px;border:2px solid var(--wood-lit);background:transparent;color:var(--plaque);font-size:11px;font-weight:700;text-transform:uppercase;white-space:nowrap}
-nav.pills button.on{background:var(--wood);color:var(--plaque)}
-.lang{display:none}
+nav.pills,.lang{display:none}
 .ticket.passed{opacity:.42}
 button:focus-visible,a:focus-visible{outline:2px solid var(--leaf-lit);outline-offset:2px}
 .pager{position:relative;z-index:2;min-width:0;min-height:0;display:flex;flex-direction:row;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
@@ -119,8 +115,6 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 13v6h14v-6"/></svg>
       </button>
     </div>
-    <nav class="pills" id="pills"></nav>
-    <div class="lang" id="langBar"></div>
   </header>
   <div class="pager" id="pager">
     <section class="page" id="page-today"></section>
@@ -142,14 +136,14 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
   </div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="./icon.js?v=en3"></script>
-<script src="./brand.js?v=en3"></script>
-<script src="./app.js?v=en3"></script>
-<script src="./i18n.js?v=en3"></script>
-<script src="./tickets.js?v=en3"></script>
-<script src="./ui.js?v=en3"></script>
-<script src="./pages.js?v=en3"></script>
-<script src="./events.js?v=en3"></script>
+<script src="./icon.js?v=en4"></script>
+<script src="./brand.js?v=en4"></script>
+<script src="./app.js?v=en4"></script>
+<script src="./i18n.js?v=en4"></script>
+<script src="./tickets.js?v=en4"></script>
+<script src="./ui.js?v=en4"></script>
+<script src="./pages.js?v=en4"></script>
+<script src="./events.js?v=en4"></script>
 <script>
 (function(){
   const c=document.getElementById("dither"); if(!c) return;
