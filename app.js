@@ -3,7 +3,7 @@ const LABELS = { today:"Trip", plan:"Schedule", map:"Places", pack:"Bag", apps:"
 const KEY = "belvia-v2";
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const WEEK = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-const LISTS = [["prep","Prep"],["flight","Flight"],["bus","Bus"],["stay","Stay"],["city","City"],["social","Meet"]];
+const LISTS = [["prep","Before you leave"],["flight","Flight"],["bus","Bus"],["stay","Stay"],["city","In the city"],["social","People"]];
 const PACK = [
   ["Tops",[["p1","5 T-shirts"],["p2","3 long-sleeve shirts"],["p3","2 light knits"],["p4","1 evening outfit"],["p5","1 rain shell"],["p6","1 warmer jacket"]]],
   ["Bottoms",[["p7","3 trousers"],["p8","1-2 joggers"],["p9","1 smarter pair"]]],
