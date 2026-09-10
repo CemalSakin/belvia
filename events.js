@@ -7,16 +7,24 @@
 function closeBagHint(){
   var el=$("bagHint");
   if(el) el.classList.remove("show");
-  try{ sessionStorage.setItem("budvia-bag-hint","1"); }catch(e){}
+  try{ sessionStorage.setItem("budvia-bag-hint-2","1"); }catch(e){}
 }
 function showBagHint(){
-  try{ if(sessionStorage.getItem("budvia-bag-hint")) return; }catch(e){}
+  try{ if(sessionStorage.getItem("budvia-bag-hint-2")) return; }catch(e){}
   var el=$("bagHint");
   if(!el){
     el=document.createElement("div");
     el.id="bagHint";
     el.className="overlay";
-    el.innerHTML='<div class="sheet stack"><p class="kicker">Bag</p><h3>Pack first?</h3><p class="muted">Want to pack the bag now?</p><button class="btn btn-a" type="button" data-act="bag-go">Open bag</button><button class="btn btn-g" type="button" data-act="bag-skip">Not now</button></div>';
+    el.innerHTML='<div class="sheet stack">'+
+      '<p class="kicker">Do this first</p>'+
+      '<h3>Pack the bag first</h3>'+
+      '<p class="muted">The trip starts with the bag. Tick what is in it.</p>'+
+      '<p style="margin:0 0 4px;font-size:9px;line-height:1.4;color:#fff;opacity:.92">Example: passport, charger, EU plug.</p>'+
+      '<p style="margin:0 0 12px;font-size:9px;line-height:1.4;color:#fff;opacity:.92">You can skip this and name the trip instead.</p>'+
+      '<button class="btn btn-a" type="button" data-act="bag-go">Pack the bag</button>'+
+      '<button class="btn btn-g" type="button" data-act="bag-skip">Name the trip first</button>'+
+      '</div>';
     document.body.appendChild(el);
     el.addEventListener("click", function(e){ if(e.target.id==="bagHint") closeBagHint(); });
   }
