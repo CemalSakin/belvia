@@ -1,10 +1,10 @@
 # LinkedIn — kopyala, yapıştır
 
-Ton: senin konuşman. Sempati postu değil. “Thrilled to announce” yok. Hasan Bey hitabı yok. Direkt soru, direkt cevap.
+Ton: senin konuşman. Sempati postu değil. Thrilled / excited yok.
 
 ---
 
-## Ana gönderi
+## Yayınla (uzun)
 
 Bir haftalık tatilini ikiye mi bölmen gerekti?
 
@@ -14,59 +14,52 @@ Hepsini organize edemiyor musun?
 
 Tek bir uygulamada birleştirdim. Bu kadar basit.
 
-Ucuz seyahat böyle işliyor. Uçak bir uygulamada, otobüs başka uygulamada, oda üçüncüde. Wizz, FlixBus, Airbnb, Booking, şehir içi ulaşım, akşam yemeği. Her teyit ayrı kutuda. Bir haftayı parçalara ayırıyorsun, sonra parçaları tekrar bir araya getirmeye çalışıyorsun. Asıl iş orada başlıyor.
+Ucuz tatil böyle kuruluyor. Uçak Wizz’de. Otöbüs FlixBus’ta. Oda Airbnb’de ya da Booking’de. Şehir içi başka uygulamada. Akşam masası başka uygulamada. Her teyit ayrı kutuda. Bir haftayı parçalara ayırıyorsun. Sonra parçaları tekrar bir trip haline getirmeye çalışıyorsun. Asıl iş orada.
 
 BudVia bilet satmıyor. Yeni bir rezervasyon sitesi de değil. Zaten aldığın şeyleri tek yerde tutuyor.
 
-Üstüne üstlük hepsi uygulama içinden tık diye açılıyor. Bileti nereden aldıysan o uygulama açılıyor. Ayrı ayrı aramıyorsun.
+Üstüne üstlük hepsi uygulama içinden tık diye açılıyor. Bileti nereden aldıysan o uygulama açılıyor. Ayrı ayrı aramıyorsun. Gidebiliyorsunuz.
 
-Sonra trip’in kendisi duruyor karşında:
+Ondan sonra trip duruyor karşında.
 
-Nerede başlıyor?
+Nerede başlayacak?
 Ne zaman başlıyor?
-Ne kadar erken çıkmalısın?
-Ne zaman orada bulunmalısın?
+Ne kadar erken gitmelisiniz?
+Ne zaman orada bulunmalısınız?
 
-Yollar, saatler, sıradaki iş, çanta. Hepsi aynı ekranda. Karışık olan şeyi sadeleştiriyor.
+Tüm yolları, saatleri, sıradaki işi, çantayı gösteriyor. Her şeyi gösteriyor. Ve her şeyi çok basit yapıyor.
 
 Hesap yok. Sunucu yok. Plan telefonda kalıyor.
 
-Açıp bakmak isteyen için:
 https://tahsinsakin.github.io/belvia/
 
-Kaynak:
-https://github.com/tahsinsakin/belvia
+Kaynak: https://github.com/tahsinsakin/belvia
 
 Tahsin Sakin
 
 ---
 
-## Daha kısa versiyon (hikâye uzun gelirse)
+## Görsel sırası (LinkedIn’e 4 foto)
 
-Bir haftalık tatilini ikiye mi bölmen gerekti? Çok mu fazla biletin var? Hepsini organize edemiyor musun?
+1. Trip — https://tahsinsakin.github.io/belvia/IMG_0554.jpeg
+2. Schedule — https://tahsinsakin.github.io/belvia/schedule-ex.jpg
+3. Tickets — https://tahsinsakin.github.io/belvia/IMG_0556.jpeg
+4. Apps — https://tahsinsakin.github.io/belvia/apps-ex.jpg
 
-Tek uygulamada birleştirdim. Bu kadar basit.
-
-Uçak, otobüs, oda, şehir içi — her biri kendi yerinde duruyor. BudVia onları satmıyor. Zaten aldıklarını bir araya getiriyor. Uygulama içinden tık: bileti aldığın uygulama açılıyor.
-
-Nerede başlıyor, ne zaman başlıyor, ne kadar erken çıkmalısın, ne zaman orada olmalısın. Yollar, saatler, çanta. Hepsi tek yerde.
-
-https://tahsinsakin.github.io/belvia/
+İsteğe bağlı 5: samur — https://tahsinsakin.github.io/belvia/0875CF7C-5ACB-48B1-B2CD-57E02C5C9B58.jpeg
 
 ---
 
-## İlk yoruma (gönderinin altına sen yaz)
+## İlk yorum
 
-Bilet satmıyor. Hesap da istemiyor. Telefonda duran bir plan. Örnek güzergah Ankara–Budapeşte–Viyana, kodlar kapalı.
+Bilet satmıyor. Hesap da istemiyor. Telefonda duran bir plan.
 
 ---
 
-## Ne ekleme
+## Koyma
 
-- “İlk uygulamamı çıkardım, heyecanlıyım”
-- 12 hashtag
-- “Değerli ağım / kıymetli bağlantılarım”
-- Reklam geliri, Pro fiyatı, ilk ay hedefi
-- Başkasının trip detayı, açık rezervasyon kodu
-
-Görsel: canlı siteden Bugün + Schedule + Tickets ekranı. Üç kare yeter.
+- İlk uygulamamı çıkardım / heyecanlıyım
+- Hashtag yağmuru
+- Değerli ağım
+- Reklam geliri, Pro, ilk ay hedefi
+- Açık PNR / başkasının rezervasyonu
