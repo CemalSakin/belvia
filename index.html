@@ -34,23 +34,24 @@ html,body{
 }
 button{cursor:pointer;font:inherit;color:inherit;background:none}
 img,svg,.mark img,.brandshot,.shot{image-rendering:auto}
-#app{
-  position:relative;
-  width:100%;max-width:430px;
-  margin:0 auto;
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-  background:var(--navy);
-  height:100%;height:100vh;height:100svh;height:100dvh;
-}
 #dither{
-  position:absolute;inset:0;
+  position:fixed;inset:0;
   width:100%;height:100%;
   z-index:0;pointer-events:none;
   image-rendering:pixelated;
 }
-header.top, nav.dock{position:relative;z-index:3;flex:0 0 auto}
+#app{
+  position:relative;z-index:1;
+  width:100%;max-width:430px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-rows:auto minmax(0,1fr) auto;
+  overflow:hidden;
+  background:var(--navy);
+  height:100%;height:100vh;height:100svh;height:100dvh;
+}
+header.top, nav.dock{position:relative;z-index:3}
 header.top{background:var(--moss);color:var(--plaque);border-bottom:5px solid var(--wood);padding:calc(8px + var(--safe-t)) 12px 8px}
 .barrow{display:flex;align-items:center;gap:10px;min-height:36px}
 .mark{width:36px;height:36px;flex:0 0 auto;background:var(--wood);overflow:hidden;border:2px solid var(--wood-lit)}
@@ -66,8 +67,7 @@ nav.pills button{flex:0 0 auto;height:28px;padding:0 10px;border:2px solid var(-
 nav.pills button.on{background:var(--wood);color:var(--plaque)}
 .pager{
   position:relative;z-index:2;
-  flex:1 1 0%;
-  min-height:0;
+  min-width:0;min-height:0;
   display:flex;
   flex-direction:row;
   overflow-x:auto;
@@ -84,6 +84,7 @@ nav.pills button.on{background:var(--wood);color:var(--plaque)}
   max-width:100%;
   height:100%;
   max-height:100%;
+  min-height:0;
   overflow-x:hidden;
   overflow-y:auto;
   scroll-snap-align:start;
@@ -154,14 +155,14 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 .shotcard{
   overflow:hidden;
   background:#f3e2c0;
-  border:8px solid #2b160c;
+  border:10px solid #2b160c;
   box-shadow:inset 0 0 0 2px #c4a574, 4px 4px 0 #1a0c06;
 }
-.shotcard .kicker{color:#2b160c;opacity:1}
+.shotcard .kicker{color:#2b160c;opacity:1;font-weight:800}
 .shot{
   width:100%;
   height:auto;
-  min-height:160px;
+  min-height:220px;
   object-fit:contain;
   object-position:top;
   display:block;
@@ -169,7 +170,7 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
   border:0;
   background:#f3e2c0;
   image-rendering:auto;
-  filter:contrast(1.08) saturate(1.08);
+  filter:contrast(1.06) saturate(1.05);
 }
 #map{height:220px;background:#1e3a5f;touch-action:none;filter:grayscale(1) contrast(1.15) sepia(.55)}
 .mapwrap{position:relative;padding:8px}
@@ -180,8 +181,8 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 </style>
 </head>
 <body>
+<canvas id="dither" aria-hidden="true"></canvas>
 <div id="app">
-  <canvas id="dither" aria-hidden="true"></canvas>
   <header class="top">
     <div class="barrow">
       <div class="mark" aria-hidden="true">B</div>
@@ -213,14 +214,12 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="./icon.js"></script>
-<script src="./et1.js?v=fix3"></script>
-<script src="./et2.js?v=fix3"></script>
-<script src="./example.js?v=fix3"></script>
-<script src="./ex_sched.js?v=fix3"></script>
-<script src="./ex_tix.js?v=fix3"></script>
+<script src="./example.js?v=fix4"></script>
+<script src="./ex_sched.js?v=fix4"></script>
+<script src="./ex_tix.js?v=fix4"></script>
 <script src="./app.js"></script>
-<script src="./ui.js?v=fix3"></script>
-<script src="./pages.js?v=fix3"></script>
+<script src="./ui.js?v=fix4"></script>
+<script src="./pages.js?v=fix4"></script>
 <script src="./events.js"></script>
 <script>
 (function(){
@@ -228,9 +227,8 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
   const N=[0x1e,0x3a,0x5f], K=[0x2a,0x4e,0x3a];
   const B=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
   function paint(){
-    const box=document.getElementById("app")||document.body;
     const cell=6;
-    const W=box.clientWidth||innerWidth, H=box.clientHeight||innerHeight;
+    const W=innerWidth||430, H=innerHeight||800;
     const w=Math.max(1,Math.ceil(W/cell)), h=Math.max(1,Math.ceil(H/cell));
     c.width=w; c.height=h;
     const ctx=c.getContext("2d");
