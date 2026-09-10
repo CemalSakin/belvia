@@ -2,7 +2,7 @@ import type { TripSnapshot } from "@/types";
 
 export const EMPTY_TRIP: TripSnapshot = {
   meta: {
-    title: "Belvia",
+    title: "BudVia",
     subtitle: "On-device itinerary",
     rangeLabel: "Add a trip",
   },
