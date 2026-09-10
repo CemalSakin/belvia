@@ -1,4 +1,13 @@
 const $ = (id) => document.getElementById(id);
+const EX = {
+  trip: "./IMG_0554.jpeg",
+  schedule: "./IMG_0555.jpeg",
+  tickets: "./IMG_0556.jpeg",
+  routes: "./IMG_0557.jpeg",
+  bag: "./IMG_0559.jpeg",
+  apps: "./IMG_0564.jpeg",
+  otter: "./0875CF7C-5ACB-48B1-B2CD-57E02C5C9B58.jpeg"
+};
 function esc(s){
   return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
     if(c === "&") return "\u0026amp;";
@@ -15,7 +24,8 @@ function davisQuote(){
   return '<p class="muted">An idiot admires complexity, a genius admires simplicity.</p><p class="note">\u2014 Terry A. Davis</p>';
 }
 function exampleShot(src, label){
-  return '<div class="card" style="margin-top:18px"><div class="pad"><p class="kicker">Example</p></div><img class="brandshot" alt="'+esc(label||"Example")+'" decoding="async" src="'+src+'" style="filter:none;min-height:0;height:auto;width:100%;object-fit:contain;object-position:top"/></div>';
+  const jpg = String(src).replace(/\.jpeg$/i, ".jpg");
+  return '<div class="card example-card" style="margin-top:18px"><div class="pad"><p class="kicker">Example</p></div><img class="example-shot" alt="'+esc(label||"Example")+'" decoding="async" loading="eager" src="'+src+'" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=\''+jpg+'\';}"/></div>';
 }
 function load(){ try { const raw = localStorage.getItem(KEY); return raw ? Object.assign(emptyState(), JSON.parse(raw)) : emptyState(); } catch(e){ return emptyState(); } }
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
@@ -99,7 +109,7 @@ function paintChrome(){
 }
 function paintToday(){
   const root=$("page-today");
-  const shot=exampleShot("./IMG_0554.jpeg","Example trip");
+  const shot=exampleShot(EX.trip,"Example trip");
   if(!hasTrip()){
     root.innerHTML='<p class="kicker">BUD&VIA</p><h2>Welcome to BudVia</h2>'+senecaQuote()+'<div class="stack" style="margin-top:16px"><div class="card"><div class="pad"><p class="kicker">New trip</p><h3>Title and dates</h3></div><div class="field"><label>Title</label><input id="nTitle" placeholder="8-day December trip to Luxembourg" /></div><div class="grid2"><div class="field"><label>Starts</label><input id="nStart" type="date" /></div><div class="field"><label>Ends</label><input id="nEnd" type="date" /></div></div><div class="field"><label>Booking code</label><input id="nPnr" placeholder="Optional" autocomplete="off" /></div><div class="pad"><button class="btn btn-a" type="button" data-act="create">Create trip</button></div></div><button class="btn btn-g" type="button" data-act="demo">Load sample itinerary</button></div>'+shot;
     return;
