@@ -72,7 +72,7 @@ Do not upload live boarding passes or readable booking codes.
 | Email | use the address on the Play developer profile |
 | Website | https://tahsinsakin.github.io/belvia/ |
 | Privacy policy | https://tahsinsakin.github.io/belvia/privacy.html |
-| Support | https://www.linkedin.com/in/tahsinsakin |
+| Support | https://www.linkedin.com/in/tahsin-sakin-390961199 |
 
 ## Data safety (Console answers)
 
