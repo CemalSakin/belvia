@@ -14,9 +14,6 @@ function senecaQuote(){
 function davisQuote(){
   return '<p class="muted">An idiot admires complexity, a genius admires simplicity.</p><p class="note">\u2014 Terry A. Davis</p>';
 }
-function exampleCard(how, result, who, pic){
-  return '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">Example</p><h3>'+how+'</h3><p class="note">'+result+'</p>'+(pic?'<p class="note" style="letter-spacing:.08em">'+pic+'</p>':'')+'<p class="note">\u2014 '+who+'</p></div></div>';
-}
 function load(){ try { const raw = localStorage.getItem(KEY); return raw ? Object.assign(emptyState(), JSON.parse(raw)) : emptyState(); } catch(e){ return emptyState(); } }
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
 let S = load();
