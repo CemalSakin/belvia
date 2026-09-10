@@ -34,6 +34,7 @@ export const EMPTY_TRIP: TripSnapshot = {
       hint: "Boarding pass and check-in",
       iosScheme: "wizzair://",
       androidIntent: "intent://#Intent;package=com.wizzair.WizzAirApp;end",
+      androidPackage: "com.wizzair.WizzAirApp",
       httpsFallback: "https://www.wizzair.com",
     },
     {
@@ -42,6 +43,7 @@ export const EMPTY_TRIP: TripSnapshot = {
       hint: "Coach QR",
       iosScheme: "flixbus://",
       androidIntent: "intent://#Intent;package=de.flixbus.app;end",
+      androidPackage: "de.flixbus.app",
       httpsFallback: "https://www.flixbus.com",
     },
     {
@@ -50,6 +52,7 @@ export const EMPTY_TRIP: TripSnapshot = {
       hint: "Stay check-in",
       iosScheme: "airbnb://",
       androidIntent: "intent://#Intent;package=com.airbnb.android;end",
+      androidPackage: "com.airbnb.android",
       httpsFallback: "https://www.airbnb.com",
     },
   ],

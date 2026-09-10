@@ -13,15 +13,7 @@ async function tryOpen(url: string): Promise<boolean> {
 }
 
 export async function openTicketApp(app: TicketApp): Promise<void> {
-  if (Platform.OS === "ios") {
-    if (await tryOpen(app.iosScheme)) return;
-  } else {
-    if (await tryOpen(app.androidIntent)) return;
-    if (app.androidPackage) {
-      const market = `market://details?id=${app.androidPackage}`;
-      // Do not bounce through Play if the app is missing. The public site is enough.
-      void market;
-    }
-  }
+  const first = Platform.OS === "ios" ? app.iosScheme : app.androidIntent;
+  if (await tryOpen(first)) return;
   await Linking.openURL(app.httpsFallback);
 }
