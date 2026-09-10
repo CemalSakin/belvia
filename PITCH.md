@@ -8,7 +8,7 @@ Hepsini organize edemiyor musun?
 
 Tek bir uygulamada birleştirdim. Bu kadar basit.
 
-Üstüne üstlük hepsi uygulama içinden tık diye tıklanıp gidebiliyor. Gidebiliyorsunuz.
+Üstüne üstlük hepsi uygulama içinden tık diye tıklanıp gidebiliyor.
 
 Ondan sonra tüm tripleriniz, her şey.
 
@@ -21,5 +21,7 @@ Ne kadar erken gitmelisiniz?
 Ne zaman orada bulunmalısınız?
 
 Her şeyi gösteriyor. Tüm yolları, gitmeniz gereken yolları, saatleri, her şeyi gösteriyor. Ve her şeyi çok basit yapıyor.
+
+Şu an beta. Yakında AI girecek. Hepsi uygulamada, renkli, ışıklı. Anlık bildirim de orada. Örnek ekran değil. Şekil, rahatlık, direkt.
 
 Canlı: https://tahsinsakin.github.io/belvia/
