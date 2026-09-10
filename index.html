@@ -214,24 +214,24 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
   </div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="./icon.js?v=davis"></script>
-<script src="./brand.js?v=davis"></script>
-<script src="./et1.js?v=davis"></script>
-<script src="./et2.js?v=davis"></script>
-<script src="./example.js?v=davis"></script>
-<script src="./ex_sched.js?v=davis"></script>
-<script src="./ex_tix.js?v=davis"></script>
+<script src="./icon.js?v=fix4"></script>
+<script src="./brand.js?v=fix4"></script>
+<script src="./et1.js?v=fix4"></script>
+<script src="./et2.js?v=fix4"></script>
+<script src="./example.js?v=fix4"></script>
+<script src="./ex_sched.js?v=fix4"></script>
+<script src="./ex_tix.js?v=fix4"></script>
 <script src="./app.js"></script>
-<script src="./ui.js?v=davis"></script>
-<script src="./pages.js?v=davis"></script>
+<script src="./ui.js?v=fix4"></script>
+<script src="./pages.js?v=fix4"></script>
 <script src="./events.js"></script>
 <script>
 (function(){
   const c=document.getElementById("dither"); if(!c) return;
-  const N=[0x1e,0x3a,0x5f], K=[0xf0,0xe6,0x8c];
+  const N=[0x1e,0x3a,0x5f], K=[0x2a,0x4e,0x3a];
   const B=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
   function paint(){
-    const cell=5;
+    const cell=6;
     const W=innerWidth||430, H=innerHeight||800;
     const w=Math.max(1,Math.ceil(W/cell)), h=Math.max(1,Math.ceil(H/cell));
     c.width=w; c.height=h;
@@ -241,9 +241,9 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
     for(let y=0;y<h;y++){
       for(let x=0;x<w;x++){
         const i=(y*w+x)*4;
-        const n=Math.sin(x*0.17)+Math.cos(y*0.13)+((x*13+y*7)%11)/11;
-        const t=0.45+(B[y&3][x&3]/16-0.5)*0.5;
-        const col=(n*0.35+0.5)>t?K:N;
+        const n=((x*13+y*7)%17)/17;
+        const t=0.78+(B[y&3][x&3]/16-0.5)*0.12;
+        const col=n>t?K:N;
         p[i]=col[0]; p[i+1]=col[1]; p[i+2]=col[2]; p[i+3]=255;
       }
     }
