@@ -1,3 +1,4 @@
+function tip(s){ return '<p style="margin:-2px 14px 10px;font-size:9px;line-height:1.35;color:#fff;opacity:.92">'+s+'</p>'; }
 function liveTickets(){
   if(!S.tickets) S.tickets = [];
   return S.tickets;
@@ -54,25 +55,34 @@ function renderAirPair(){
 }
 function renderSimGate(){
   const list = liveSim();
-  let html = '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">After the SIM</p><h3>Apps after the SIM</h3><p class="note">Add apps you open after the local number works.</p></div>';
+  let html = '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">After the SIM</p><h3>Apps after the SIM</h3></div>';
   if(!list.length) html += '<div class="pad"><p class="muted">None yet. Add one below.</p></div>';
   list.forEach(function(app, i){
     html += '<div class="row"><span class="when"><b>'+(i+1)+'</b><span>After SIM</span></span><span style="flex:1"><p class="ttl">'+esc(app.name)+'</p><p class="note">'+esc(app.note||"")+'</p></span><button class="act" type="button" data-act="app" data-scheme="'+esc(app.scheme||"")+'">Open</button><button class="act" type="button" data-act="del-sim" data-id="'+esc(app.id)+'">Delete</button></div>';
   });
   html += '<div class="field" style="padding-top:12px"><label>Name</label><input id="simName" placeholder="Bumble" /></div>';
+  html += tip("App name. Example: Bumble");
   html += '<div class="field"><label>Link</label><input id="simLink" placeholder="https://bumble.com/" /></div>';
+  html += tip("Site link. Example: https://bumble.com/");
   html += '<div class="field"><label>Note</label><input id="simNote" placeholder="Open after the local number works" /></div>';
+  html += tip("When to open it. Example: Open after the local number works");
   html += '<div class="pad"><button class="btn btn-a" type="button" data-act="add-sim">Add after SIM apps</button></div></div>';
   return html;
 }
 function renderAddTicket(){
   return '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">New</p><h3>Add a ticket</h3></div>'+
     '<div class="field"><label>Type</label><select id="tKind"><option value="flight">Flight</option><option value="coach">Bus</option><option value="stay">Stay</option></select></div>'+
+    tip("Flight, bus, or stay")+
     '<div class="field"><label>Company</label><input id="tCarrier" placeholder="Wizz Air" /></div>'+
+    tip("Who sold it. Example: Wizz Air")+
     '<div class="grid2"><div class="field"><label>From</label><input id="tFrom" placeholder="ESB" /></div><div class="field"><label>To</label><input id="tTo" placeholder="BUD" /></div></div>'+
+    tip("Airport or station codes. Example: ESB to BUD")+
     '<div class="grid2"><div class="field"><label>From city</label><input id="tFromCity" placeholder="Ankara" /></div><div class="field"><label>To city</label><input id="tToCity" placeholder="Budapest" /></div></div>'+
+    tip("City names. Example: Ankara to Budapest")+
     '<div class="grid2"><div class="field"><label>Leaves</label><input id="tAt" type="datetime-local" /></div><div class="field"><label>Lands</label><input id="tLand" type="datetime-local" /></div></div>'+
+    tip("When it leaves and lands. Example: 14 Sep 10:25")+
     '<div class="field"><label>Code</label><input id="tCode" placeholder="W6 2488" /></div>'+
+    tip("Flight or booking code. Example: W6 2488")+
     '<div class="pad"><button class="btn btn-a" type="button" data-act="add-ticket">Add ticket</button></div></div>';
 }
 function renderTicketBoard(){
