@@ -56,7 +56,7 @@ function stamp(iso){ const [d,t="09:00"]=String(iso).split("T"); return d.replac
 function fold(s){ const t=String(s).replace(/\n/g,"\\n").replace(/,/g,"\\,"); const o=[]; for(let i=0;i<t.length;i+=74) o.push((i?" ":"")+t.slice(i,i+74)); return o.join("\r\n"); }
 function buildIcs(kind){
   const now=stamp(new Date().toISOString().slice(0,16));
-  const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Belvia//Travel//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH","X-WR-CALNAME:"+(S.meta.title||"Belvia")];
+  const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//BudVia//Travel//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH","X-WR-CALNAME:"+(S.meta.title||"BudVia")];
   S.reminders.filter(r=>r.at).forEach(r=>{
     const start=stamp(r.at);
     const hm=(r.at.split("T")[1]||"09:00").split(":");
@@ -64,12 +64,12 @@ function buildIcs(kind){
     const end=r.at.split("T")[0].replace(/-/g,"")+"T"+String(eh).padStart(2,"0")+String(em).padStart(2,"0")+"00";
     const place=placeBy(r.place);
     if(kind==="event"){
-      lines.push("BEGIN:VEVENT","UID:"+r.id+"@belvia.app","DTSTAMP:"+now+"Z","DTSTART:"+start,"DTEND:"+end,fold("SUMMARY:"+r.title));
+      lines.push("BEGIN:VEVENT","UID:"+r.id+"@budvia.app","DTSTAMP:"+now+"Z","DTSTART:"+start,"DTEND:"+end,fold("SUMMARY:"+r.title));
       if(r.notes) lines.push(fold("DESCRIPTION:"+r.notes));
       if(place){ lines.push(fold("LOCATION:"+place.address)); lines.push("GEO:"+place.lat+";"+place.lng); }
       lines.push("BEGIN:VALARM","ACTION:DISPLAY","TRIGGER:-PT45M","DESCRIPTION:"+r.title,"END:VALARM","END:VEVENT");
     } else {
-      lines.push("BEGIN:VTODO","UID:"+r.id+"-todo@belvia.app","DTSTAMP:"+now+"Z","DTSTART:"+start,"DUE:"+start,fold("SUMMARY:"+r.title),"STATUS:NEEDS-ACTION");
+      lines.push("BEGIN:VTODO","UID:"+r.id+"-todo@budvia.app","DTSTAMP:"+now+"Z","DTSTART:"+start,"DUE:"+start,fold("SUMMARY:"+r.title),"STATUS:NEEDS-ACTION");
       if(r.notes) lines.push(fold("DESCRIPTION:"+r.notes));
       lines.push("BEGIN:VALARM","ACTION:DISPLAY","TRIGGER:-PT30M","DESCRIPTION:"+r.title,"END:VALARM","END:VTODO");
     }
