@@ -87,7 +87,7 @@ flowchart LR
 
 Tahsin Sakin  
 Information Systems Engineer · Ankara  
-[linkedin.com/in/tahsinsakin](https://www.linkedin.com/in/tahsinsakin)
+[linkedin.com/in/tahsin-sakin-390961199](https://www.linkedin.com/in/tahsin-sakin-390961199)
 
 An idiot admires complexity, a genius admires simplicity.  
 — Terry A. Davis
