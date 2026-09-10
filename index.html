@@ -34,20 +34,23 @@ img,svg,.mark img,.brandshot,.shot{image-rendering:auto}
 #app{
   position:relative;
   width:100%;max-width:430px;
-  height:100%;height:100vh;height:100dvh;height:100svh;
+  height:100%;
+  min-height:100vh;
+  height:100dvh;
   margin:0 auto;
-  display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;
+  display:flex;
+  flex-direction:column;
   overflow:hidden;
   background:var(--navy);
 }
 #dither{
-  grid-column:1;grid-row:1 / -1;
+  position:absolute;inset:0;
   width:100%;height:100%;
   z-index:0;pointer-events:none;
   image-rendering:pixelated;
 }
-header.top, .pager, nav.dock{position:relative;z-index:2}
-header.top{grid-column:1;grid-row:1;background:var(--moss);color:var(--plaque);border-bottom:5px solid var(--wood);padding:calc(8px + var(--safe-t)) 12px 8px}
+header.top, .pager, nav.dock{position:relative;z-index:2;flex-shrink:0}
+header.top{background:var(--moss);color:var(--plaque);border-bottom:5px solid var(--wood);padding:calc(8px + var(--safe-t)) 12px 8px}
 .barrow{display:flex;align-items:center;gap:10px;min-height:36px}
 .mark{width:36px;height:36px;flex:0 0 auto;background:var(--wood);overflow:hidden;border:2px solid var(--wood-lit)}
 .mark img{width:100%;height:100%;object-fit:cover;display:block}
@@ -61,11 +64,12 @@ nav.pills::-webkit-scrollbar{display:none}
 nav.pills button{flex:0 0 auto;height:28px;padding:0 10px;border:2px solid var(--wood-lit);background:transparent;color:var(--plaque);font-size:11px;font-weight:700;text-transform:uppercase;white-space:nowrap}
 nav.pills button.on{background:var(--wood);color:var(--plaque)}
 .pager{
-  grid-column:1;grid-row:2;min-height:0;
+  flex:1 1 auto;min-height:0;
   display:flex;flex-direction:row;
   overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x mandatory;
   scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
 }
 .pager::-webkit-scrollbar{display:none}
 .page{
@@ -81,7 +85,7 @@ nav.pills button.on{background:var(--wood);color:var(--plaque)}
   -webkit-overflow-scrolling:touch;
   overscroll-behavior:contain;
 }
-nav.dock{grid-column:1;grid-row:3;display:grid;grid-template-columns:repeat(5,1fr);background:var(--moss);color:var(--plaque);border-top:5px solid var(--wood);padding:6px 2px calc(8px + var(--safe-b))}
+nav.dock{display:grid;grid-template-columns:repeat(5,1fr);background:var(--moss);color:var(--plaque);border-top:5px solid var(--wood);padding:6px 2px calc(8px + var(--safe-b))}
 nav.dock button{border:0;background:none;color:var(--plaque);opacity:.45;font-size:9px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;text-transform:uppercase;white-space:nowrap}
 nav.dock button.on{opacity:1;background:var(--wood)}
 nav.dock svg{width:18px;height:18px}
@@ -140,7 +144,8 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 .ticket .meta span{font-size:10px;font-weight:650}
 .banner{padding:12px 14px;font-size:12px}
 .brandshot{width:100%;max-height:360px;object-fit:contain;object-position:top;margin:10px 0;border:5px solid var(--wood);display:block;background:#0c1c14}
-.shot{width:100%;display:block;margin:0;border:0;background:#0c1c14}
+.shot{width:100%;height:auto;min-height:200px;object-fit:contain;object-position:top;display:block;margin:0;border:0;background:#0c1c14}
+.shotcard{overflow:hidden}
 #map{height:220px;background:#1e3a5f;touch-action:none;filter:grayscale(1) contrast(1.15) sepia(.55)}
 .mapwrap{position:relative;padding:8px}
 .mapclose{position:absolute;top:16px;left:16px;z-index:2;height:34px;padding:0 12px;border:0;background:var(--wood);color:var(--plaque);font-size:12px;font-weight:700}
@@ -183,12 +188,12 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="./icon.js"></script>
-<script src="./example.js"></script>
-<script src="./ex_sched.js"></script>
-<script src="./ex_tix.js"></script>
+<script src="./example.js?v=fix2"></script>
+<script src="./ex_sched.js?v=fix2"></script>
+<script src="./ex_tix.js?v=fix2"></script>
 <script src="./app.js"></script>
-<script src="./ui.js"></script>
-<script src="./pages.js"></script>
+<script src="./ui.js?v=fix2"></script>
+<script src="./pages.js?v=fix2"></script>
 <script src="./events.js"></script>
 <script>
 (function(){
