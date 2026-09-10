@@ -1,6 +1,6 @@
 function shotCard(src, label){
   if(!src || String(src).length<40) return "";
-  return '<div class="card shotcard" style="margin-top:14px"><p class="kicker" style="margin:10px 12px 8px">Example</p><img class="shot" alt="'+(label||"Example")+'" width="419" height="760" decoding="async" src="'+src+'"/></div>';
+  return '<div class="card" style="margin-top:18px"><div class="pad"><p class="kicker">Example</p></div><img class="shot" alt="'+(label||"Example")+'" decoding="async" src="'+src+'" style="background:transparent;filter:none;min-height:0;object-fit:contain"/></div>';
 }
 function paintPlan(){
   const groups={}; S.reminders.forEach(r=>{ const k=r.at?r.at.slice(0,10):"prep"; (groups[k]||(groups[k]=[])).push(r); });
