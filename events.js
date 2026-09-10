@@ -4,35 +4,27 @@ document.addEventListener("click", function(e){
   if(goEl && (!actEl || actEl===goEl || actEl.getAttribute("data-act")==="go")){ e.preventDefault(); setTab(goEl.getAttribute("data-go")); return; }
   if(!actEl) return;
   const act=actEl.getAttribute("data-act");
-  if(act==="toggle"){ if(e.target.closest("a")) return; const id=actEl.getAttribute("data-id"); S.done[id]=!S.done[id]; save(); actEl.classList.toggle("on", !!S.done[id]); paintToday(); paintChrome(); }
+  if(act==="toggle"){ if(e.target.closest("a")) return; const id=actEl.getAttribute("data-id"); S.done[id]=!S.done[id]; save(); paintPlan(); paintToday(); }
   else if(act==="pack"){ const id=actEl.getAttribute("data-id"); S.packed[id]=!S.packed[id]; save(); actEl.classList.toggle("on", !!S.packed[id]); const k=$("packCount"); if(k){ const done=PACK.reduce((n,g)=>n+g[1].filter(i=>S.packed[i[0]]).length,0); const total=PACK.reduce((n,g)=>n+g[1].length,0); k.textContent=done+" / "+total+" packed"; } }
   else if(act==="create"){ S.meta.title=((($("nTitle")||{}).value)||"").trim()||"Trip"; S.meta.start=(($("nStart")||{}).value)||""; S.meta.end=(($("nEnd")||{}).value)||""; S.meta.pnr=((($("nPnr")||{}).value)||"").trim(); S.meta.sample=false; save(); paintAll(); }
-  else if(act==="demo"){ S=demoState(); S.tickets=S.tickets||[]; S.sim=S.sim||[]; save(); paintAll(); }
+  else if(act==="demo"){ S=demoState(); S.tickets=S.tickets||[]; S.sim=S.sim||[]; S.hideSample=false; save(); paintAll(); }
   else if(act==="wipe"){ if(confirm("Remove this trip from this phone?")){ S=emptyState(); save(); paintAll(); } }
   else if(act==="add"){ const title=((($("rTitle")||{}).value)||"").trim(); if(!title) return; const date=($("rDate")||{}).value; const time=($("rTime")||{}).value; S.reminders.push({id:"u"+Date.now(),title,notes:((($("rNotes")||{}).value)||"").trim(),list:(($("rList")||{}).value)||"prep",at:date?(date+"T"+(time||"09:00")):""}); save(); paintPlan(); paintToday(); paintChrome(); }
-  else if(act==="del-rem"){ const id=actEl.getAttribute("data-id"); S.reminders=S.reminders.filter(r=>r.id!==id); save(); paintPlan(); paintToday(); }
-  else if(act==="del-ticket"){ if(!S.tickets) S.tickets=[]; S.tickets=S.tickets.filter(x=>x.id!==actEl.getAttribute("data-id")); save(); paintApps(); paintToday(); }
+  else if(act==="del-rem"){ S.reminders=S.reminders.filter(r=>r.id!==actEl.getAttribute("data-id")); save(); paintPlan(); paintToday(); }
+  else if(act==="del-place"){ S.places=S.places.filter(p=>p.id!==actEl.getAttribute("data-id")); save(); paintMap(); }
+  else if(act==="del-route"){ S.routes=S.routes.filter(r=>r.id!==actEl.getAttribute("data-id")); save(); paintMap(); }
+  else if(act==="del-ticket"){ if(!S.tickets) S.tickets=[]; const id=actEl.getAttribute("data-id"); S.tickets=S.tickets.filter(x=>x.id!==id); if(id==="ex1") S.hideSample=true; save(); paintApps(); paintToday(); }
   else if(act==="add-ticket"){
     if(!S.tickets) S.tickets=[];
-    const kind=(($("tKind")||{}).value)||"flight";
-    const carrier=((($("tCarrier")||{}).value)||"").trim()||"Carrier";
-    const from=((($("tFrom")||{}).value)||"").trim();
-    const to=((($("tTo")||{}).value)||"").trim();
-    const fromCity=((($("tFromCity")||{}).value)||"").trim();
-    const toCity=((($("tToCity")||{}).value)||"").trim();
-    const at=((($("tAt")||{}).value)||"").replace(" ","T");
-    const land=((($("tLand")||{}).value)||"").replace(" ","T");
-    const code=((($("tCode")||{}).value)||"").trim();
-    S.tickets.push({id:"t"+Date.now(),kind:kind,carrier:carrier,code:code,from:from,to:to,fromCity:fromCity,toCity:toCity,title:carrier,at:at,land:land,pnr:code,note:""});
+    S.hideSample=true;
+    S.tickets.push({id:"t"+Date.now(),kind:(($("tKind")||{}).value)||"flight",carrier:((($("tCarrier")||{}).value)||"").trim()||"Carrier",code:((($("tCode")||{}).value)||"").trim(),from:((($("tFrom")||{}).value)||"").trim(),to:((($("tTo")||{}).value)||"").trim(),fromCity:((($("tFromCity")||{}).value)||"").trim(),toCity:((($("tToCity")||{}).value)||"").trim(),title:((($("tCarrier")||{}).value)||"").trim(),at:((($("tAt")||{}).value)||"").replace(" ","T"),land:((($("tLand")||{}).value)||"").replace(" ","T"),pnr:((($("tCode")||{}).value)||"").trim(),note:""});
     save(); paintApps(); paintToday();
   }
   else if(act==="del-sim"){ if(!S.sim) S.sim=[]; S.sim=S.sim.filter(x=>x.id!==actEl.getAttribute("data-id")); save(); paintApps(); }
   else if(act==="add-sim"){
     if(!S.sim) S.sim=[];
     const name=((($("simName")||{}).value)||"").trim(); if(!name) return;
-    const link=((($("simLink")||{}).value)||"").trim();
-    const note=((($("simNote")||{}).value)||"").trim();
-    S.sim.push({id:"s"+Date.now(),name:name,scheme:link,note:note});
+    S.sim.push({id:"s"+Date.now(),name:name,scheme:((($("simLink")||{}).value)||"").trim(),note:((($("simNote")||{}).value)||"").trim()});
     save(); paintApps();
   }
   else if(act==="app"){ openScheme(actEl.getAttribute("data-scheme")); }
