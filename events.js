@@ -1,9 +1,27 @@
 (function(){
   var l=document.createElement("link");
   l.rel="stylesheet";
-  l.href="./desk.css?v=en3";
+  l.href="./desk.css?v=en5";
   document.head.appendChild(l);
 })();
+function closeBagHint(){
+  var el=$("bagHint");
+  if(el) el.classList.remove("show");
+  try{ sessionStorage.setItem("budvia-bag-hint","1"); }catch(e){}
+}
+function showBagHint(){
+  try{ if(sessionStorage.getItem("budvia-bag-hint")) return; }catch(e){}
+  var el=$("bagHint");
+  if(!el){
+    el=document.createElement("div");
+    el.id="bagHint";
+    el.className="overlay";
+    el.innerHTML='<div class="sheet stack"><p class="kicker">Bag</p><h3>Pack first?</h3><p class="muted">Tick the bag now if you want. You can skip this.</p><button class="btn btn-a" type="button" data-act="bag-go">Open bag</button><button class="btn btn-g" type="button" data-act="bag-skip">Not now</button></div>';
+    document.body.appendChild(el);
+    el.addEventListener("click", function(e){ if(e.target.id==="bagHint") closeBagHint(); });
+  }
+  el.classList.add("show");
+}
 document.addEventListener("click", function(e){
   const goEl=e.target.closest("[data-go]");
   const actEl=e.target.closest("[data-act]");
@@ -48,12 +66,18 @@ document.addEventListener("click", function(e){
   else if(act==="app"){ openScheme(actEl.getAttribute("data-scheme")); }
   else if(act==="export"){ if(typeof paintExport==="function") paintExport(); $("export").classList.add("show"); }
   else if(act==="export-close"){ $("export").classList.remove("show"); }
-  else if(act==="ics-cal"){ if(!S.reminders.some(r=>r.at)){ alert("Add timed reminders first."); return; } downloadIcs("BudVia-Calendar.ics", buildIcs("event")); }
-  else if(act==="ics-rem"){ if(!S.reminders.some(r=>r.at)){ alert("Add timed reminders first."); return; } downloadIcs("BudVia-Reminders.ics", buildIcs("todo")); }
+  else if(act==="ics-cal"){ if(!S.reminders.some(r=>r.at)){ alert("Add a time first."); return; } downloadIcs("BudVia-Calendar.ics", buildIcs("event")); }
+  else if(act==="ics-rem"){ if(!S.reminders.some(r=>r.at)){ alert("Add a time first."); return; } downloadIcs("BudVia-Reminders.ics", buildIcs("todo")); }
   else if(act==="install"){ if(window.BudViaInstall) window.BudViaInstall.add(); }
+  else if(act==="bag-go"){ closeBagHint(); setTab("pack"); }
+  else if(act==="bag-skip"){ closeBagHint(); }
 });
 $("export").addEventListener("click", function(e){ if(e.target.id==="export") $("export").classList.remove("show"); });
-document.addEventListener("keydown", function(e){ if(e.key==="Escape") $("export").classList.remove("show"); });
+document.addEventListener("keydown", function(e){
+  if(e.key!=="Escape") return;
+  $("export").classList.remove("show");
+  closeBagHint();
+});
 document.addEventListener("change", function(e){ if(e.target && e.target.id==="extra"){ S.extra=e.target.value; save(); } });
 (function(){
   const pager=$("pager"); if(!pager) return; let x0=0,y0=0,skip=false;
@@ -70,13 +94,14 @@ function loadScript(src){
     document.body.appendChild(s);
   });
 }
-loadScript("./i18n.js?v=en3").then(function(){
-  return loadScript("./tickets.js?v=en3");
+loadScript("./i18n.js?v=en5").then(function(){
+  return loadScript("./tickets.js?v=en5");
 }).then(function(){
-  return loadScript("./install.js?v=en3");
+  return loadScript("./install.js?v=en5");
 }).then(function(){
   if(!S.tickets) S.tickets=[];
   if(!S.sim) S.sim=[];
   if(!S.packExtra) S.packExtra=[];
   paintAll();
+  setTimeout(showBagHint, 400);
 });
