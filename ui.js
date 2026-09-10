@@ -35,8 +35,35 @@ let map = null;
 let mapSig = "";
 function hasTrip(){ return !!(S.meta.title || S.reminders.length); }
 function placeBy(id){ return S.places.find(p => p.id === id); }
-function mapsUrl(p){ if(!p) return ""; return "https://maps.apple.com/?daddr=" + encodeURIComponent(p.name + ", " + p.address) + "&dirflg=d&t=m"; }
-function routeUrl(r){ const a=placeBy(r.from), b=placeBy(r.to); if(!a||!b) return ""; return "https://maps.apple.com/?saddr="+encodeURIComponent(a.name)+"&daddr="+encodeURIComponent(b.name)+"&dirflg="+(r.mode||"d")+"&t=m"; }
+function deskLike(){
+  return !/iPhone|iPad|iPod|Android.+Mobile/i.test(navigator.userAgent);
+}
+function webFor(scheme){
+  const map={
+    "wizzair://":"https://www.wizzair.com/",
+    "flixbus://":"https://www.flixbus.com/",
+    "airbnb://":"https://www.airbnb.com/",
+    "booking://":"https://www.booking.com/",
+    "bubi://":"https://molbubi.hu/",
+    "bumble://":"https://bumble.com/",
+    "timeleft://":"https://www.timeleft.com/",
+    "nomadtable://":"https://www.nomadtable.com/"
+  };
+  return map[scheme]||"";
+}
+function mapsUrl(p){
+  if(!p) return "";
+  const q=encodeURIComponent(p.name+", "+p.address);
+  if(deskLike() && !/Mac OS X|iPhone|iPad/.test(navigator.userAgent)) return "https://www.google.com/maps/search/?api=1&query="+q;
+  return "https://maps.apple.com/?daddr="+q+"&dirflg=d&t=m";
+}
+function routeUrl(r){
+  const a=placeBy(r.from), b=placeBy(r.to); if(!a||!b) return "";
+  if(deskLike() && !/Mac OS X|iPhone|iPad/.test(navigator.userAgent)){
+    return "https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(a.name)+"&destination="+encodeURIComponent(b.name);
+  }
+  return "https://maps.apple.com/?saddr="+encodeURIComponent(a.name)+"&daddr="+encodeURIComponent(b.name)+"&dirflg="+(r.mode||"d")+"&t=m";
+}
 function fmtWhen(iso){
   if(!iso) return { day:"Prep", time:"\u2014" };
   const parts = String(iso).split("T");
@@ -54,8 +81,8 @@ function nextUp(){
   const now=Date.now();
   return S.reminders.filter(r=>r.at && !S.done[r.id]).map(r=>({r,t:Date.parse(r.at.length===16?r.at+":00":r.at)})).filter(x=>!Number.isNaN(x.t)&&x.t>=now-36e5).sort((a,b)=>a.t-b.t)[0];
 }
-function stamp(iso){ const [d,t="09:00"]=String(iso).split("T"); return d.replace(/-/g,"")+"T"+t.replace(":","")+"00"; }
-function fold(s){ const t=String(s).replace(/\n/g,"\\n").replace(/,/g,"\\,"); const o=[]; for(let i=0;i<t.length;i+=74) o.push((i?" ":"")+t.slice(i,i+74)); return o.join("\r\n"); }
+function stamp(iso){ const [d,tm="09:00"]=String(iso).split("T"); return d.replace(/-/g,"")+"T"+tm.replace(":","")+"00"; }
+function fold(s){ const txt=String(s).replace(/\n/g,"\\n").replace(/,/g,"\\,"); const o=[]; for(let i=0;i<txt.length;i+=74) o.push((i?" ":"")+txt.slice(i,i+74)); return o.join("\r\n"); }
 function buildIcs(kind){
   const now=stamp(new Date().toISOString().slice(0,16));
   const lines=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//BudVia//Travel//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH","X-WR-CALNAME:"+(S.meta.title||"BudVia")];
@@ -85,19 +112,35 @@ function downloadIcs(name,body){
   if(navigator.canShare && navigator.canShare({files:[file]})){ navigator.share({files:[file],title:name}).catch(function(){}); return; }
   const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); a.remove();
 }
-function openScheme(scheme){ const a=document.createElement("a"); a.href=scheme; a.rel="noopener noreferrer"; document.body.appendChild(a); a.click(); a.remove(); }
+function openScheme(scheme){
+  if(!scheme) return;
+  const web=scheme.indexOf("http")===0?scheme:(webFor(scheme)||scheme);
+  if(scheme.indexOf("http")===0 || deskLike()){
+    window.open(web,"_blank","noopener,noreferrer");
+    return;
+  }
+  var timer=setTimeout(function(){
+    if(web && web!==scheme) window.open(web,"_blank","noopener,noreferrer");
+  },800);
+  try{ window.location.href=scheme; }catch(e){ clearTimeout(timer); window.open(web,"_blank","noopener,noreferrer"); }
+}
 function setTab(id){
   if(TABS.indexOf(id)<0) return;
   tab=id;
   document.querySelectorAll("#pills button, #dock button").forEach(b=>b.classList.toggle("on", b.getAttribute("data-go")===id));
+  document.querySelectorAll(".page").forEach(p=>p.classList.toggle("on", p.id==="page-"+id));
   const pager=$("pager");
-  pager.scrollLeft = TABS.indexOf(id) * pager.clientWidth;
+  const desk=window.matchMedia("(min-width:880px)").matches;
+  if(!desk && pager) pager.scrollLeft = TABS.indexOf(id) * pager.clientWidth;
   if(id==="map") setTimeout(ensureMap, 80);
 }
 function paintChrome(){
   $("hdrTitle").textContent = "BudVia";
   $("hdrSub").textContent = "Not all who wander are lost, especially with the right companion: Tolkien";
-  $("pills").innerHTML = TABS.map(t=>'<button type="button" data-go="'+t+'"'+(t===tab?' class="on"':'')+'>'+LABELS[t]+'</button>').join("");
+  $("pills").innerHTML = TABS.map(id=>'<button type="button" data-go="'+id+'"'+(id===tab?' class="on"':'')+'>'+(typeof t==="function"?t("tab_"+id):LABELS[id])+'</button>').join("");
+  if($("langBar") && typeof LANG!=="undefined"){
+    $("langBar").innerHTML='<button type="button" data-act="lang" data-lang="tr"'+(LANG==="tr"?' class="on"':'')+'>TR</button><button type="button" data-act="lang" data-lang="en"'+(LANG==="en"?' class="on"':'')+'>EN</button>';
+  }
   const icons={
     today:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>',
     plan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>',
@@ -105,7 +148,7 @@ function paintChrome(){
     pack:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 8V7a5 5 0 0 1 10 0v1M6 8h12l-1 13H7L6 8z"/></svg>',
     apps:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/></svg>'
   };
-  $("dock").innerHTML = TABS.map(t=>'<button type="button" data-go="'+t+'"'+(t===tab?' class="on"':'')+'>'+icons[t]+LABELS[t]+'</button>').join("");
+  $("dock").innerHTML = TABS.map(id=>'<button type="button" data-go="'+id+'"'+(id===tab?' class="on"':'')+'>'+icons[id]+(typeof t==="function"?t("tab_"+id):LABELS[id])+'</button>').join("");
 }
 function paintToday(){
   const root=$("page-today");
@@ -116,7 +159,7 @@ function paintToday(){
     return;
   }
   const n=nextUp();
-  root.innerHTML=(S.meta.sample?'<div class="banner">Sample itinerary. Personal codes and street numbers are hidden.</div>':'')+'<p class="kicker">'+esc(rangeLabel())+'</p><h2>'+esc(S.meta.title || "BudVia")+'</h2>'+(S.meta.pnr?'<p class="muted">Booking ref '+esc(S.meta.pnr)+'</p>':senecaQuote())+'<div class="stack" style="margin-top:16px">'+flightCard()+'<div class="card"><div class="pad"><p class="kicker">Up next</p>'+(n?'<h3>'+esc(n.r.title)+'</h3><p class="note">'+esc(fmtWhen(n.r.at).day+' \u00b7 '+fmtWhen(n.r.at).time)+'</p>'+(n.r.notes?'<p class="note">'+esc(n.r.notes)+'</p>':''):'<h3>Nothing waiting</h3><p class="note">Open Plan to add a reminder.</p>')+'</div></div>'+addBtn+'<button class="btn btn-g" type="button" data-act="go" data-go="plan">Open plan</button><button class="btn btn-g" type="button" data-act="wipe">Clear this device</button></div>'+shot;
+  root.innerHTML=(S.meta.sample?'<div class="banner">Sample itinerary. Personal codes and street numbers are hidden.</div>':'')+'<p class="kicker">'+esc(rangeLabel())+'</p><h2>'+esc(S.meta.title || "BudVia")+'</h2>'+(S.meta.pnr?'<p class="muted">Booking ref '+esc(S.meta.pnr)+'</p>':senecaQuote())+'<div class="stack" style="margin-top:16px">'+(typeof renderAirPair==="function"?renderAirPair():flightCard())+'<div class="card"><div class="pad"><p class="kicker">Up next</p>'+(n?'<h3>'+esc(n.r.title)+'</h3><p class="note">'+esc(fmtWhen(n.r.at).day+' \u00b7 '+fmtWhen(n.r.at).time)+'</p>'+(n.r.notes?'<p class="note">'+esc(n.r.notes)+'</p>':''):'<h3>Nothing waiting</h3><p class="note">Open Plan to add a reminder.</p>')+'</div></div>'+addBtn+'<button class="btn btn-g" type="button" data-act="go" data-go="plan">Open plan</button><button class="btn btn-g" type="button" data-act="wipe">Clear this device</button></div>'+shot;
 }
 function flightCard(){
   const out=S.reminders.find(r=>r.id==="d14b"); const ret=S.reminders.find(r=>r.id==="d21c");
