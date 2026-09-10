@@ -1,4 +1,4 @@
-# Belvia — App Store listing
+# BudVia — App Store listing
 
 Prepared: 10 September 2026  
 Intended release: 12 September 2026  
@@ -10,11 +10,11 @@ Age: 4+
 Price: Free  
 Availability: All countries, with English as the primary language
 
-Belvia is not on the App Store until an Apple Developer account wraps this PWA in Xcode and App Store Connect accepts the build. Use this file as the listing. Do not paste live booking codes into review notes.
+BudVia is not on the App Store until an Apple Developer account wraps this PWA in Xcode and App Store Connect accepts the build. Use this file as the listing. Do not paste live booking codes into review notes.
 
 ## Name
 
-Belvia
+BudVia
 
 ## Subtitle (30 characters)
 
@@ -22,15 +22,15 @@ One trip. Every cheap ticket.
 
 ## Promotional text (170 characters)
 
-Cheap flights, coaches and rooms live in different apps. Belvia gathers the plan on your iPhone — times, maps, packing — without an account or a server.
+Cheap flights, coaches and rooms live in different apps. BudVia gathers the plan on your iPhone — times, maps, packing — without an account or a server.
 
 ## Description
 
 Cheap travel is messy on purpose. The lowest fare is on Wizz, the coach is on FlixBus, the room is on Airbnb or Booking, the city bike is another app, the dinner table is another one again. Each confirmation is cheap. Putting them back together is not.
 
-Belvia is the place those pieces meet.
+BudVia is the place those pieces meet.
 
-You keep buying tickets wherever they are cheapest. Belvia does not replace those apps and does not sell seats. It holds the itinerary you already paid for: dated reminders, Apple Maps legs, a packing list, and a tap that opens the same app you used to book.
+You keep buying tickets wherever they are cheapest. BudVia does not replace those apps and does not sell seats. It holds the itinerary you already paid for: dated reminders, Apple Maps legs, a packing list, and a tap that opens the same app you used to book.
 
 Start empty and type your own dates. Or load the sample trip (14–21 September 2026, Ankara → Budapest – Vienna). Sample codes are masked. Street numbers are left out. Pins sit on public landmarks.
 
@@ -47,9 +47,9 @@ Swipe between tabs. The header and dock stay on screen.
 
 PRIVACY
 
-No account. No cloud. No analytics from Belvia. The trip is stored only on this device. Clear the trip and it is gone.
+No account. No cloud. No analytics from BudVia. The trip is stored only on this device. Clear the trip and it is gone.
 
-Belvia is built for people who stitch a journey out of several cheap bookings and need one quiet place that remembers the order.
+BudVia is built for people who stitch a journey out of several cheap bookings and need one quiet place that remembers the order.
 
 Publisher: Tahsin Sakin
 
@@ -70,7 +70,7 @@ This build is a private itinerary companion. There is no login. Reviewers can ta
 - Data Not Collected
 - No tracking
 - No third-party advertising
-- Location is not collected by Belvia; Apple Maps is opened as a separate app
+- Location is not collected by BudVia; Apple Maps is opened as a separate app
 
 ## Support and privacy URLs
 

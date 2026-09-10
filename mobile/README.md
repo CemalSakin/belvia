@@ -1,4 +1,4 @@
-# Belvia mobile
+# BudVia mobile
 
 Expo SDK 51 managed workflow. React Native 0.74. TypeScript strict.
 

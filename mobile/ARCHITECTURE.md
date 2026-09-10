@@ -1,4 +1,4 @@
-# Belvia mobile architecture
+# BudVia mobile architecture
 
 Expo SDK 51 managed. New Architecture on. TypeScript strict + exactOptionalPropertyTypes.
 

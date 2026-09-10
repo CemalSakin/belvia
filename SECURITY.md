@@ -1,6 +1,6 @@
 # Security
 
-Belvia is a static page. It does not collect accounts or talk to an API you own.
+BudVia is a static page. It does not collect accounts or talk to an API you own.
 
 ## Design
 
