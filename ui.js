@@ -1,13 +1,4 @@
 const $ = (id) => document.getElementById(id);
-const EX = {
-  trip: "./IMG_0554.jpeg?v=pin3",
-  schedule: "./schedule-ex.jpg?v=pin3",
-  tickets: "./IMG_0556.jpeg?v=pin3",
-  routes: "./IMG_0557.jpeg?v=pin3",
-  bag: "./IMG_0559.jpeg?v=pin3",
-  apps: "./apps-ex.jpg?v=pin3",
-  otter: "./0875CF7C-5ACB-48B1-B2CD-57E02C5C9B58.jpeg?v=pin3"
-};
 function esc(s){
   return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
     if(c === "&") return "\u0026amp;";
@@ -23,8 +14,8 @@ function senecaQuote(){
 function davisQuote(){
   return '<p class="muted">An idiot admires complexity, a genius admires simplicity.</p><p class="note">\u2014 Terry A. Davis</p>';
 }
-function exampleShot(src, label){
-  return '<div class="card example-card" style="margin-top:18px"><div class="pad"><p class="kicker">'+(typeof t==="function"?t("example"):"Example")+'</p></div><img class="example-shot" alt="'+esc(label||"Example")+'" decoding="async" src="'+src+'"/></div>';
+function teach(title, body){
+  return '<div class="card example-card" style="margin-top:18px"><div class="pad"><p class="kicker">Worked example</p><h3>'+title+'</h3><p class="muted">'+body+'</p></div></div>';
 }
 function load(){ try { const raw = localStorage.getItem(KEY); return raw ? Object.assign(emptyState(), JSON.parse(raw)) : emptyState(); } catch(e){ return emptyState(); } }
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
@@ -134,10 +125,8 @@ function setTab(id){
 function paintChrome(){
   $("hdrTitle").textContent = "BudVia";
   $("hdrSub").textContent = "Not all who wander are lost, especially with the right companion: Tolkien";
-  $("pills").innerHTML = TABS.map(id=>'<button type="button" data-go="'+id+'"'+(id===tab?' class="on"':'')+'>'+(typeof t==="function"?t("tab_"+id):LABELS[id])+'</button>').join("");
-  if($("langBar") && typeof LANG!=="undefined"){
-    $("langBar").innerHTML='<button type="button" data-act="lang" data-lang="tr"'+(LANG==="tr"?' class="on"':'')+'>TR</button><button type="button" data-act="lang" data-lang="en"'+(LANG==="en"?' class="on"':'')+'>EN</button>';
-  }
+  $("pills").innerHTML = TABS.map(id=>'<button type="button" data-go="'+id+'"'+(id===tab?' class="on"':'')+'>'+LABELS[id]+'</button>').join("");
+  if($("langBar")) $("langBar").innerHTML = "";
   const icons={
     today:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>',
     plan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>',
@@ -145,18 +134,18 @@ function paintChrome(){
     pack:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 8V7a5 5 0 0 1 10 0v1M6 8h12l-1 13H7L6 8z"/></svg>',
     apps:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/></svg>'
   };
-  $("dock").innerHTML = TABS.map(id=>'<button type="button" data-go="'+id+'"'+(id===tab?' class="on"':'')+'>'+icons[id]+(typeof t==="function"?t("tab_"+id):LABELS[id])+'</button>').join("");
+  $("dock").innerHTML = TABS.map(id=>'<button type="button" data-go="'+id+'"'+(id===tab?' class="on"':'')+'>'+icons[id]+LABELS[id]+'</button>').join("");
 }
 function paintToday(){
   const root=$("page-today");
-  const shot=exampleShot(EX.trip,"Example trip");
+  const shot=teach("A trip is a title and two dates","Fake example: 8-day December trip to Luxembourg, 12\u201320 Dec. Load sample itinerary to see the next action on this screen. Buying the ticket is easy. Keeping the trip together is not.");
   const addBtn='<button class="btn btn-a" type="button" data-act="install">Add to Home Screen</button>';
   if(!hasTrip()){
     root.innerHTML='<p class="kicker">BUD&VIA</p><h2>Welcome to BudVia</h2>'+senecaQuote()+'<div class="stack" style="margin-top:16px">'+addBtn+'<div class="card"><div class="pad"><p class="kicker">New trip</p><h3>Title and dates</h3></div><div class="field"><label>Title</label><input id="nTitle" placeholder="8-day December trip to Luxembourg" /></div><div class="grid2"><div class="field"><label>Starts</label><input id="nStart" type="date" /></div><div class="field"><label>Ends</label><input id="nEnd" type="date" /></div></div><div class="field"><label>Booking code</label><input id="nPnr" placeholder="Optional" autocomplete="off" /></div><div class="pad"><button class="btn btn-a" type="button" data-act="create">Create trip</button></div></div><button class="btn btn-g" type="button" data-act="demo">Load sample itinerary</button></div>'+shot;
     return;
   }
   const n=nextUp();
-  root.innerHTML=(S.meta.sample?'<div class="banner">Sample itinerary. Personal codes and street numbers are hidden.</div>':'')+'<p class="kicker">'+esc(rangeLabel())+'</p><h2>'+esc(S.meta.title || "BudVia")+'</h2>'+(S.meta.pnr?'<p class="muted">Booking ref '+esc(S.meta.pnr)+'</p>':senecaQuote())+'<div class="stack" style="margin-top:16px">'+(typeof renderAirPair==="function"?renderAirPair():flightCard())+'<div class="card"><div class="pad"><p class="kicker">Up next</p>'+(n?'<h3>'+esc(n.r.title)+'</h3><p class="note">'+esc(fmtWhen(n.r.at).day+' \u00b7 '+fmtWhen(n.r.at).time)+'</p>'+(n.r.notes?'<p class="note">'+esc(n.r.notes)+'</p>':''):'<h3>Nothing waiting</h3><p class="note">Open Plan to add a reminder.</p>')+'</div></div>'+addBtn+'<button class="btn btn-g" type="button" data-act="go" data-go="plan">Open plan</button><button class="btn btn-g" type="button" data-act="wipe">Clear this device</button></div>'+shot;
+  root.innerHTML=(S.meta.sample?'<div class="banner">Sample itinerary. Personal codes and street numbers are hidden.</div>':'')+'<p class="kicker">'+esc(rangeLabel())+'</p><h2>'+esc(S.meta.title || "BudVia")+'</h2>'+(S.meta.pnr?'<p class="muted">Booking ref '+esc(S.meta.pnr)+'</p>':senecaQuote())+'<div class="stack" style="margin-top:16px">'+(typeof renderAirPair==="function"?renderAirPair():flightCard())+'<div class="card"><div class="pad"><p class="kicker">Up next</p>'+(n?'<h3>'+esc(n.r.title)+'</h3><p class="note">'+esc(fmtWhen(n.r.at).day+' \u00b7 '+fmtWhen(n.r.at).time)+'</p>'+(n.r.notes?'<p class="note">'+esc(n.r.notes)+'</p>':''):'<h3>Nothing waiting</h3><p class="note">Open Schedule to add a reminder.</p>')+'</div></div>'+addBtn+'<button class="btn btn-g" type="button" data-act="go" data-go="plan">Open schedule</button><button class="btn btn-g" type="button" data-act="wipe">Clear this device</button></div>'+shot;
 }
 function flightCard(){
   const out=S.reminders.find(r=>r.id==="d14b"); const ret=S.reminders.find(r=>r.id==="d21c");
