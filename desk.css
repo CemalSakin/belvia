@@ -1,10 +1,4 @@
-#langBar { display: none !important; }
-nav.pills {
-  display: flex !important;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  overflow-x: auto;
-}
+#langBar, nav.pills { display: none !important; }
 nav.dock {
   display: flex !important;
   justify-content: center;
@@ -23,7 +17,6 @@ nav.dock button {
 .row .act {
   min-width: 52px;
   text-align: center;
-  border: 2px solid var(--wood-lit);
   padding: 6px 8px;
   margin-left: 4px;
 }
