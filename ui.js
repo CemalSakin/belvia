@@ -12,7 +12,7 @@ function goBtn(id, label){
   return '<button class="btn btn-g" type="button" data-act="go" data-go="'+id+'">'+label+'</button>';
 }
 function nextStepTitle(){
-  return '<p class="next-step" style="margin:0 0 10px;font-size:28px;line-height:1.05;letter-spacing:.12em;text-transform:uppercase;color:#9b1218;font-weight:800">Next step</p>';
+  return '<p class="next-step" style="margin:0 0 12px;display:inline-block;padding:10px 12px;border:4px solid #000;font-size:24px;line-height:1.15;letter-spacing:.08em;text-transform:uppercase;color:#9b1218;font-weight:800">Do this next, genius</p>';
 }
 function senecaQuote(){
   return '<p class="muted">There is no surer way to find out whether you like people or hate them than to travel with them.</p><p class="note">\u2014 Mark Twain</p>';
@@ -153,7 +153,7 @@ function paintToday(){
   const n=nextUp();
   const nextCard=n
     ? '<div class="card"><div class="pad">'+nextStepTitle()+'<h3>'+esc(n.r.title)+'</h3><p class="note">'+esc(fmtWhen(n.r.at).day+' \u00b7 '+fmtWhen(n.r.at).time)+'</p>'+(n.r.notes?'<p class="note">'+esc(n.r.notes)+'</p>':'')+'</div><div class="pad" style="padding-top:0">'+goBtn("plan","Open schedule")+'</div></div>'
-    : '<div class="card"><div class="pad">'+nextStepTitle()+'<h3>Nothing next</h3></div><div class="pad" style="padding-top:0">'+goBtn("plan","Open schedule")+'</div></div>';
+    : '<div class="card"><div class="pad">'+nextStepTitle()+'</div><div class="pad" style="padding-top:0">'+goBtn("plan","Open schedule")+'</div></div>';
   root.innerHTML=(S.meta.sample?'<div class="banner">This is a sample. Real codes are hidden.</div>':'')+'<p class="kicker">'+esc(rangeLabel())+'</p><h2>'+esc(S.meta.title || "BudVia")+'</h2>'+(S.meta.pnr?'<p class="muted">Code '+esc(S.meta.pnr)+'</p>':senecaQuote())+'<div class="stack" style="margin-top:16px">'+(typeof renderAirPair==="function"?renderAirPair():flightCard())+nextCard+addBtn+goBtn("apps","Open tickets")+'<button class="btn btn-g" type="button" data-act="wipe">Clear this phone</button></div>'+shot;
 }
 function flightCard(){
