@@ -24,7 +24,7 @@
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;border-radius:0 !important}
 html,body{
-  margin:0;background:var(--moss);color:var(--plaque);
+  margin:0;background:var(--navy);color:var(--plaque);
   font-family:ui-monospace,Menlo,"SF Mono",Consolas,monospace;
   overflow:hidden;
   height:100%;height:100vh;height:100svh;height:100dvh;
@@ -48,7 +48,7 @@ img,svg,.mark img,.brandshot,.shot{image-rendering:auto}
   grid-template-columns:minmax(0,1fr);
   grid-template-rows:auto minmax(0,1fr) auto;
   overflow:hidden;
-  background:var(--navy);
+  background:transparent;
   height:100%;height:100vh;height:100svh;height:100dvh;
 }
 header.top, nav.dock{position:relative;z-index:3}
@@ -92,6 +92,7 @@ nav.pills button.on{background:var(--wood);color:var(--plaque)}
   padding:16px 12px 28px;
   -webkit-overflow-scrolling:touch;
   overscroll-behavior:contain;
+  background:transparent;
 }
 nav.dock{display:grid;grid-template-columns:repeat(5,1fr);background:var(--moss);color:var(--plaque);border-top:5px solid var(--wood);padding:6px 2px calc(8px + var(--safe-b))}
 nav.dock button{border:0;background:none;color:var(--plaque);opacity:.45;font-size:9px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;text-transform:uppercase;white-space:nowrap}
@@ -214,22 +215,22 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="./icon.js"></script>
-<script src="./et1.js?v=fix4"></script>
-<script src="./et2.js?v=fix4"></script>
-<script src="./example.js?v=fix4"></script>
-<script src="./ex_sched.js?v=fix4"></script>
-<script src="./ex_tix.js?v=fix4"></script>
+<script src="./et1.js?v=pos3"></script>
+<script src="./et2.js?v=pos3"></script>
+<script src="./example.js?v=pos3"></script>
+<script src="./ex_sched.js?v=pos3"></script>
+<script src="./ex_tix.js?v=pos3"></script>
 <script src="./app.js"></script>
-<script src="./ui.js?v=fix4"></script>
-<script src="./pages.js?v=fix4"></script>
+<script src="./ui.js?v=pos3"></script>
+<script src="./pages.js?v=pos3"></script>
 <script src="./events.js"></script>
 <script>
 (function(){
   const c=document.getElementById("dither"); if(!c) return;
-  const N=[0x1e,0x3a,0x5f], K=[0x2a,0x4e,0x3a];
+  const N=[0x1e,0x3a,0x5f], K=[0xf0,0xe6,0x8c];
   const B=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
   function paint(){
-    const cell=6;
+    const cell=4;
     const W=innerWidth||430, H=innerHeight||800;
     const w=Math.max(1,Math.ceil(W/cell)), h=Math.max(1,Math.ceil(H/cell));
     c.width=w; c.height=h;
@@ -239,7 +240,7 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
       for(let x=0;x<w;x++){
         const i=(y*w+x)*4;
         const n=((x*13+y*7)%17)/17;
-        const t=0.78+(B[y&3][x&3]/16-0.5)*0.12;
+        const t=0.62+(B[y&3][x&3]/16-0.5)*0.10;
         const col=n>t?K:N;
         p[i]=col[0]; p[i+1]=col[1]; p[i+2]=col[2]; p[i+3]=255;
       }
