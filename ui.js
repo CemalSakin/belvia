@@ -15,7 +15,7 @@ function tip(s){
   return '<p style="margin:-2px 14px 10px;font-size:9px;line-height:1.35;color:#fff;opacity:.92">'+s+'</p>';
 }
 function nextStepTitle(){
-  return '<p class="next-step" style="margin:0 0 12px;display:inline-block;padding:10px 12px;border:4px solid #000;font-size:24px;line-height:1.15;letter-spacing:.08em;text-transform:uppercase;color:#9b1218;font-weight:800">Do this next</p>';
+  return '<p class="next-step" style="margin:0 0 10px;display:inline-block;padding:5px 10px;border:2px solid #1a1a1a;font-size:11px;line-height:1.2;letter-spacing:.16em;text-transform:uppercase;color:#7a1f1f;font-weight:700">Up next</p>';
 }
 function senecaQuote(){
   return '<p class="muted">There is no surer way to find out whether you like people or hate them than to travel with them.</p><p class="note">\u2014 Mark Twain</p>';
