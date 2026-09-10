@@ -30,7 +30,7 @@ html,body{
   overflow:hidden;
 }
 button{cursor:pointer;font:inherit;color:inherit;background:none}
-img,svg,.mark img,.brandshot{image-rendering:auto}
+img,svg,.mark img,.brandshot,.shot{image-rendering:auto}
 #app{
   position:relative;
   width:100%;max-width:430px;
@@ -140,6 +140,7 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 .ticket .meta span{font-size:10px;font-weight:650}
 .banner{padding:12px 14px;font-size:12px}
 .brandshot{width:100%;max-height:360px;object-fit:contain;object-position:top;margin:10px 0;border:5px solid var(--wood);display:block;background:#0c1c14}
+.shot{width:100%;display:block;margin:0;border:0;background:#0c1c14}
 #map{height:220px;background:#1e3a5f;touch-action:none;filter:grayscale(1) contrast(1.15) sepia(.55)}
 .mapwrap{position:relative;padding:8px}
 .mapclose{position:absolute;top:16px;left:16px;z-index:2;height:34px;padding:0 12px;border:0;background:var(--wood);color:var(--plaque);font-size:12px;font-weight:700}
@@ -183,6 +184,8 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="./icon.js"></script>
 <script src="./example.js"></script>
+<script src="./ex_sched.js"></script>
+<script src="./ex_tix.js"></script>
 <script src="./app.js"></script>
 <script src="./ui.js"></script>
 <script src="./pages.js"></script>
