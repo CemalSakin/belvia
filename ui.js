@@ -18,7 +18,7 @@ function esc(s){
   });
 }
 function senecaQuote(){
-  return '<p class="muted">We are not born for ourselves alone.</p><p class="note">\u2014 Cicero</p>';
+  return '<p class="muted">There is nothing so absurd that some philosopher has not already said it.</p><p class="note">\u2014 Cicero</p>';
 }
 function davisQuote(){
   return '<p class="muted">An idiot admires complexity, a genius admires simplicity.</p><p class="note">\u2014 Terry A. Davis</p>';
