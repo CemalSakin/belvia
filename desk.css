@@ -1,76 +1,7 @@
 @media (min-width: 880px){
-  html,body{
-    overflow:auto !important;
-    height:auto !important;
-    min-height:100%;
-  }
   #app{
-    max-width:1180px !important;
-    width:min(1180px, calc(100% - 48px)) !important;
-    margin:24px auto 48px !important;
-    height:auto !important;
-    min-height:calc(100dvh - 72px);
-    grid-template-columns: 220px minmax(0,1fr) !important;
-    grid-template-rows: auto minmax(0,auto) !important;
-    overflow:visible !important;
-    border:5px solid var(--wood);
-    box-shadow:8px 8px 0 var(--wood-ink);
-    background:transparent;
+    max-width: 430px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  header.top{
-    grid-column:1 / -1;
-    padding:16px 20px 12px !important;
-  }
-  .brand p{font-size:11px !important;-webkit-line-clamp:2}
-  .pager{
-    grid-column:2;
-    grid-row:2;
-    display:block !important;
-    overflow:visible !important;
-    scroll-snap-type:none !important;
-    height:auto !important;
-  }
-  .page{
-    display:none !important;
-    flex:none !important;
-    width:100% !important;
-    min-width:0 !important;
-    max-width:none !important;
-    height:auto !important;
-    max-height:none !important;
-    overflow:visible !important;
-    scroll-snap-align:unset !important;
-    padding:28px 36px 64px !important;
-  }
-  .page.on{display:block !important}
-  nav.dock{
-    grid-column:1;
-    grid-row:2;
-    display:flex !important;
-    flex-direction:column;
-    align-items:stretch;
-    justify-content:flex-start;
-    gap:6px;
-    border-top:0;
-    border-right:5px solid var(--wood);
-    padding:18px 12px 28px !important;
-  }
-  nav.dock button{
-    flex-direction:row !important;
-    justify-content:flex-start;
-    gap:10px;
-    padding:12px 10px !important;
-    font-size:12px !important;
-    width:100%;
-    opacity:.7;
-  }
-  nav.dock button.on{opacity:1}
-  nav.pills{display:none}
-  #map{height:360px !important}
-  .overlay{align-items:center !important}
-  .sheet{width:min(480px,92vw); box-shadow:8px 8px 0 var(--wood-ink)}
-  .ticket .code{font-size:32px}
-}
-@media (min-width: 1200px){
-  #app{width:min(1280px, calc(100% - 64px)) !important}
 }
