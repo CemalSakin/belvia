@@ -55,10 +55,10 @@ function routeUrl(r){
   return "https://maps.apple.com/?saddr="+encodeURIComponent(a.name)+"&daddr="+encodeURIComponent(b.name)+"&dirflg="+(r.mode||"d")+"&t=m";
 }
 function fmtWhen(iso){
-  if(!iso) return { day:"Prep", time:"\u2014" };
+  if(!iso) return { day:"No time", time:"\u2014" };
   const parts = String(iso).split("T");
   const d = (parts[0]||"").split("-");
-  if(d.length!==3) return { day:"Prep", time:"\u2014" };
+  if(d.length!==3) return { day:"No time", time:"\u2014" };
   const wd = new Date(Date.UTC(+d[0], +d[1]-1, +d[2])).getUTCDay();
   return { day: WEEK[wd] + " " + (+d[2]) + " " + MONTHS[+d[1]-1], time: (parts[1]||"\u2014").slice(0,5) };
 }
@@ -117,7 +117,7 @@ function openScheme(scheme){
 function setTab(id){
   if(TABS.indexOf(id)<0) return;
   tab=id;
-  document.querySelectorAll("#pills button, #dock button").forEach(b=>b.classList.toggle("on", b.getAttribute("data-go")===id));
+  document.querySelectorAll("#dock button").forEach(b=>b.classList.toggle("on", b.getAttribute("data-go")===id));
   const pager=$("pager");
   if(pager) pager.scrollLeft = TABS.indexOf(id) * pager.clientWidth;
   if(id==="map") setTimeout(ensureMap, 80);
@@ -125,7 +125,7 @@ function setTab(id){
 function paintChrome(){
   $("hdrTitle").textContent = "BudVia";
   $("hdrSub").textContent = "Not all who wander are lost, especially with the right companion: Tolkien";
-  $("pills").innerHTML = TABS.map(id=>'<button type="button" data-go="'+id+'"'+(id===tab?' class="on"':'')+'>'+LABELS[id]+'</button>').join("");
+  if($("pills")) $("pills").innerHTML = "";
   if($("langBar")) $("langBar").innerHTML = "";
   const icons={
     today:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>',
