@@ -11,7 +11,8 @@ function paintPlan(){
     });
     html+='</div>';
   });
-  html+='</div><div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">New</p><h3>Add a reminder</h3></div><div class="field"><label>Title</label><input id="rTitle" placeholder="Airport check-in" /></div><div class="grid2"><div class="field"><label>Date</label><input id="rDate" type="date" /></div><div class="field"><label>Time</label><input id="rTime" type="time" /></div></div><div class="field"><label>List</label><select id="rList">'+LISTS.map(l=>'<option value="'+l[0]+'">'+l[1]+'</option>').join("")+'</select></div><div class="field"><label>Notes</label><textarea id="rNotes" rows="2" placeholder="Optional"></textarea></div><div class="pad"><button class="btn btn-a" type="button" data-act="add">Add reminder</button></div></div>';
+  html+='</div><div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">New</p><h3>Add a reminder</h3></div><div class="field"><label>Title</label><input id="rTitle" placeholder="Mudam morning ticket" /></div><div class="grid2"><div class="field"><label>Date</label><input id="rDate" type="date" /></div><div class="field"><label>Time</label><input id="rTime" type="time" /></div></div><div class="field"><label>List</label><select id="rList">'+LISTS.map(l=>'<option value="'+l[0]+'">'+l[1]+'</option>').join("")+'</select></div><div class="field"><label>Notes</label><textarea id="rNotes" rows="2" placeholder="Optional"></textarea></div><div class="pad"><button class="btn btn-a" type="button" data-act="add">Add reminder</button></div></div>';
+  html+=exampleCard("Add \u201cFind the water-lilies poster at Mudam\u201d at 10:00","It drops onto this list and later onto Today as the next thing.","Claude Monet","[ ticket stub ] [ 10:00 ] [ museum door ]");
   $("page-plan").innerHTML=html;
 }
 function paintMap(){
@@ -20,6 +21,7 @@ function paintMap(){
   else S.places.forEach(p=>{ html+='<a class="row" href="'+esc(mapsUrl(p))+'" rel="noopener noreferrer"><span style="flex:1"><p class="ttl">'+esc(p.name)+'</p><p class="note">'+esc(p.address)+'</p></span><span class="act">Directions</span></a>'; });
   html+='</div>';
   if(S.routes.length){ html+='<div class="card" style="margin-top:12px"><div class="pad"><p class="kicker">Legs</p><h3>Saved directions</h3></div>'; S.routes.forEach(r=>{ html+='<a class="row" href="'+esc(routeUrl(r))+'" rel="noopener noreferrer"><span style="flex:1"><p class="ttl">'+esc(r.label)+'</p><p class="note">'+esc(r.when)+'</p></span><span class="act">Open</span></a>'; }); html+='</div>'; }
+  html+=exampleCard("Tap Directions on a pin","Apple Maps opens that street. The pin stays on this phone.","Ibn Battuta","[ pin ] ----walk---- [ door ]");
   $("page-map").innerHTML=html; map=null; mapSig="";
 }
 function ensureMap(){
@@ -37,13 +39,14 @@ function ensureMap(){
 function paintPack(){
   const done=PACK.reduce((n,g)=>n+g[1].filter(i=>S.packed[i[0]]).length,0);
   const total=PACK.reduce((n,g)=>n+g[1].length,0);
-  let html='<p class="kicker" id="packCount">'+done+' / '+total+' packed</p><h2>Bag</h2><div class="stack">';
-  PACK.forEach(g=>{ html+='<div class="card"><div class="pad"><p class="kicker">Packing</p><h3>'+esc(g[0])+'</h3></div>'; g[1].forEach(item=>{ html+='<button type="button" class="row'+(S.packed[item[0]]?' on':'')+'" data-act="pack" data-id="'+item[0]+'"><span class="check"></span><span><p class="ttl">'+esc(item[1])+'</p>'+(item[2]?'<p class="note">'+esc(item[2])+'</p>':'')+'</span></button>'; }); html+='</div>'; });
+  let html='<p class="kicker" id="packCount">'+done+' / '+total+' packed</p><h2>Bag</h2><p class="muted">An example of an 8-day December trip to Luxembourg.</p><div class="stack">';
+  PACK.forEach(g=>{ html+='<div class="card"><div class="pad"><p class="kicker">Dec kit</p><h3>'+esc(g[0])+'</h3></div>'; g[1].forEach(item=>{ html+='<button type="button" class="row'+(S.packed[item[0]]?' on':'')+'" data-act="pack" data-id="'+item[0]+'"><span class="check"></span><span><p class="ttl">'+esc(item[1])+'</p>'+(item[2]?'<p class="note">'+esc(item[2])+'</p>':'')+'</span></button>'; }); html+='</div>'; });
   html+='</div><div class="card" style="margin-top:12px"><div class="field" style="padding-top:14px"><label>Notes</label><textarea id="extra" rows="3" placeholder="Adapters, meds, gifts">'+esc(S.extra)+'</textarea></div></div>';
+  html+=exampleCard("Tick the rain shell and the Type C plug","The count at the top moves. That is the whole trick.","Diogenes","[ wool coat ] [ scarf ] [ wet boots ] [ Type C ]");
   $("page-pack").innerHTML=html;
 }
 function paintApps(){
-  const shot=window.BUDVIA_ICON||"./budvia.jpg";
-  $("page-apps").innerHTML='<p class="kicker">Bookings</p><h2>Tickets</h2><p class="muted">Open the apps where you bought the cheap seats and rooms.</p><div class="card" style="margin-top:12px">'+APPS.map(a=>'<button type="button" class="row" data-act="app" data-scheme="'+a[2]+'"><span style="flex:1"><p class="ttl">'+esc(a[1])+'</p><p class="note">'+esc(a[3])+'</p></span><span class="act">Open</span></button>').join("")+'</div><div class="card" style="margin-top:12px"><div class="pad"><p class="kicker">Contact</p><h3>BUD&VIA</h3><img class="brandshot" alt="BUD&VIA" src="'+shot+'"/><p class="note">An idiot admires complexity, a genius admires simplicity.</p><p class="note">Publisher: Tahsin Sakin.</p><p class="note"><a class="act" href="https://www.linkedin.com/in/tahsinsakin" rel="noopener noreferrer">LinkedIn</a></p></div></div>';
+  const shot=window.BUDVIA_SHOT||window.BUDVIA_ICON||"./budvia.jpg";
+  $("page-apps").innerHTML='<p class="kicker">Bookings</p><h2>Tickets</h2><p class="muted">Open the apps where you bought the cheap seats and rooms.</p><div class="card" style="margin-top:12px">'+APPS.map(a=>'<button type="button" class="row" data-act="app" data-scheme="'+a[2]+'"><span style="flex:1"><p class="ttl">'+esc(a[1])+'</p><p class="note">'+esc(a[3])+'</p></span><span class="act">Open</span></button>').join("")+'</div>'+exampleCard("Tap Wizz Air after you buy the seat","The airline app opens. BudVia does not store the pass.","Seneca","[ phone ] [ QR ] [ gate ]")+'<div class="card" style="margin-top:12px"><div class="pad"><p class="kicker">Contact</p><h3>BUD&VIA</h3><img class="brandshot" alt="BUD&VIA" src="./budvia.jpg" onerror="this.onerror=null;this.src=(window.BUDVIA_SHOT||window.BUDVIA_ICON||\'\')"/><p class="note">An idiot admires complexity, a genius admires simplicity.</p><p class="note">Physical copy: this otter, printed on a card in the bag pocket.</p><p class="note">Publisher: Tahsin Sakin.</p><p class="note"><a class="act" href="https://www.linkedin.com/in/tahsinsakin" rel="noopener noreferrer">LinkedIn</a></p></div></div>';
 }
 function paintAll(){ paintChrome(); paintToday(); paintPlan(); paintMap(); paintPack(); paintApps(); }
