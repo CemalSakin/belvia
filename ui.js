@@ -11,8 +11,11 @@ function esc(s){
 function goBtn(id, label){
   return '<button class="btn btn-g" type="button" data-act="go" data-go="'+id+'">'+label+'</button>';
 }
+function tip(s){
+  return '<p style="margin:-2px 14px 10px;font-size:9px;line-height:1.35;color:#fff;opacity:.92">'+s+'</p>';
+}
 function nextStepTitle(){
-  return '<p class="next-step" style="margin:0 0 12px;display:inline-block;padding:10px 12px;border:4px solid #000;font-size:24px;line-height:1.15;letter-spacing:.08em;text-transform:uppercase;color:#9b1218;font-weight:800">Do this next, genius</p>';
+  return '<p class="next-step" style="margin:0 0 12px;display:inline-block;padding:10px 12px;border:4px solid #000;font-size:24px;line-height:1.15;letter-spacing:.08em;text-transform:uppercase;color:#9b1218;font-weight:800">Do this next</p>';
 }
 function senecaQuote(){
   return '<p class="muted">There is no surer way to find out whether you like people or hate them than to travel with them.</p><p class="note">\u2014 Mark Twain</p>';
@@ -144,16 +147,16 @@ function paintChrome(){
 }
 function paintToday(){
   const root=$("page-today");
-  const shot=teach("A trip is a name and two dates","Write it the way you say it. Example: 8-day trip to Luxembourg.");
+  const shot=teach("A trip is a name and two days","Write a name. Pick the first day and the last day.");
   const addBtn='<button class="btn btn-a" type="button" data-act="install">Add to Home Screen</button>';
   if(!hasTrip()){
-    root.innerHTML='<p class="kicker">BUD&VIA</p><h2>Welcome to BudVia</h2>'+senecaQuote()+'<div class="stack" style="margin-top:16px">'+addBtn+'<div class="card"><div class="pad"><p class="kicker">New trip</p><h3>Name your trip</h3><p class="note">Write the trip like you say it. Dates are the first and last day.</p></div><div class="field"><label>Name</label><input id="nTitle" placeholder="8-day trip to Luxembourg" /></div><div class="grid2"><div class="field"><label>Starts</label><input id="nStart" type="date" /></div><div class="field"><label>Ends</label><input id="nEnd" type="date" /></div></div><div class="field"><label>Booking code</label><input id="nPnr" placeholder="W6 2488 or leave blank" autocomplete="off" /></div><div class="pad"><button class="btn btn-a" type="button" data-act="create">Save trip</button></div></div><button class="btn btn-g" type="button" data-act="demo">Load a sample trip</button></div>'+shot;
+    root.innerHTML='<p class="kicker">BUD&VIA</p><h2>Welcome to BudVia</h2>'+senecaQuote()+'<div class="stack" style="margin-top:16px">'+addBtn+'<div class="card"><div class="pad"><p class="kicker">New trip</p><h3>Name your trip</h3></div><div class="field"><label>Name</label><input id="nTitle" placeholder="8-day trip to Luxembourg" /></div>'+tip("Write it like you say it. Example: 8-day trip to Luxembourg")+'<div class="grid2"><div class="field"><label>Starts</label><input id="nStart" type="date" /></div><div class="field"><label>Ends</label><input id="nEnd" type="date" /></div></div>'+tip("First day and last day. Example: 12 Dec to 20 Dec")+'<div class="field"><label>Code</label><input id="nPnr" placeholder="W6 2488" autocomplete="off" /></div>'+tip("Flight or booking code. Example: W6 2488. You can leave this empty.")+'<div class="pad"><button class="btn btn-a" type="button" data-act="create">Save trip</button></div></div><button class="btn btn-g" type="button" data-act="demo">Load a sample trip</button></div>'+shot;
     return;
   }
   const n=nextUp();
   const nextCard=n
-    ? '<div class="card"><div class="pad">'+nextStepTitle()+'<h3>'+esc(n.r.title)+'</h3><p class="note">'+esc(fmtWhen(n.r.at).day+' \u00b7 '+fmtWhen(n.r.at).time)+'</p>'+(n.r.notes?'<p class="note">'+esc(n.r.notes)+'</p>':'')+'</div><div class="pad" style="padding-top:0">'+goBtn("plan","Open schedule")+'</div></div>'
-    : '<div class="card"><div class="pad">'+nextStepTitle()+'</div><div class="pad" style="padding-top:0">'+goBtn("plan","Open schedule")+'</div></div>';
+    ? '<div class="card"><div class="pad">'+nextStepTitle()+'<h3>'+esc(n.r.title)+'</h3><p class="note">'+esc(fmtWhen(n.r.at).day+' \u00b7 '+fmtWhen(n.r.at).time)+'</p>'+(n.r.notes?'<p class="note">'+esc(n.r.notes)+'</p>':'')+'</div><div class="pad" style="padding-top:0">'+goBtn("plan","Open plan")+'</div></div>'
+    : '<div class="card"><div class="pad">'+nextStepTitle()+'</div><div class="pad" style="padding-top:0">'+goBtn("plan","Open plan")+'</div></div>';
   root.innerHTML=(S.meta.sample?'<div class="banner">This is a sample. Real codes are hidden.</div>':'')+'<p class="kicker">'+esc(rangeLabel())+'</p><h2>'+esc(S.meta.title || "BudVia")+'</h2>'+(S.meta.pnr?'<p class="muted">Code '+esc(S.meta.pnr)+'</p>':senecaQuote())+'<div class="stack" style="margin-top:16px">'+(typeof renderAirPair==="function"?renderAirPair():flightCard())+nextCard+addBtn+goBtn("apps","Open tickets")+'<button class="btn btn-g" type="button" data-act="wipe">Clear this phone</button></div>'+shot;
 }
 function flightCard(){
