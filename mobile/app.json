@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Belvia",
+    "slug": "belvia",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "belvia",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": false,
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "app.belvia.trip",
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": ["wizzair", "flixbus", "airbnb", "maps", "googlegmail"]
+      }
+    },
+    "android": {
+      "package": "app.belvia.trip",
+      "adaptiveIcon": {
+        "backgroundColor": "#F2F2F4"
+      }
+    },
+    "plugins": ["expo-router", "expo-system-ui"],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
