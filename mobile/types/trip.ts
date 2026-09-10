@@ -45,6 +45,7 @@ export interface TicketApp {
   hint: string;
   iosScheme: string;
   androidIntent: string;
+  androidPackage?: string;
   httpsFallback: string;
 }
 

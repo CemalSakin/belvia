@@ -8,6 +8,9 @@ import { FlashList } from "@shopify/flash-list";
 import { useCallback } from "react";
 import { Linking, Text, View } from "react-native";
 
+const PRIVACY = "https://tahsinsakin.github.io/belvia/privacy.html";
+const LINKEDIN = "https://www.linkedin.com/in/tahsinsakin";
+
 export default function TicketsScreen() {
   const apps = useTripStore((s) => s.trip.apps);
 
@@ -41,8 +44,11 @@ export default function TicketsScreen() {
           <View className="p-4">
             <Text className="text-[16px] font-semibold text-ink">This copy never leaves the phone</Text>
             <Text className="mt-2 text-[12px] text-muted">No login. No analytics. Publisher: Tahsin Sakin.</Text>
-            <AppPressable className="mt-2 self-start" onPress={() => { void Linking.openURL("https://www.linkedin.com/in/tahsinsakin"); }}>
+            <AppPressable className="mt-2 self-start" onPress={() => { void Linking.openURL(LINKEDIN); }}>
               <Text className="text-[13px] font-bold text-ink">LinkedIn</Text>
+            </AppPressable>
+            <AppPressable className="mt-1 self-start" onPress={() => { void Linking.openURL(PRIVACY); }}>
+              <Text className="text-[13px] font-bold text-ink">Privacy policy</Text>
             </AppPressable>
           </View>
         </Surface>
