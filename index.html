@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -11,6 +11,7 @@
 <meta name="referrer" content="no-referrer" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com; connect-src 'none'; font-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'" />
 <title>BudVia</title>
+<link rel="manifest" href="./manifest.webmanifest" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <style>
 :root {
@@ -34,23 +35,8 @@ html,body{
 }
 button{cursor:pointer;font:inherit;color:inherit;background:none}
 img,svg,.mark img,.brandshot,.shot,.example-shot{image-rendering:auto}
-#dither{
-  position:fixed;inset:0;
-  width:100%;height:100%;
-  z-index:0;pointer-events:none;
-  image-rendering:pixelated;
-}
-#app{
-  position:relative;z-index:1;
-  width:100%;max-width:430px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:minmax(0,1fr);
-  grid-template-rows:auto minmax(0,1fr) auto;
-  overflow:hidden;
-  background:transparent;
-  height:100%;height:100vh;height:100svh;height:100dvh;
-}
+#dither{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;image-rendering:pixelated}
+#app{position:relative;z-index:1;width:100%;max-width:430px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden;background:transparent;height:100%;height:100vh;height:100svh;height:100dvh}
 header.top, nav.dock{position:relative;z-index:3}
 header.top{background:var(--moss);color:var(--plaque);border-bottom:5px solid var(--wood);padding:calc(8px + var(--safe-t)) 12px 8px}
 .barrow{display:flex;align-items:center;gap:10px;min-height:36px}
@@ -65,46 +51,19 @@ nav.pills{display:flex;flex-wrap:nowrap;gap:4px;margin-top:8px;overflow-x:auto;o
 nav.pills::-webkit-scrollbar{display:none}
 nav.pills button{flex:0 0 auto;height:28px;padding:0 10px;border:2px solid var(--wood-lit);background:transparent;color:var(--plaque);font-size:11px;font-weight:700;text-transform:uppercase;white-space:nowrap}
 nav.pills button.on{background:var(--wood);color:var(--plaque)}
-.pager{
-  position:relative;z-index:2;
-  min-width:0;min-height:0;
-  display:flex;
-  flex-direction:row;
-  overflow-x:auto;
-  overflow-y:hidden;
-  scroll-snap-type:x mandatory;
-  scrollbar-width:none;
-  -webkit-overflow-scrolling:touch;
-}
+.lang{display:flex;gap:4px;margin-top:8px}
+.lang button{height:24px;padding:0 9px;border:2px solid var(--wood-lit);background:transparent;color:var(--plaque);font-size:10px;font-weight:700}
+.lang button.on{background:var(--wood)}
+.ticket.passed{opacity:.42}
+button:focus-visible,a:focus-visible{outline:2px solid var(--leaf-lit);outline-offset:2px}
+.pager{position:relative;z-index:2;min-width:0;min-height:0;display:flex;flex-direction:row;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .pager::-webkit-scrollbar{display:none}
-.page{
-  flex:0 0 100%;
-  width:100%;
-  min-width:100%;
-  max-width:100%;
-  height:100%;
-  max-height:100%;
-  min-height:0;
-  overflow-x:hidden;
-  overflow-y:auto;
-  scroll-snap-align:start;
-  scroll-snap-stop:always;
-  padding:16px 12px 28px;
-  -webkit-overflow-scrolling:touch;
-  overscroll-behavior:contain;
-  background:transparent;
-}
+.page{flex:0 0 100%;width:100%;min-width:100%;max-width:100%;height:100%;max-height:100%;min-height:0;overflow-x:hidden;overflow-y:auto;scroll-snap-align:start;scroll-snap-stop:always;padding:16px 12px 28px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:transparent}
 nav.dock{display:grid;grid-template-columns:repeat(5,1fr);background:var(--moss);color:var(--plaque);border-top:5px solid var(--wood);padding:6px 2px calc(8px + var(--safe-b))}
 nav.dock button{border:0;background:none;color:var(--plaque);opacity:.45;font-size:9px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;text-transform:uppercase;white-space:nowrap}
 nav.dock button.on{opacity:1;background:var(--wood)}
 nav.dock svg{width:18px;height:18px}
-h2{
-  position:relative;isolation:isolate;margin:0 0 12px;padding:14px 12px;
-  font-size:20px;letter-spacing:.03em;line-height:1.25;text-transform:uppercase;color:var(--plaque);
-  background:linear-gradient(180deg,var(--moss-lit),var(--moss));
-  border:9px solid var(--wood);
-  box-shadow:inset 0 0 0 2px var(--wood-lit),4px 4px 0 var(--wood-ink);
-}
+h2{position:relative;isolation:isolate;margin:0 0 12px;padding:14px 12px;font-size:20px;letter-spacing:.03em;line-height:1.25;text-transform:uppercase;color:var(--plaque);background:linear-gradient(180deg,var(--moss-lit),var(--moss));border:9px solid var(--wood);box-shadow:inset 0 0 0 2px var(--wood-lit),4px 4px 0 var(--wood-ink)}
 h2::before{content:"";position:absolute;inset:-9px;z-index:-1;pointer-events:none;background:var(--grain)}
 h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var(--plaque)}
 .kicker{display:inline-block;margin:0 0 8px;padding:4px 8px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--plaque);background:var(--moss);border:4px solid var(--wood);box-shadow:inset 0 0 0 1px var(--wood-lit),3px 3px 0 var(--wood-ink)}
@@ -112,13 +71,7 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 .muted{color:var(--plaque);font-size:12px;line-height:1.45;text-shadow:0 1px 0 #0b1a2e}
 .note{color:var(--plaque);font-size:11px;line-height:1.4;margin-top:3px;opacity:.8}
 .stack{display:flex;flex-direction:column;gap:10px}
-.card,.ticket,.banner,.sheet{
-  color:var(--plaque);
-  background:linear-gradient(180deg,var(--moss-lit),var(--moss));
-  border:5px solid var(--wood);
-  box-shadow:inset 0 0 0 1px var(--wood-lit),3px 3px 0 var(--wood-ink);
-  overflow:hidden;
-}
+.card,.ticket,.banner,.sheet{color:var(--plaque);background:linear-gradient(180deg,var(--moss-lit),var(--moss));border:5px solid var(--wood);box-shadow:inset 0 0 0 1px var(--wood-lit),3px 3px 0 var(--wood-ink);overflow:hidden}
 .pad{padding:14px 14px}
 .row{display:flex;gap:12px;align-items:flex-start;width:100%;padding:12px 14px;border:0;border-top:2px solid var(--wood);background:transparent;color:inherit;text-align:left;text-decoration:none}
 .card>.row:first-of-type{border-top:0}
@@ -135,13 +88,7 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 .btn-g{background:var(--wood);color:var(--plaque);border:4px solid var(--wood-lit);box-shadow:3px 3px 0 var(--wood-ink)}
 .field{display:flex;flex-direction:column;gap:6px;padding:0 14px 12px}
 .field label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--plaque)}
-.field input,.field textarea,.field select{
-  border:2px solid var(--wood);background:#0c1c14;padding:10px;
-  font-size:16px;line-height:1.3;color:var(--plaque);font-family:inherit;
-  width:100%;min-width:0;
-  -webkit-appearance:none;appearance:none;
-  color-scheme:dark;
-}
+.field input,.field textarea,.field select{border:2px solid var(--wood);background:#0c1c14;padding:10px;font-size:16px;line-height:1.3;color:var(--plaque);font-family:inherit;width:100%;min-width:0;-webkit-appearance:none;appearance:none;color-scheme:dark}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .ticket{padding:14px}
 .ticket .codes{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -152,19 +99,7 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 .ticket .meta b{display:block;font-variant-numeric:tabular-nums}
 .ticket .meta span{font-size:10px;font-weight:650}
 .banner{padding:12px 14px;font-size:12px}
-.brandshot,.example-shot{
-  width:100%;
-  max-width:100%;
-  height:auto;
-  max-height:none;
-  object-fit:contain;
-  object-position:top;
-  margin:0;
-  border:0;
-  display:block;
-  background:#0c1c14;
-  filter:none;
-}
+.brandshot,.example-shot{width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain;object-position:top;margin:0;border:0;display:block;background:#0c1c14;filter:none}
 .example-card{flex-shrink:0}
 #map{height:220px;background:#1e3a5f;touch-action:none;filter:grayscale(1) contrast(1.15) sepia(.55)}
 .mapwrap{position:relative;padding:8px}
@@ -186,6 +121,7 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
       </button>
     </div>
     <nav class="pills" id="pills"></nav>
+    <div class="lang" id="langBar"></div>
   </header>
   <div class="pager" id="pager">
     <section class="page" id="page-today"></section>
@@ -197,25 +133,24 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
   <nav class="dock" id="dock"></nav>
 </div>
 <div class="overlay" id="export">
-  <div class="sheet stack">
+  <div class="sheet stack" id="exportSheet">
     <p class="kicker">Export</p>
-    <h3>Add this trip to iPhone</h3>
-    <p class="muted">Files stay on this device.</p>
+    <h3>Calendar and Reminders</h3>
+    <p class="muted">Writes an .ics file on this phone. Nothing is uploaded.</p>
     <button class="btn btn-a" type="button" data-act="ics-cal">Add to Calendar</button>
     <button class="btn btn-g" type="button" data-act="ics-rem">Add to Reminders</button>
     <button class="btn btn-g" type="button" data-act="export-close">Close</button>
   </div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="./icon.js?v=lock1"></script>
-<script src="./b1.js?v=lock1"></script>
-<script src="./b2.js?v=lock1"></script>
-<script src="./b3.js?v=lock1"></script>
-<script src="./brand.js?v=lock1"></script>
-<script src="./app.js?v=lock1"></script>
-<script src="./ui.js?v=lock1"></script>
-<script src="./pages.js?v=lock1"></script>
-<script src="./events.js?v=lock1"></script>
+<script src="./icon.js?v=mit1"></script>
+<script src="./brand.js?v=mit1"></script>
+<script src="./app.js?v=mit1"></script>
+<script src="./i18n.js?v=mit1"></script>
+<script src="./tickets.js?v=mit1"></script>
+<script src="./ui.js?v=mit1"></script>
+<script src="./pages.js?v=mit1"></script>
+<script src="./events.js?v=mit1"></script>
 <script>
 (function(){
   const c=document.getElementById("dither"); if(!c) return;
@@ -223,7 +158,7 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
   const B=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
   function paint(){
     const cell=6;
-  const W=innerWidth||430, H=innerHeight||800;
+    const W=innerWidth||430, H=innerHeight||800;
     const w=Math.max(1,Math.ceil(W/cell)), h=Math.max(1,Math.ceil(H/cell));
     c.width=w; c.height=h;
     c.style.width=W+"px"; c.style.height=H+"px";
