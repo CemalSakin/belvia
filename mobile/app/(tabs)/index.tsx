@@ -20,7 +20,7 @@ export default function TripCommandScreen() {
   const loadDemo = useTripStore((s) => s.loadDemo);
   const reset = useTripStore((s) => s.reset);
 
-  const armed = trip.reminders.length > 0 || trip.meta.title !== "Belvia";
+  const armed = trip.reminders.length > 0 || trip.meta.title !== "BudVia";
   const startIso = trip.reminders.find((r) => r.at)?.at?.slice(0, 10) ?? "2026-09-14";
   const tMinus = daysUntil(startIso);
   const next = useMemo(() => {
@@ -43,7 +43,7 @@ export default function TripCommandScreen() {
           </View>
           <View className="flex-1">
             <Text className="font-mono text-[9px] tracking-[0.22em] text-cyan-400/70">
-              SYS // BELVIA · SEC_LVL 0x4F
+              SYS // BUDVIA · SEC_LVL 0x4F
             </Text>
             <AsciiDecode
               className="mt-0.5 font-mono text-[16px] font-semibold uppercase tracking-wider text-zinc-100"
