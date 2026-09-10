@@ -18,7 +18,7 @@ function esc(s){
   });
 }
 function senecaQuote(){
-  return '<p class="muted">Travel and change of place impart new vigor to the mind.</p><p class="note">\u2014 Seneca</p>';
+  return '<p class="muted">We are not born for ourselves alone.</p><p class="note">\u2014 Cicero</p>';
 }
 function davisQuote(){
   return '<p class="muted">An idiot admires complexity, a genius admires simplicity.</p><p class="note">\u2014 Terry A. Davis</p>';
