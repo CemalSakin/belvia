@@ -3,73 +3,62 @@
 </p>
 
 <p align="center">
-  <a href="https://tahsinsakin.github.io/belvia/"><img src="https://img.shields.io/badge/live-open%20in%20Safari-f0e68c?style=for-the-badge&labelColor=1e3a5f" alt="live" /></a>
+  <a href="https://tahsinsakin.github.io/belvia/"><img src="https://img.shields.io/badge/live-tahsinsakin.github.io%2Fbelvia-f0e68c?style=for-the-badge&labelColor=1e3a5f" alt="live" /></a>
   <img src="https://img.shields.io/badge/PWA-Home%20Screen-06b6d4?style=for-the-badge&labelColor=1e3a5f" alt="pwa" />
   <img src="https://img.shields.io/badge/no%20account-no%20server-22c55e?style=for-the-badge&labelColor=1e3a5f" alt="private" />
   <img src="https://img.shields.io/github/license/tahsinsakin/belvia?style=for-the-badge&labelColor=1e3a5f&color=f59e0b" alt="mit" />
+  <img src="https://img.shields.io/badge/TypeScript-Expo-3178C6?style=for-the-badge&labelColor=1e3a5f" alt="ts" />
 </p>
 
-# Bilet almak kolay. Hatırlamak değil.
+# Buying the ticket is easy. Keeping the trip together is not.
 
-Bir haftalık tatilini ikiye mi bölmen gerekti?
+Cheap travel is split on purpose.
 
-Çok mu fazla biletin var?
+The lowest fare is on Wizz. The coach is on FlixBus. The room is on Airbnb or Booking. The city bike is another app. The dinner table is another one again. Each confirmation is cheap. Each confirmation lives in a different inbox. You spend a week assembling a trip out of five purchases, then spend the night before departure assembling those five purchases back into one trip.
 
-Hepsini organize edemiyor musun?
-
-**Tek uygulamada birleştirdim. Bu kadar.**
+BudVia is that second job.
 
 ---
 
-## Problem bu
+## What it is
 
-Ucuz tatil kasıtlı olarak parçalı.
+An on-device itinerary for trips you already booked.
 
-En ucuz uçak Wizz’de. Otobüs FlixBus’ta. Oda Airbnb’de ya da Booking’de. Şehir bisikleti başka uygulamada. Akşam masası başka uygulamada. Her teyit ayrı kutuya düşüyor. Her PNR ayrı mailde duruyor. Sen bir haftayı beş yere bölüyorsun. Sonra havalimanına çıkmadan o beş yeri tekrar tek bir trip haline getirmeye çalışıyorsun.
+It does not sell flights, coaches, or rooms. It is not a reservation site. It does not replace Wizz, FlixBus, Airbnb, or Booking. It holds the plan those apps refuse to hold together, and a tap opens the same app you used to buy the ticket.
 
-Kimse o ikinci işi satmıyor. Herkes birinci işi satıyor: koltuk, oda, bilet.
+The trip sits in one place:
 
-BudVia ikinci iş.
+- Where it starts
+- When it starts
+- How early you leave
+- When you need to be there
+- The route
+- What is in the bag
+- What is next
 
-## BudVia ne
+No account. No server. No analytics. The plan stays on this phone. Clear the trip and it is gone.
 
-Zaten aldığın şeylerin durduğu yer.
+## What it is not
 
-Bilet satmıyor. Oda satmıyor. Yeni bir rezervasyon sitesi değil. Wizz’in rakibi değil. Wizz’i açıyor. FlixBus’u açıyor. Odayı açıyor. Tık. Gittiğin uygulama, bileti aldığın uygulama.
-
-Üstüne trip duruyor. Tüm trip. Parça değil.
-
-- Nerede başlayacak
-- Ne zaman başlıyor
-- Ne kadar erken çıkmalısın
-- Ne zaman orada olmalısın
-- Hangi yol
-- Çantada ne var
-- Sırada ne var
-
-Saatleri gösteriyor. Yolları gösteriyor. Kapıyı gösteriyor. Çantayı gösteriyor. Ve bunu sade tutuyor. Çünkü tatilin kendisi zaten yeterince dağınık.
-
-## Ne değil
-
-| Bu değil | Bu |
+| Not this | This |
 |---|---|
-| Rezervasyon sitesi | Aldığın rezervasyonun defteri |
-| Yeni bir bilet uygulaması | Eski bilet uygulamalarını açan düğme |
-| Hesaplı bulut | Telefondaki plan |
-| Takip ürünü | Hesap yok, sunucu yok, analitik yok |
-| Seyahat tavsiyesi | Sen nereye gittiysen orası |
+| A booking site | A register of bookings you already made |
+| A new ticket app | A tap that opens the app you already use |
+| A cloud product | Local storage on this device |
+| A tracking product | No login, no backend, no analytics |
+| Travel advice | The itinerary you actually have |
 
-Data `localStorage` key `belvia-v2`. Clear trip deyince biter. Başka kopya yok.
+Trip data lives under the `localStorage` key `belvia-v2`.
 
-## Ekranlar
+## Screens
 
-| | |
+| Screen | Purpose |
 |---|---|
-| **Trip** | Karşılama. Uçuş kartı. Sıradaki iş. Bugünün sırası. |
-| **Schedule** | Tarihli hatırlatma. Saat. “Bir ara bir şey vardı” yok. |
-| **Places** | Pin ve yol. Harita sistem uygulamasında açılır. |
-| **Bag** | Sekiz günlük örnek çanta. Unuttuğun şey burada durur. |
-| **Tickets** | Wizz, FlixBus, Airbnb, Booking, MOL Bubi. Tık. O uygulama. |
+| Trip | Arrival view, flight card, next action |
+| Schedule | Dated reminders — times with dates, not times alone |
+| Places | Pins and directions, opened in the system maps app |
+| Bag | Packing list for the sample week |
+| Tickets | Wizz, FlixBus, Airbnb, Booking, MOL Bubi |
 
 ```mermaid
 flowchart LR
@@ -80,15 +69,15 @@ flowchart LR
   B -->|tap opens the same app| A
 ```
 
-## Aç. Üye olma.
+## Open it
 
 1. Safari → [tahsinsakin.github.io/belvia](https://tahsinsakin.github.io/belvia/)
-2. Paylaş → **Ana Ekrana Ekle**
-3. Örnek itinerary yükle ya da kendi tarihini yaz
+2. Share → **Add to Home Screen**
+3. Load the sample itinerary, or enter your own dates
 
-Native App Store metni [`APP_STORE.md`](APP_STORE.md) içinde. PWA bugün yeter. Hesap yok.
+No sign-in. App Store listing copy is in [`APP_STORE.md`](APP_STORE.md). The PWA is usable today.
 
-## Kim
+## Publisher
 
 Tahsin Sakin  
 Information Systems Engineer · Ankara  
@@ -97,7 +86,7 @@ Information Systems Engineer · Ankara
 An idiot admires complexity, a genius admires simplicity.  
 — Terry A. Davis
 
-MIT. `LICENSE`.
+MIT. See `LICENSE`.
 
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=1e3a5f&height=90&section=footer" alt="" />
