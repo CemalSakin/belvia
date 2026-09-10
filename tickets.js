@@ -7,7 +7,7 @@ function liveSim(){
   return S.sim;
 }
 function sampleTicket(){
-  return {id:"ex1",kind:"flight",carrier:"Wizz Air",code:"W6 2488",from:"ESB",to:"BUD",fromCity:"Ankara",toCity:"Budapest",at:"2026-09-14T10:25",land:"2026-09-14T11:55",pnr:"••••••",scheme:"wizzair://",note:"One sample. Land T2B. Delete it and add your own."};
+  return {id:"ex1",kind:"flight",carrier:"Wizz Air",code:"W6 2488",from:"ESB",to:"BUD",fromCity:"Ankara",toCity:"Budapest",at:"2026-09-14T10:25",land:"2026-09-14T11:55",pnr:"\u2022\u2022\u2022\u2022\u2022\u2022",scheme:"wizzair://",note:"One sample. Delete it and add your own."};
 }
 function untilLabel(iso){
   if(!iso) return "";
@@ -48,15 +48,14 @@ function renderTicket(item){
 }
 function renderAirPair(){
   const list = liveTickets();
-  const item = list[0] || sampleTicket();
-  return renderTicket(item);
+  if(list[0]) return renderTicket(list[0]);
+  if(S.hideSample) return "";
+  return renderTicket(sampleTicket());
 }
 function renderSimGate(){
   const list = liveSim();
   let html = '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">SIM gate</p><h3>After the local SIM</h3><p class="note">Add the apps you will open only after the local line is live.</p></div>';
-  if(!list.length){
-    html += '<div class="pad"><p class="muted">None yet. Add one below.</p></div>';
-  }
+  if(!list.length) html += '<div class="pad"><p class="muted">None yet. Add one below.</p></div>';
   list.forEach(function(app, i){
     html += '<div class="row"><span class="when"><b>'+(i+1)+'</b><span>After SIM</span></span><span style="flex:1"><p class="ttl">'+esc(app.name)+'</p><p class="note">'+esc(app.note||"")+'</p></span><button class="act" type="button" data-act="app" data-scheme="'+esc(app.scheme||"")+'">Open</button><button class="act" type="button" data-act="del-sim" data-id="'+esc(app.id)+'">Delete</button></div>';
   });
@@ -79,11 +78,11 @@ function renderAddTicket(){
 function renderTicketBoard(){
   const list = liveTickets();
   let html = '<p class="kicker">Bookings</p><h2>Tickets</h2><p class="muted">One card per booking. Add yours. Delete what you do not need.</p>';
-  if(!list.length){
+  if(list.length){
+    list.forEach(function(item){ html += renderTicket(item); });
+  } else if(!S.hideSample){
     html += '<div class="banner" style="margin-top:10px">One sample card. Delete it when you add a real ticket.</div>';
     html += renderTicket(sampleTicket());
-  } else {
-    list.forEach(function(item){ html += renderTicket(item); });
   }
   html += renderAddTicket();
   html += renderSimGate();
