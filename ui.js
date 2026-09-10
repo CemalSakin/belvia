@@ -8,6 +8,9 @@ function esc(s){
     return "\u0026#39;";
   });
 }
+function goBtn(id, label){
+  return '<button class="btn btn-g" type="button" data-act="go" data-go="'+id+'">'+label+'</button>';
+}
 function senecaQuote(){
   return '<p class="muted">There is no surer way to find out whether you like people or hate them than to travel with them.</p><p class="note">\u2014 Mark Twain</p>';
 }
@@ -15,7 +18,7 @@ function davisQuote(){
   return '<p class="muted">An idiot admires complexity, a genius admires simplicity.</p><p class="note">\u2014 Terry A. Davis</p>';
 }
 function teach(title, body){
-  return '<div class="card example-card" style="margin-top:18px"><div class="pad"><p class="kicker">How this tab works</p><h3>'+title+'</h3><p class="muted">'+body+'</p></div></div>';
+  return '<div class="card example-card" style="margin-top:18px"><div class="pad"><p class="kicker">How this works</p><h3>'+title+'</h3><p class="muted">'+body+'</p></div></div>';
 }
 function load(){ try { const raw = localStorage.getItem(KEY); return raw ? Object.assign(emptyState(), JSON.parse(raw)) : emptyState(); } catch(e){ return emptyState(); } }
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
@@ -63,7 +66,7 @@ function fmtWhen(iso){
   return { day: WEEK[wd] + " " + (+d[2]) + " " + MONTHS[+d[1]-1], time: (parts[1]||"\u2014").slice(0,5) };
 }
 function rangeLabel(){
-  if(!S.meta.start) return "On-device itinerary";
+  if(!S.meta.start) return "Saved on this phone";
   const a=S.meta.start.split("-"), b=(S.meta.end||S.meta.start).split("-");
   return (+a[2])+" "+MONTHS[+a[1]-1]+" \u2013 "+(+b[2])+" "+MONTHS[+b[1]-1];
 }
@@ -138,18 +141,21 @@ function paintChrome(){
 }
 function paintToday(){
   const root=$("page-today");
-  const shot=teach("A trip is a title and two dates","Write the trip the way you say it: 8-day December trip to Luxembourg. Starts and ends are the first and last calendar days. Load sample itinerary if you want a filled week to poke.");
+  const shot=teach("A trip is a name and two dates","Write it the way you say it. Example: 8-day trip to Luxembourg.");
   const addBtn='<button class="btn btn-a" type="button" data-act="install">Add to Home Screen</button>';
   if(!hasTrip()){
-    root.innerHTML='<p class="kicker">BUD&VIA</p><h2>Welcome to BudVia</h2>'+senecaQuote()+'<div class="stack" style="margin-top:16px">'+addBtn+'<div class="card"><div class="pad"><p class="kicker">New trip</p><h3>Name the week</h3><p class="note">Title is how you would tell a friend. Dates are the first and last day you are away.</p></div><div class="field"><label>Title</label><input id="nTitle" placeholder="8-day December trip to Luxembourg" /></div><p class="hint">Not Luxembourg. The whole sentence.</p><div class="grid2"><div class="field"><label>Starts</label><input id="nStart" type="date" /></div><div class="field"><label>Ends</label><input id="nEnd" type="date" /></div></div><p class="hint">Example: 12 Dec to 20 Dec.</p><div class="field"><label>Booking code</label><input id="nPnr" placeholder="W6 2488 or leave blank" autocomplete="off" /></div><div class="pad"><button class="btn btn-a" type="button" data-act="create">Create trip</button></div></div><button class="btn btn-g" type="button" data-act="demo">Load sample itinerary</button></div>'+shot;
+    root.innerHTML='<p class="kicker">BUD&VIA</p><h2>Welcome to BudVia</h2>'+senecaQuote()+'<div class="stack" style="margin-top:16px">'+addBtn+'<div class="card"><div class="pad"><p class="kicker">New trip</p><h3>Name your trip</h3><p class="note">Write the trip like you say it. Dates are the first and last day.</p></div><div class="field"><label>Name</label><input id="nTitle" placeholder="8-day trip to Luxembourg" /></div><div class="grid2"><div class="field"><label>Starts</label><input id="nStart" type="date" /></div><div class="field"><label>Ends</label><input id="nEnd" type="date" /></div></div><div class="field"><label>Booking code</label><input id="nPnr" placeholder="W6 2488 or leave blank" autocomplete="off" /></div><div class="pad"><button class="btn btn-a" type="button" data-act="create">Save trip</button></div></div><button class="btn btn-g" type="button" data-act="demo">Load a sample trip</button></div>'+shot;
     return;
   }
   const n=nextUp();
-  root.innerHTML=(S.meta.sample?'<div class="banner">Sample itinerary. Personal codes and street numbers are hidden.</div>':'')+'<p class="kicker">'+esc(rangeLabel())+'</p><h2>'+esc(S.meta.title || "BudVia")+'</h2>'+(S.meta.pnr?'<p class="muted">Booking ref '+esc(S.meta.pnr)+'</p>':senecaQuote())+'<div class="stack" style="margin-top:16px">'+(typeof renderAirPair==="function"?renderAirPair():flightCard())+'<div class="card"><div class="pad"><p class="kicker">Up next</p>'+(n?'<h3>'+esc(n.r.title)+'</h3><p class="note">'+esc(fmtWhen(n.r.at).day+' \u00b7 '+fmtWhen(n.r.at).time)+'</p>'+(n.r.notes?'<p class="note">'+esc(n.r.notes)+'</p>':''):'<h3>Nothing waiting</h3><p class="note">Open Schedule and add the next action.</p>')+'</div></div>'+addBtn+'<button class="btn btn-g" type="button" data-act="go" data-go="plan">Open schedule</button><button class="btn btn-g" type="button" data-act="wipe">Clear this device</button></div>'+shot;
+  const nextCard=n
+    ? '<div class="card"><div class="pad"><p class="kicker">Next</p><h3>'+esc(n.r.title)+'</h3><p class="note">'+esc(fmtWhen(n.r.at).day+' \u00b7 '+fmtWhen(n.r.at).time)+'</p>'+(n.r.notes?'<p class="note">'+esc(n.r.notes)+'</p>':'')+'</div><div class="pad" style="padding-top:0">'+goBtn("plan","Open schedule")+'</div></div>'
+    : '<div class="card"><div class="pad"><p class="kicker">Next</p><h3>Nothing next</h3></div><div class="pad" style="padding-top:0">'+goBtn("plan","Open schedule")+'</div></div>';
+  root.innerHTML=(S.meta.sample?'<div class="banner">This is a sample. Real codes are hidden.</div>':'')+'<p class="kicker">'+esc(rangeLabel())+'</p><h2>'+esc(S.meta.title || "BudVia")+'</h2>'+(S.meta.pnr?'<p class="muted">Code '+esc(S.meta.pnr)+'</p>':senecaQuote())+'<div class="stack" style="margin-top:16px">'+(typeof renderAirPair==="function"?renderAirPair():flightCard())+nextCard+addBtn+goBtn("apps","Open tickets")+'<button class="btn btn-g" type="button" data-act="wipe">Clear this phone</button></div>'+shot;
 }
 function flightCard(){
   const out=S.reminders.find(r=>r.id==="d14b"); const ret=S.reminders.find(r=>r.id==="d21c");
   if(!out) return "";
   const a=fmtWhen(out.at), b=ret?fmtWhen(ret.at):null;
-  return '<div class="ticket"><p class="kicker">Air</p><div class="codes"><div><div class="code">ESB</div><div class="city">Ankara</div></div><div class="mid">Wizz Air</div><div style="text-align:right"><div class="code">BUD</div><div class="city">Budapest</div></div></div><div class="meta"><div><span>Outbound</span><b>'+esc(a.day)+' \u00b7 '+esc(a.time)+'</b></div><div style="text-align:right"><span>Return</span><b>'+(b?esc(b.day+' \u00b7 '+b.time):'\u2014')+'</b></div></div></div>';
+  return '<div class="ticket"><p class="kicker">Flight</p><div class="codes"><div><div class="code">ESB</div><div class="city">Ankara</div></div><div class="mid">Wizz Air</div><div style="text-align:right"><div class="code">BUD</div><div class="city">Budapest</div></div></div><div class="meta"><div><span>Going</span><b>'+esc(a.day)+' \u00b7 '+esc(a.time)+'</b></div><div style="text-align:right"><span>Back</span><b>'+(b?esc(b.day+' \u00b7 '+b.time):'\u2014')+'</b></div></div></div>';
 }
