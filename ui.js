@@ -1,12 +1,12 @@
 const $ = (id) => document.getElementById(id);
 const EX = {
-  trip: "./IMG_0554.jpeg",
-  schedule: "./schedule-ex.jpg",
-  tickets: "./IMG_0556.jpeg",
-  routes: "./IMG_0557.jpeg",
-  bag: "./IMG_0559.jpeg",
-  apps: "./apps-ex.jpg",
-  otter: "./0875CF7C-5ACB-48B1-B2CD-57E02C5C9B58.jpeg"
+  trip: "./IMG_0554.jpeg?v=pin2",
+  schedule: "./IMG_0555.jpeg?v=pin2",
+  tickets: "./IMG_0556.jpeg?v=pin2",
+  routes: "./IMG_0557.jpeg?v=pin2",
+  bag: "./IMG_0559.jpeg?v=pin2",
+  apps: "./IMG_0564.jpeg?v=pin2",
+  otter: "./0875CF7C-5ACB-48B1-B2CD-57E02C5C9B58.jpeg?v=pin2"
 };
 function esc(s){
   return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
@@ -24,8 +24,7 @@ function davisQuote(){
   return '<p class="muted">An idiot admires complexity, a genius admires simplicity.</p><p class="note">\u2014 Terry A. Davis</p>';
 }
 function exampleShot(src, label){
-  const jpg = String(src).replace(/\.jpeg$/i, ".jpg");
-  return '<div class="card example-card" style="margin-top:18px"><div class="pad"><p class="kicker">Example</p></div><img class="example-shot" alt="'+esc(label||"Example")+'" decoding="async" loading="eager" src="'+src+'" onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=\''+jpg+'\';}"/></div>';
+  return '<div class="card example-card" style="margin-top:18px"><div class="pad"><p class="kicker">'+(typeof t==="function"?t("example"):"Example")+'</p></div><img class="example-shot" alt="'+esc(label||"Example")+'" decoding="async" src="'+src+'"/></div>';
 }
 function load(){ try { const raw = localStorage.getItem(KEY); return raw ? Object.assign(emptyState(), JSON.parse(raw)) : emptyState(); } catch(e){ return emptyState(); } }
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
