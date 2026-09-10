@@ -1,1 +1,1 @@
-window.EX_TIX="./tickets.jpg?v=img4";
+window.EX_TIX="data:image/jpeg;base64,"+(window._TX1||"")+(window._TX2||"");
