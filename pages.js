@@ -42,7 +42,7 @@ function paintPack(){
   let html='<p class="kicker" id="packCount">'+done+' / '+total+' packed</p><h2>Bag</h2><p class="muted">Pack list for this trip.</p><div class="stack">';
   PACK.forEach(g=>{ html+='<div class="card"><div class="pad"><p class="kicker">Kit</p><h3>'+esc(g[0])+'</h3></div>'; g[1].forEach(item=>{ html+='<button type="button" class="row'+(S.packed[item[0]]?' on':'')+'" data-act="pack" data-id="'+item[0]+'"><span class="check"></span><span><p class="ttl">'+esc(item[1])+'</p>'+(item[2]?'<p class="note">'+esc(item[2])+'</p>':'')+'</span></button>'; }); html+='</div>'; });
   html+='</div><div class="card" style="margin-top:12px"><div class="field" style="padding-top:14px"><label>Notes</label><textarea id="extra" rows="3" placeholder="Adapters, meds, gifts">'+esc(S.extra)+'</textarea></div></div>';
-  html+=exampleShot("./IMG_0557.jpeg","Example bag");
+  html+=exampleShot("./IMG_0559.jpeg","Example bag");
   $("page-pack").innerHTML=html;
 }
 function paintApps(){
