@@ -13,8 +13,8 @@ document.addEventListener("click", function(e){
   else if(act==="app"){ openScheme(actEl.getAttribute("data-scheme")); }
   else if(act==="export"){ $("export").classList.add("show"); }
   else if(act==="export-close"){ $("export").classList.remove("show"); }
-  else if(act==="ics-cal"){ if(!S.reminders.some(r=>r.at)){ alert("Add timed reminders first."); return; } downloadIcs("Belvia-Calendar.ics", buildIcs("event")); }
-  else if(act==="ics-rem"){ if(!S.reminders.some(r=>r.at)){ alert("Add timed reminders first."); return; } downloadIcs("Belvia-Reminders.ics", buildIcs("todo")); }
+  else if(act==="ics-cal"){ if(!S.reminders.some(r=>r.at)){ alert("Add timed reminders first."); return; } downloadIcs("BudVia-Calendar.ics", buildIcs("event")); }
+  else if(act==="ics-rem"){ if(!S.reminders.some(r=>r.at)){ alert("Add timed reminders first."); return; } downloadIcs("BudVia-Reminders.ics", buildIcs("todo")); }
 });
 $("export").addEventListener("click", function(e){ if(e.target.id==="export") $("export").classList.remove("show"); });
 document.addEventListener("keydown", function(e){ if(e.key==="Escape") $("export").classList.remove("show"); });
