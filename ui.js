@@ -14,10 +14,15 @@ function davisQuote(){
 function exampleCard(how, result, who, pic){
   return '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">Example</p><h3>'+how+'</h3><p class="note">'+result+'</p>'+(pic?'<p class="note" style="letter-spacing:.08em">'+pic+'</p>':'')+'<p class="note">\u2014 '+who+'</p></div></div>';
 }
+function tripSrc(){
+  if(window.EXAMPLE_TRIP && window.EXAMPLE_TRIP.length>40) return window.EXAMPLE_TRIP;
+  const a=(window._ET1||"")+(window._ET2||"");
+  return a ? "data:image/jpeg;base64,"+a : "";
+}
 function tripExample(){
-  const src = window.EXAMPLE_TRIP || "";
+  const src = tripSrc();
   if(!src) return "";
-  return '<div class="card shotcard" style="margin-top:16px"><p class="kicker" style="margin:10px 12px 8px">Example</p><img class="shot" alt="" src="'+src+'"/></div>';
+  return '<div class="card shotcard" style="margin-top:16px"><p class="kicker" style="margin:10px 12px 8px">Example</p><img class="shot" alt="8-day December trip" width="419" height="760" src="'+src+'"/></div>';
 }
 function load(){ try { const raw = localStorage.getItem(KEY); return raw ? Object.assign(emptyState(), JSON.parse(raw)) : emptyState(); } catch(e){ return emptyState(); } }
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
