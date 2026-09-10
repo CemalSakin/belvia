@@ -16,7 +16,7 @@ function showBagHint(){
     el=document.createElement("div");
     el.id="bagHint";
     el.className="overlay";
-    el.innerHTML='<div class="sheet stack"><p class="kicker">Bag</p><h3>Pack first?</h3><p class="muted">Tick the bag now if you want. You can skip this.</p><button class="btn btn-a" type="button" data-act="bag-go">Open bag</button><button class="btn btn-g" type="button" data-act="bag-skip">Not now</button></div>';
+    el.innerHTML='<div class="sheet stack"><p class="kicker">Bag</p><h3>Pack first?</h3><p class="muted">Want to pack the bag now?</p><button class="btn btn-a" type="button" data-act="bag-go">Open bag</button><button class="btn btn-g" type="button" data-act="bag-skip">Not now</button></div>';
     document.body.appendChild(el);
     el.addEventListener("click", function(e){ if(e.target.id==="bagHint") closeBagHint(); });
   }
@@ -32,7 +32,7 @@ document.addEventListener("click", function(e){
   else if(act==="pack"){ const id=actEl.getAttribute("data-id"); S.packed[id]=!S.packed[id]; save(); paintPack(); }
   else if(act==="create"){ S.meta.title=((($("nTitle")||{}).value)||"").trim()||"Trip"; S.meta.start=(($("nStart")||{}).value)||""; S.meta.end=(($("nEnd")||{}).value)||""; S.meta.pnr=((($("nPnr")||{}).value)||"").trim(); S.meta.sample=false; save(); paintAll(); }
   else if(act==="demo"){ S=demoState(); S.tickets=S.tickets||[]; S.sim=S.sim||[]; S.packExtra=S.packExtra||[]; save(); paintAll(); }
-  else if(act==="wipe"){ if(confirm("Remove this trip from this phone?")){ S=emptyState(); save(); paintAll(); } }
+  else if(act==="wipe"){ if(confirm("Delete this trip from this phone?")){ S=emptyState(); save(); paintAll(); } }
   else if(act==="add"){ const title=((($("rTitle")||{}).value)||"").trim(); if(!title) return; const date=($("rDate")||{}).value; const time=($("rTime")||{}).value; S.reminders.push({id:"u"+Date.now(),title,notes:((($("rNotes")||{}).value)||"").trim(),list:(($("rList")||{}).value)||"prep",at:date?(date+"T"+(time||"09:00")):""}); save(); paintPlan(); paintToday(); }
   else if(act==="del-rem"){ S.reminders=S.reminders.filter(r=>r.id!==actEl.getAttribute("data-id")); save(); paintPlan(); paintToday(); }
   else if(act==="del-place"){ S.places=S.places.filter(p=>p.id!==actEl.getAttribute("data-id")); save(); paintMap(); }
@@ -53,7 +53,7 @@ document.addEventListener("click", function(e){
   else if(act==="add-ticket"){
     if(!S.tickets) S.tickets=[];
     S.hideSample=true;
-    S.tickets.push({id:"t"+Date.now(),kind:(($("tKind")||{}).value)||"flight",carrier:((($("tCarrier")||{}).value)||"").trim()||"Carrier",code:((($("tCode")||{}).value)||"").trim(),from:((($("tFrom")||{}).value)||"").trim(),to:((($("tTo")||{}).value)||"").trim(),fromCity:((($("tFromCity")||{}).value)||"").trim(),toCity:((($("tToCity")||{}).value)||"").trim(),title:((($("tCarrier")||{}).value)||"").trim(),at:((($("tAt")||{}).value)||"").replace(" ","T"),land:((($("tLand")||{}).value)||"").replace(" ","T"),pnr:((($("tCode")||{}).value)||"").trim(),note:""});
+    S.tickets.push({id:"t"+Date.now(),kind:(($("tKind")||{}).value)||"flight",carrier:((($("tCarrier")||{}).value)||"").trim()||"Company",code:((($("tCode")||{}).value)||"").trim(),from:((($("tFrom")||{}).value)||"").trim(),to:((($("tTo")||{}).value)||"").trim(),fromCity:((($("tFromCity")||{}).value)||"").trim(),toCity:((($("tToCity")||{}).value)||"").trim(),title:((($("tCarrier")||{}).value)||"").trim(),at:((($("tAt")||{}).value)||"").replace(" ","T"),land:((($("tLand")||{}).value)||"").replace(" ","T"),pnr:((($("tCode")||{}).value)||"").trim(),note:""});
     save(); paintApps(); paintToday();
   }
   else if(act==="del-sim"){ if(!S.sim) S.sim=[]; S.sim=S.sim.filter(x=>x.id!==actEl.getAttribute("data-id")); save(); paintApps(); }
