@@ -15,7 +15,7 @@
 <style>
 :root {
   --navy:#1e3a5f;
-  --wood:#3d2414; --wood-lit:#6b4224; --wood-ink:#1a0c06;
+  --wood:#2b160c; --wood-lit:#6b4224; --wood-ink:#1a0c06;
   --moss:#14301f; --moss-lit:#1d4630;
   --leaf:#c45a1a; --leaf-lit:#d9782e; --leaf-dim:#8a3d12;
   --plaque:#f3e2c0;
@@ -24,24 +24,25 @@
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;border-radius:0 !important}
 html,body{
-  height:100%;height:100vh;height:100dvh;
   margin:0;background:var(--moss);color:var(--plaque);
   font-family:ui-monospace,Menlo,"SF Mono",Consolas,monospace;
   overflow:hidden;
+  height:100%;height:100vh;height:100svh;height:100dvh;
+}
+@supports (-webkit-touch-callout: none){
+  html,body,#app{height:-webkit-fill-available;}
 }
 button{cursor:pointer;font:inherit;color:inherit;background:none}
 img,svg,.mark img,.brandshot,.shot{image-rendering:auto}
 #app{
   position:relative;
   width:100%;max-width:430px;
-  height:100%;
-  min-height:100vh;
-  height:100dvh;
   margin:0 auto;
   display:flex;
   flex-direction:column;
   overflow:hidden;
   background:var(--navy);
+  height:100%;height:100vh;height:100svh;height:100dvh;
 }
 #dither{
   position:absolute;inset:0;
@@ -49,7 +50,7 @@ img,svg,.mark img,.brandshot,.shot{image-rendering:auto}
   z-index:0;pointer-events:none;
   image-rendering:pixelated;
 }
-header.top, .pager, nav.dock{position:relative;z-index:2;flex-shrink:0}
+header.top, nav.dock{position:relative;z-index:3;flex:0 0 auto}
 header.top{background:var(--moss);color:var(--plaque);border-bottom:5px solid var(--wood);padding:calc(8px + var(--safe-t)) 12px 8px}
 .barrow{display:flex;align-items:center;gap:10px;min-height:36px}
 .mark{width:36px;height:36px;flex:0 0 auto;background:var(--wood);overflow:hidden;border:2px solid var(--wood-lit)}
@@ -64,9 +65,13 @@ nav.pills::-webkit-scrollbar{display:none}
 nav.pills button{flex:0 0 auto;height:28px;padding:0 10px;border:2px solid var(--wood-lit);background:transparent;color:var(--plaque);font-size:11px;font-weight:700;text-transform:uppercase;white-space:nowrap}
 nav.pills button.on{background:var(--wood);color:var(--plaque)}
 .pager{
-  flex:1 1 auto;min-height:0;
-  display:flex;flex-direction:row;
-  overflow-x:auto;overflow-y:hidden;
+  position:relative;z-index:2;
+  flex:1 1 0%;
+  min-height:0;
+  display:flex;
+  flex-direction:row;
+  overflow-x:auto;
+  overflow-y:hidden;
   scroll-snap-type:x mandatory;
   scrollbar-width:none;
   -webkit-overflow-scrolling:touch;
@@ -76,7 +81,9 @@ nav.pills button.on{background:var(--wood);color:var(--plaque)}
   flex:0 0 100%;
   width:100%;
   min-width:100%;
+  max-width:100%;
   height:100%;
+  max-height:100%;
   overflow-x:hidden;
   overflow-y:auto;
   scroll-snap-align:start;
@@ -144,8 +151,26 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 .ticket .meta span{font-size:10px;font-weight:650}
 .banner{padding:12px 14px;font-size:12px}
 .brandshot{width:100%;max-height:360px;object-fit:contain;object-position:top;margin:10px 0;border:5px solid var(--wood);display:block;background:#0c1c14}
-.shot{width:100%;height:auto;min-height:200px;object-fit:contain;object-position:top;display:block;margin:0;border:0;background:#0c1c14}
-.shotcard{overflow:hidden}
+.shotcard{
+  overflow:hidden;
+  background:#f3e2c0;
+  border:8px solid #2b160c;
+  box-shadow:inset 0 0 0 2px #c4a574, 4px 4px 0 #1a0c06;
+}
+.shotcard .kicker{color:#2b160c;opacity:1}
+.shot{
+  width:100%;
+  height:auto;
+  min-height:160px;
+  object-fit:contain;
+  object-position:top;
+  display:block;
+  margin:0;
+  border:0;
+  background:#f3e2c0;
+  image-rendering:auto;
+  filter:contrast(1.08) saturate(1.08);
+}
 #map{height:220px;background:#1e3a5f;touch-action:none;filter:grayscale(1) contrast(1.15) sepia(.55)}
 .mapwrap{position:relative;padding:8px}
 .mapclose{position:absolute;top:16px;left:16px;z-index:2;height:34px;padding:0 12px;border:0;background:var(--wood);color:var(--plaque);font-size:12px;font-weight:700}
@@ -188,14 +213,14 @@ h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:v
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="./icon.js"></script>
-<script src="./et1.js?v=fix2"></script>
-<script src="./et2.js?v=fix2"></script>
-<script src="./example.js?v=fix2"></script>
-<script src="./ex_sched.js?v=fix2"></script>
-<script src="./ex_tix.js?v=fix2"></script>
+<script src="./et1.js?v=fix3"></script>
+<script src="./et2.js?v=fix3"></script>
+<script src="./example.js?v=fix3"></script>
+<script src="./ex_sched.js?v=fix3"></script>
+<script src="./ex_tix.js?v=fix3"></script>
 <script src="./app.js"></script>
-<script src="./ui.js?v=fix2"></script>
-<script src="./pages.js?v=fix2"></script>
+<script src="./ui.js?v=fix3"></script>
+<script src="./pages.js?v=fix3"></script>
 <script src="./events.js"></script>
 <script>
 (function(){
