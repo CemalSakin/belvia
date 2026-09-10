@@ -8,6 +8,9 @@ function esc(s){
     return "\u0026#39;";
   });
 }
+function davisQuote(){
+  return '<p class="muted">An idiot admires complexity, a genius admires simplicity.</p><p class="note">\u2014 Terry A. Davis</p>';
+}
 function exampleCard(how, result, who, pic){
   return '<div class="card" style="margin-top:14px"><div class="pad"><p class="kicker">Example</p><h3>'+how+'</h3><p class="note">'+result+'</p>'+(pic?'<p class="note" style="letter-spacing:.08em">'+pic+'</p>':'')+'<p class="note">\u2014 '+who+'</p></div></div>';
 }
@@ -100,11 +103,11 @@ function paintToday(){
   const root=$("page-today");
   const ex=tripExample();
   if(!hasTrip()){
-    root.innerHTML='<p class="kicker">BUD&VIA</p><h2>Welcome to BudVia</h2><p class="muted">An idiot admires complexity, a genius admires simplicity.</p><div class="stack" style="margin-top:16px"><div class="card"><div class="pad"><p class="kicker">New trip</p><h3>Title and dates</h3></div><div class="field"><label>Title</label><input id="nTitle" placeholder="8-day December trip to Luxembourg" /></div><div class="grid2"><div class="field"><label>Starts</label><input id="nStart" type="date" /></div><div class="field"><label>Ends</label><input id="nEnd" type="date" /></div></div><div class="field"><label>Booking code</label><input id="nPnr" placeholder="Optional" autocomplete="off" /></div><div class="pad"><button class="btn btn-a" type="button" data-act="create">Create trip</button></div></div><button class="btn btn-g" type="button" data-act="demo">Load sample itinerary</button></div>'+ex;
+    root.innerHTML='<p class="kicker">BUD&VIA</p><h2>Welcome to BudVia</h2>'+davisQuote()+'<div class="stack" style="margin-top:16px"><div class="card"><div class="pad"><p class="kicker">New trip</p><h3>Title and dates</h3></div><div class="field"><label>Title</label><input id="nTitle" placeholder="8-day December trip to Luxembourg" /></div><div class="grid2"><div class="field"><label>Starts</label><input id="nStart" type="date" /></div><div class="field"><label>Ends</label><input id="nEnd" type="date" /></div></div><div class="field"><label>Booking code</label><input id="nPnr" placeholder="Optional" autocomplete="off" /></div><div class="pad"><button class="btn btn-a" type="button" data-act="create">Create trip</button></div></div><button class="btn btn-g" type="button" data-act="demo">Load sample itinerary</button></div>'+ex;
     return;
   }
   const n=nextUp();
-  root.innerHTML=(S.meta.sample?'<div class="banner">Sample itinerary. Personal codes and street numbers are hidden.</div>':'')+'<p class="kicker">'+esc(rangeLabel())+'</p><h2>'+esc(S.meta.title || "BudVia")+'</h2><p class="muted">'+(S.meta.pnr?'Booking ref '+esc(S.meta.pnr):'An idiot admires complexity, a genius admires simplicity.')+'</p><div class="stack" style="margin-top:16px">'+flightCard()+'<div class="card"><div class="pad"><p class="kicker">Up next</p>'+(n?'<h3>'+esc(n.r.title)+'</h3><p class="note">'+esc(fmtWhen(n.r.at).day+' \u00b7 '+fmtWhen(n.r.at).time)+'</p>'+(n.r.notes?'<p class="note">'+esc(n.r.notes)+'</p>':''):'<h3>Nothing waiting</h3><p class="note">Open Plan to add a reminder.</p>')+'</div></div><button class="btn btn-a" type="button" data-act="go" data-go="plan">Open plan</button><button class="btn btn-g" type="button" data-act="wipe">Clear this device</button></div>'+ex;
+  root.innerHTML=(S.meta.sample?'<div class="banner">Sample itinerary. Personal codes and street numbers are hidden.</div>':'')+'<p class="kicker">'+esc(rangeLabel())+'</p><h2>'+esc(S.meta.title || "BudVia")+'</h2>'+(S.meta.pnr?'<p class="muted">Booking ref '+esc(S.meta.pnr)+'</p>':davisQuote())+'<div class="stack" style="margin-top:16px">'+flightCard()+'<div class="card"><div class="pad"><p class="kicker">Up next</p>'+(n?'<h3>'+esc(n.r.title)+'</h3><p class="note">'+esc(fmtWhen(n.r.at).day+' \u00b7 '+fmtWhen(n.r.at).time)+'</p>'+(n.r.notes?'<p class="note">'+esc(n.r.notes)+'</p>':''):'<h3>Nothing waiting</h3><p class="note">Open Plan to add a reminder.</p>')+'</div></div><button class="btn btn-a" type="button" data-act="go" data-go="plan">Open plan</button><button class="btn btn-g" type="button" data-act="wipe">Clear this device</button></div>'+ex;
 }
 function flightCard(){
   const out=S.reminders.find(r=>r.id==="d14b"); const ret=S.reminders.find(r=>r.id==="d21c");
