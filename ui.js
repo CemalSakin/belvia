@@ -1,12 +1,12 @@
 const $ = (id) => document.getElementById(id);
 const EX = {
-  trip: "./IMG_0554.jpeg?v=pin2",
-  schedule: "./IMG_0555.jpeg?v=pin2",
-  tickets: "./IMG_0556.jpeg?v=pin2",
-  routes: "./IMG_0557.jpeg?v=pin2",
-  bag: "./IMG_0559.jpeg?v=pin2",
-  apps: "./IMG_0564.jpeg?v=pin2",
-  otter: "./0875CF7C-5ACB-48B1-B2CD-57E02C5C9B58.jpeg?v=pin2"
+  trip: "./IMG_0554.jpeg?v=pin3",
+  schedule: "./schedule-ex.jpg?v=pin3",
+  tickets: "./IMG_0556.jpeg?v=pin3",
+  routes: "./IMG_0557.jpeg?v=pin3",
+  bag: "./IMG_0559.jpeg?v=pin3",
+  apps: "./apps-ex.jpg?v=pin3",
+  otter: "./0875CF7C-5ACB-48B1-B2CD-57E02C5C9B58.jpeg?v=pin3"
 };
 function esc(s){
   return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
@@ -127,10 +127,8 @@ function setTab(id){
   if(TABS.indexOf(id)<0) return;
   tab=id;
   document.querySelectorAll("#pills button, #dock button").forEach(b=>b.classList.toggle("on", b.getAttribute("data-go")===id));
-  document.querySelectorAll(".page").forEach(p=>p.classList.toggle("on", p.id==="page-"+id));
   const pager=$("pager");
-  const desk=window.matchMedia("(min-width:880px)").matches;
-  if(!desk && pager) pager.scrollLeft = TABS.indexOf(id) * pager.clientWidth;
+  if(pager) pager.scrollLeft = TABS.indexOf(id) * pager.clientWidth;
   if(id==="map") setTimeout(ensureMap, 80);
 }
 function paintChrome(){
