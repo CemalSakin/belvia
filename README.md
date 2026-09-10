@@ -1,70 +1,79 @@
-# BudVia
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=1e3a5f&height=160&section=header&text=BudVia&fontSize=54&fontColor=f0e68c&animation=fadeIn&fontAlignY=38&desc=The%20trip%2C%20on%20this%20device&descAlignY=62&descSize=16" alt="BudVia" />
+</p>
 
-Bir haftalık tatilini ikiye mi bölmen gerekti?
+<p align="center">
+  <a href="https://cemalsakin.github.io/belvia/"><img src="https://img.shields.io/badge/live-cemalsakin.github.io%2Fbelvia-f0e68c?style=for-the-badge&labelColor=1e3a5f" alt="live" /></a>
+  <img src="https://img.shields.io/badge/PWA-Home%20Screen-06b6d4?style=for-the-badge&labelColor=1e3a5f" alt="pwa" />
+  <img src="https://img.shields.io/badge/no%20account-no%20server-22c55e?style=for-the-badge&labelColor=1e3a5f" alt="private" />
+  <img src="https://img.shields.io/github/license/CemalSakin/belvia?style=for-the-badge&labelColor=1e3a5f&color=f59e0b" alt="mit" />
+  <img src="https://img.shields.io/badge/TypeScript-Expo-3178C6?style=for-the-badge&labelColor=1e3a5f" alt="ts" />
+</p>
+
+# Bir haftalık tatilini ikiye mi bölmen gerekti?
+
 Çok mu fazla biletin var?
+
 Hepsini organize edemiyor musun?
 
-Tek bir uygulamada birleştirdim. Bu kadar basit.
+**Tek bir uygulamada birleştirdim. Bu kadar basit.**
 
-Canlı: [cemalsakin.github.io/belvia](https://cemalsakin.github.io/belvia/)
+Ucuz tatil böyle kuruluyor. Uçak Wizz’de. Otöbüs FlixBus’ta. Oda Airbnb’de ya da Booking’de. Şehir içi başka uygulamada. Akşam masası başka uygulamada. Her teyit ayrı kutuda. Her PNR ayrı mailde. Bir haftayı beş uygulamaya bölüyorsun. Sonra o beş parçayı tekrar bir trip haline getirmeye çalışıyorsun. Asıl yorulan yer orası. Bilet almak değil. Biletleri hatırlamak.
 
----
+BudVia bilet satmıyor. Yeni bir rezervasyon sitesi de değil. Zaten aldığın şeyleri tek yerde tutuyor.
 
-## Direkt ne diyor?
+Üstüne üstlük hepsi uygulama içinden tık diye açılıyor. Bileti nereden aldıysan o uygulama açılıyor. Ayrı ayrı aramıyorsun. Tık. Gidebiliyorsunuz.
 
-Ucuz tatil şöyle işliyor. Uçak bir yerde, otobüs başka yerde, oda başka yerde. Wizz, FlixBus, Airbnb, Booking, şehir içi bisiklet, akşam yemeği. Her biri kendi uygulamasında, her teyit kendi kutusunda.
+Ondan sonra trip duruyor karşında. Tüm trip. Her şey.
 
-Bir haftalık işi ikiye bölüyorsun. Sonra üçe. Sonra “biletlerim çok, hangisi hangisi” diye bakıyorsun. Gidilecek saat, kalkış saati, ne kadar erken evden çıkman gerektiği, kapıda ne zaman olman gerektiği — hepsi dağınık.
-
-BudVia bunu tek yerde topluyor.
-
-Bilet satmıyor. Rezervasyon sitesi değil. Zaten aldığın şeyleri birleştiriyor.
-
-Üstüne üstlük hepsi uygulama içinden tık diye açılıyor. Wizz’i Wizz’den aldıysan Wizz açılıyor. Otobüs FlixBus’taysa FlixBus açılıyor. Odaya gitmek istiyorsan Airbnb veya Booking. Ayrı ayrı aramıyorsun.
-
-Sonra trip’in kendisi:
-
-- Nerede başlıyor?
+- Nerede başlayacak?
 - Ne zaman başlıyor?
-- Ne kadar erken çıkmalısın?
-- Ne zaman orada bulunmalısın?
-- Hangi yol, hangi saat, sıradaki iş ne?
+- Ne kadar erken gitmelisiniz?
+- Ne zaman orada bulunmalısınız?
 
-Hepsini gösteriyor. Saatleri gösteriyor. Yolları gösteriyor. Çantayı gösteriyor. Bugün ne yapacağını gösteriyor.
+Tüm yolları gösteriyor. Gitmen gereken yolları gösteriyor. Saatleri gösteriyor. Çantayı gösteriyor. Sıradaki işi gösteriyor. Ve her şeyi çok basit yapıyor.
 
 Hesap yok. Sunucu yok. Analitik yok. Plan telefonda kalıyor.
 
-## Ne işe yarar, madde madde
+## Aç
 
-- Uçuş ve otobüs saatleri tek kartta
-- Tarihli hatırlatmalar — sadece saat değil, gün de var
-- Her bacak için harita / yol tarifi
-- Cihazda kalan çanta listesi
-- Wizz Air, FlixBus, Airbnb, Booking, MOL Bubi ve benzeri uygulamalara tık — telefonda varsa açılır
-- Takvime veya Anımsatıcılara `.ics` ile çıkış
+1. [cemalsakin.github.io/belvia](https://cemalsakin.github.io/belvia/) — Safari.
+2. Paylaş → **Ana Ekrana Ekle**.
+3. Kendi tripini yaz ya da sample itinerary yükle.
 
-Örnek plan: 14–21 Eylül 2026, Ankara → Budapeşte → Viyana. Rezervasyon kodları maskeli, sokak numaraları yok.
+Data `localStorage` key `belvia-v2`. Clear trip siler.
 
-## Telefonda aç
+## Ne var
 
-1. [cemalsakin.github.io/belvia](https://cemalsakin.github.io/belvia/) — Safari tercih
-2. Paylaş → **Ana Ekrana Ekle**
-3. Kendi tarihlerini yaz veya örnek trip’i yükle
+| Ekran | Ne işe yarar |
+|---|---|
+| Trip | Karşılama, uçuş kartı, sıradaki iş |
+| Schedule | Tarihli hatırlatmalar, saatler |
+| Places | Pin ve yol |
+| Bag | Sekiz günlük örnek çanta |
+| Tickets | Wizz, FlixBus, Airbnb, Booking, MOL Bubi — tık, o uygulama |
 
-Veri `localStorage` anahtarı `belvia-v2` içinde. Trip’i silersen gider.
+```mermaid
+flowchart LR
+  A[Wizz / FlixBus / Airbnb] -->|already bought| B[BudVia]
+  B --> C[Schedule]
+  B --> D[Maps]
+  B --> E[Bag]
+  B -->|tap| A
+```
 
-Mağaza metni: [`APP_STORE.md`](APP_STORE.md)  
-LinkedIn için hazır metin: [`LINKEDIN.md`](LINKEDIN.md)
-
-## English, short
-
-Cheap tickets live in five apps. BudVia puts the trip you already bought on one phone: times, routes, when to leave, when to be there, and a tap that opens the same app you booked with. No account. No server. The itinerary does not leave the device.
+Native App Store için metin [`APP_STORE.md`](APP_STORE.md). PWA bugün Ana Ekrana eklenir.
 
 ## Publisher
 
 Tahsin Sakin  
-[linkedin.com/in/tahsin-sakin-390961199](https://www.linkedin.com/in/tahsin-sakin-390961199)
+[linkedin.com/in/tahsinsakin](https://www.linkedin.com/in/tahsinsakin)
 
-Repo adı tarihsel olarak **Belvia**. Ekranda gördüğün yüz **BudVia**.
+An idiot admires complexity, a genius admires simplicity.  
+— Terry A. Davis
 
-MIT. `LICENSE`.
+MIT. See `LICENSE`.
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=1e3a5f&height=90&section=footer" alt="" />
+</p>
