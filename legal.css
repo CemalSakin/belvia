@@ -1,0 +1,10 @@
+html,body{margin:0;background:#1e3a5f;color:#f3e2c0;font-family:ui-sans-serif,system-ui,sans-serif;line-height:1.55}
+a{color:#f3e2c0}
+a:focus-visible,button:focus-visible{outline:2px solid #d9782e;outline-offset:3px}
+.wrap{max-width:42rem;margin:0 auto;padding:24px 16px 64px}
+nav{display:flex;flex-wrap:wrap;gap:10px 14px;margin:0 0 24px;font-size:14px}
+h1{font-size:28px;line-height:1.2}
+h2{font-size:18px;margin-top:28px}
+.muted{opacity:.85;font-size:14px}
+.skip{position:absolute;left:-999px;top:8px;background:#14301f;color:#f3e2c0;padding:8px}
+.skip:focus{left:8px}
