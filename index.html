@@ -9,10 +9,11 @@
 <meta name="apple-mobile-web-app-title" content="BudVia" />
 <meta name="theme-color" content="#1e3a5f" />
 <meta name="referrer" content="no-referrer" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com; connect-src 'none'; font-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com https://fonts.googleapis.com; img-src 'self' data: blob: https://tile.openstreetmap.org https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com; connect-src 'none'; font-src 'self' https://fonts.gstatic.com; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'" />
 <title>BudVia</title>
 <link rel="manifest" href="./manifest.webmanifest" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pirata+One&family=New+Rocker&display=swap" />
 <style>
 :root {
   --navy:#1e3a5f;
@@ -22,6 +23,7 @@
   --plaque:#f3e2c0;
   --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
   --grain:repeating-linear-gradient(90deg,#6a3e22 0 2px,#8b5530 2px 5px,#7a4a28 5px 8px,#9a6240 8px 10px,#6a3e22 10px 13px);
+  --tavern:"Pirata One","New Rocker",Georgia,serif;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;border-radius:0 !important}
 html,body{
@@ -40,10 +42,10 @@ img,svg,.mark img,.brandshot,.shot,.example-shot{image-rendering:auto}
 header.top, nav.dock{position:relative;z-index:3}
 header.top{background:var(--moss);color:var(--plaque);border-bottom:5px solid var(--wood);padding:calc(8px + var(--safe-t)) 12px 8px}
 .barrow{display:flex;align-items:center;gap:10px;min-height:36px}
-.mark{width:36px;height:36px;flex:0 0 auto;background:var(--wood);overflow:hidden;border:2px solid var(--wood-lit)}
+.mark{width:36px;height:36px;flex:0 0 auto;background:var(--wood);overflow:hidden;border:2px solid var(--wood-lit);font-family:var(--tavern);font-size:22px;line-height:32px;text-align:center;color:var(--plaque)}
 .mark img{width:100%;height:100%;object-fit:cover;display:block}
 .brand{flex:1;min-width:0;color:var(--plaque)}
-.brand h1{margin:0;font-size:15px;font-weight:700;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase}
+.brand h1{margin:0;font-family:var(--tavern);font-size:26px;font-weight:400;letter-spacing:.08em;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase;text-shadow:0 2px 0 var(--wood-ink)}
 .brand p{margin:3px 0 0;font-size:8px;line-height:1.3;font-weight:600;opacity:.85;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .iconbtn{flex:0 0 auto;width:36px;height:36px;border:0;background:var(--wood);color:var(--plaque);display:grid;place-items:center}
 .iconbtn svg{width:18px;height:18px}
@@ -57,7 +59,7 @@ nav.dock{display:flex;justify-content:center;align-items:stretch;gap:0;backgroun
 nav.dock button{flex:1 1 0;max-width:84px;border:0;background:none;color:var(--plaque);opacity:.45;font-size:9px;font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px 2px;text-transform:uppercase;white-space:nowrap;text-align:center}
 nav.dock button.on{opacity:1;background:var(--wood)}
 nav.dock svg{width:18px;height:18px}
-h2{position:relative;isolation:isolate;margin:0 0 12px;padding:14px 12px;font-size:20px;letter-spacing:.03em;line-height:1.25;text-transform:uppercase;color:var(--plaque);background:linear-gradient(180deg,var(--moss-lit),var(--moss));border:9px solid var(--wood);box-shadow:inset 0 0 0 2px var(--wood-lit),4px 4px 0 var(--wood-ink)}
+h2{position:relative;isolation:isolate;margin:0 0 12px;padding:14px 12px;font-family:var(--tavern);font-size:26px;font-weight:400;letter-spacing:.06em;line-height:1.2;text-transform:uppercase;color:var(--plaque);background:linear-gradient(180deg,var(--moss-lit),var(--moss));border:9px solid var(--wood);box-shadow:inset 0 0 0 2px var(--wood-lit),4px 4px 0 var(--wood-ink);text-shadow:0 2px 0 var(--wood-ink)}
 h2::before{content:"";position:absolute;inset:-9px;z-index:-1;pointer-events:none;background:var(--grain)}
 h3{margin:0;font-size:14px;letter-spacing:.02em;text-transform:uppercase;color:var(--plaque)}
 .kicker{display:inline-block;margin:0 0 8px;padding:4px 8px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--plaque);background:var(--moss);border:4px solid var(--wood);box-shadow:inset 0 0 0 1px var(--wood-lit),3px 3px 0 var(--wood-ink)}
